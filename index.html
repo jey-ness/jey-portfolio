@@ -29,7 +29,9 @@
   .tab { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; font-weight: 500; padding: 9px 20px 10px; cursor: pointer; border: 1px solid rgba(26,24,20,0.1); border-radius: 10px 10px 0 0; color: var(--muted); background: rgba(26,24,20,0.04); border-bottom: none; transition: all 0.18s ease; position: relative; top: 1px; white-space: nowrap; user-select: none; }
   .tab:hover { color: var(--ink); background: rgba(26,24,20,0.07); }
   .tab.active { background: var(--cream); color: var(--ink); border-color: rgba(26,24,20,0.18); z-index: 2; }
-  .tab-about { margin-left: auto; }
+  .tab-about { margin-left: auto; border-radius: 3px 3px 8px 8px; border-bottom: 1px solid rgba(26,24,20,0.16); background: #EFE8DA; top: 0; padding: 13px 16px 18px; transform: translateY(-8px); box-shadow: 0 5px 14px rgba(26,24,20,0.06); }
+  .tab-about::after { content: ''; position: absolute; left: 50%; bottom: -1px; width: 12px; height: 12px; background: var(--cream); border-left: 1px solid rgba(26,24,20,0.12); border-top: 1px solid rgba(26,24,20,0.12); transform: translateX(-50%) rotate(45deg); }
+  .tab-about.active { background: #E7DDCB; border-color: rgba(26,24,20,0.2); }
   .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; vertical-align: middle; position: relative; top: -1px; }
   .dot-best{background:#E8C547}.dot-shoplift{background:#6BBFA3}.dot-elementor{background:#D05C95}.dot-clover{background:#78C25A}.dot-other{background:#A09DE0}
   .folder-body { border: 1px solid rgba(26,24,20,0.18); border-radius: 0 12px 12px 12px; background: var(--cream); padding: 40px; position: relative; z-index: 1; }
@@ -37,7 +39,7 @@
   .panel.active { display: block; }
   .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 24px; }
   .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 600px) { .project-grid { grid-template-columns: 1fr; } .tab-about { margin-left: 0; } .folder-body { padding: 24px; } .outcome-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .project-grid { grid-template-columns: 1fr; } .tab-about { margin-left: 0; transform: none; padding: 10px 16px 13px; } .folder-body { padding: 24px; } .outcome-grid { grid-template-columns: 1fr; } }
   .project-card { border: 1px solid rgba(26,24,20,0.12); border-radius: 10px; cursor: pointer; transition: all 0.2s ease; background: white; position: relative; overflow: hidden; }
   .project-card:hover { border-color: rgba(26,24,20,0.3); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,24,20,0.08); }
   .project-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; z-index: 1; }
@@ -54,7 +56,10 @@
   .coming-soon-text { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--muted); margin-bottom: 8px; }
   .coming-soon-sub { font-size: 13px; color: var(--muted); opacity: 0.7; }
   .detail-view { display: none; }
-  .detail-view.open { display: block; }
+  .detail-view.open { display: block; background: #FFFDF8; border: 1px solid rgba(26,24,20,0.12); border-radius: 8px; padding: 34px; box-shadow: 0 18px 50px rgba(26,24,20,0.08), inset 0 0 0 1px rgba(255,255,255,0.75); position: relative; }
+  .detail-view.open::before { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: 8px; background: linear-gradient(90deg, rgba(26,24,20,0.035) 0 1px, transparent 1px), linear-gradient(180deg, rgba(26,24,20,0.025), transparent 120px); background-size: 28px 100%, 100% 100%; opacity: 0.45; }
+  .detail-view > * { position: relative; z-index: 1; }
+  @media (max-width: 600px) { .detail-view.open { padding: 24px; } }
   .back-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 32px; border: none; background: none; padding: 0; transition: color 0.15s; }
   .back-btn:hover { color: var(--ink); }
   .hero-banner { border-radius: 10px; padding: 28px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -103,9 +108,9 @@
   <div class="folders" id="mainFolders">
     <div class="tabs">
       <div class="tab active"    onclick="switchTab('best')">     <span class="dot dot-best"></span>best</div>
+      <div class="tab"           onclick="switchTab('clover')">    <span class="dot dot-clover"></span>clover</div>
       <div class="tab"           onclick="switchTab('shoplift')">  <span class="dot dot-shoplift"></span>shoplift</div>
       <div class="tab"           onclick="switchTab('elementor')"> <span class="dot dot-elementor"></span>elementor</div>
-      <div class="tab"           onclick="switchTab('clover')">    <span class="dot dot-clover"></span>clover</div>
       <div class="tab"           onclick="switchTab('other')">     <span class="dot dot-other"></span>other</div>
       <div class="tab tab-about" onclick="switchTab('about')">about</div>
     </div>
@@ -419,26 +424,60 @@
 
 <script>
   var currentTab = 'best';
-  function switchTab(t) {
+  var tabNames = ['best','clover','shoplift','elementor','other','about'];
+  var projectIds = ['reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','ifever'];
+
+  function setHash(hash) {
+    if (window.location.hash === hash) {
+      routeFromHash();
+    } else {
+      window.location.hash = hash;
+    }
+  }
+
+  function switchTab(t, updateUrl) {
     currentTab = t;
-    var names = ['best','shoplift','elementor','clover','other','about'];
-    document.querySelectorAll('.tab').forEach(function(el,i){ el.classList.toggle('active', names[i]===t); });
+    if (updateUrl !== false) setHash('#' + t);
+    document.getElementById('mainFolders').style.display = 'block';
+    document.querySelectorAll('.detail-view').forEach(function(el){ el.classList.remove('open'); });
+    document.querySelectorAll('.tab').forEach(function(el,i){ el.classList.toggle('active', tabNames[i]===t); });
     document.querySelectorAll('.panel').forEach(function(el){ el.classList.remove('active'); });
     var p = document.getElementById('panel-'+t);
     if(p) p.classList.add('active');
   }
-  function openDetail(id) {
+
+  function openDetail(id, updateUrl) {
+    if (updateUrl !== false) setHash('#project-' + id);
     document.getElementById('mainFolders').style.display = 'none';
     document.querySelectorAll('.detail-view').forEach(function(el){ el.classList.remove('open'); });
     var d = document.getElementById('detail-'+id);
     if(d) d.classList.add('open');
     window.scrollTo({top:0,behavior:'smooth'});
   }
+
   function closeDetail() {
-    document.querySelectorAll('.detail-view').forEach(function(el){ el.classList.remove('open'); });
-    document.getElementById('mainFolders').style.display = 'block';
+    switchTab(currentTab || 'best');
     window.scrollTo({top:0,behavior:'smooth'});
   }
+
+  function routeFromHash() {
+    var slug = window.location.hash.replace('#','');
+    if (slug.indexOf('project-') === 0) {
+      var projectId = slug.replace('project-','');
+      if (projectIds.indexOf(projectId) > -1) {
+        openDetail(projectId, false);
+        return;
+      }
+    }
+    if (tabNames.indexOf(slug) > -1) {
+      switchTab(slug, false);
+      return;
+    }
+    switchTab('best', false);
+  }
+
+  window.addEventListener('hashchange', routeFromHash);
+  routeFromHash();
 </script>
 </body>
 </html>
