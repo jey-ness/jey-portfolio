@@ -91,6 +91,23 @@
   .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent2); box-shadow: 0 0 0 3px rgba(200,168,130,0.24); }
   .contact-form button { justify-self: start; border: 1px solid rgba(26,24,20,0.18); border-radius: 8px; background: var(--ink); color: var(--cream); font: 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 11px 16px; cursor: pointer; }
   .contact-form button:hover { background: var(--accent2); }
+  .contact-form button:disabled { cursor: wait; opacity: 0.68; }
+  .form-note { display: none; max-width: 560px; margin-top: 14px; font-size: 13px; line-height: 1.6; color: var(--accent2); }
+  .form-note.visible { display: block; }
+  .confirmation-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(26,24,20,0.28); z-index: 20; }
+  .confirmation-modal.open { display: flex; }
+  .confirmation-card { width: min(420px, 100%); background: #FFFDF8; border: 1px solid rgba(26,24,20,0.14); border-radius: 8px; padding: 32px; box-shadow: 0 24px 70px rgba(26,24,20,0.18), inset 0 0 0 1px rgba(255,255,255,0.7); position: relative; overflow: hidden; }
+  .confirmation-card::before { content: ''; position: absolute; top: 0; left: 28px; right: 28px; height: 5px; background: linear-gradient(90deg, #E8C547, #78C25A, #D05C95); border-radius: 0 0 8px 8px; }
+  .confirmation-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(26,24,20,0.03) 0 1px, transparent 1px), linear-gradient(180deg, rgba(26,24,20,0.025), transparent 130px); background-size: 24px 100%, 100% 100%; opacity: 0.5; }
+  .confirmation-card > * { position: relative; z-index: 1; }
+  .confirmation-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .confirmation-card h2 { font-family: var(--serif); font-size: 32px; font-style: italic; line-height: 1.1; margin-bottom: 12px; }
+  .confirmation-card p { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 22px; }
+  .confirmation-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .home-link { display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(26,24,20,0.18); border-radius: 8px; background: var(--ink); color: var(--cream); font: 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 11px 15px; text-decoration: none; }
+  .home-link:hover { background: var(--accent2); }
+  .modal-close { border: none; background: transparent; color: var(--muted); font: 12px var(--mono); letter-spacing: 0.06em; cursor: pointer; padding: 8px 0; }
+  .modal-close:hover { color: var(--ink); }
   .exp-item { padding: 16px 0; border-bottom: 1px solid rgba(26,24,20,0.07); overflow: hidden; }
   .exp-item:last-child { border-bottom: none; }
   .exp-company { font-weight: 600; font-size: 14px; }
@@ -436,6 +453,7 @@
       <input type="hidden" name="_subject" value="New portfolio message">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" id="formNextUrl" value="">
       <input type="text" name="_honey" style="display:none">
       <label>
         Name
@@ -451,6 +469,7 @@
       </label>
       <button type="submit">Send message</button>
     </form>
+    <p class="form-note" id="formNote">The message could not send from this page. Please try again in a moment.</p>
   </div>
 
   <div class="footer">
@@ -458,6 +477,18 @@
     <span class="footer-rights">All rights reserved</span>
   </div>
 
+</div>
+
+<div class="confirmation-modal" id="confirmationModal" role="dialog" aria-modal="true" aria-labelledby="confirmationTitle">
+  <div class="confirmation-card">
+    <div class="confirmation-kicker">Message sent</div>
+    <h2 id="confirmationTitle">Thank you.</h2>
+    <p>Your note is on its way to Jey. Head back home and keep browsing while the message finds its place.</p>
+    <div class="confirmation-actions">
+      <a class="home-link" href="#best" onclick="returnToHome()">Back to homepage</a>
+      <button class="modal-close" type="button" onclick="closeConfirmation()">Close</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -501,6 +532,20 @@
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
+  function showConfirmation() {
+    document.getElementById('confirmationModal').classList.add('open');
+  }
+
+  function closeConfirmation() {
+    document.getElementById('confirmationModal').classList.remove('open');
+  }
+
+  function returnToHome() {
+    closeConfirmation();
+    switchTab('best');
+    return true;
+  }
+
   function closeDetail() {
     switchTab(currentTab || 'best');
     window.scrollTo({top:0,behavior:'smooth'});
@@ -527,6 +572,38 @@
   }
 
   window.addEventListener('hashchange', routeFromHash);
+
+  var contactForm = document.querySelector('.contact-form');
+  var formNote = document.getElementById('formNote');
+  var formNextUrl = document.getElementById('formNextUrl');
+  if (formNextUrl) {
+    formNextUrl.value = window.location.origin + window.location.pathname + '#best';
+  }
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      var submitButton = contactForm.querySelector('button[type="submit"]');
+      var originalText = submitButton.textContent;
+      formNote.classList.remove('visible');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Form submit failed');
+        contactForm.reset();
+        showConfirmation();
+      }).catch(function() {
+        formNote.classList.add('visible');
+      }).finally(function() {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      });
+    });
+  }
   routeFromHash();
 </script>
 </body>
