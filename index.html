@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jey Tsymbaluk — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF8F4;
+    --ink: #1A1814;
+    --muted: #7A7672;
+    --accent: #C8A882;
+    --accent2: #8B6B4A;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Instrument Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    font-family: var(--sans);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  .shell {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(26,24,20,0.12);
+  }
+  .header-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    letter-spacing: -0.5px;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .header-meta {
+    text-align: right;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .header-meta a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+  .header-meta a:hover { color: var(--accent2); }
+
+  /* Folder tabs */
+  .folders { position: relative; margin-bottom: 0; }
+  .tabs {
+    display: flex;
+    gap: 0;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .tab {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    padding: 9px 20px 10px;
+    cursor: pointer;
+    border: 1px solid rgba(26,24,20,0.1);
+    border-radius: 10px 10px 0 0;
+    color: var(--muted);
+    background: rgba(26,24,20,0.04);
+    border-bottom: none;
+    transition: all 0.18s ease;
+    position: relative;
+    top: 1px;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .tab:hover { color: var(--ink); background: rgba(26,24,20,0.07); }
+  .tab.active {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: rgba(26,24,20,0.18);
+    z-index: 2;
+  }
+  .tab-about { margin-left: auto; }
+  .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+  .dot-best    { background: #E8C547; }
+  .dot-shoplift{ background: #6BBFA3; }
+  .dot-elementor{ background: #D05C95; }
+  .dot-clover  { background: #78C25A; }
+  .dot-other   { background: #A09DE0; }
+
+  .folder-body {
+    border: 1px solid rgba(26,24,20,0.18);
+    border-radius: 0 12px 12px 12px;
+    background: var(--cream);
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* Project cards */
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .project-grid { grid-template-columns: 1fr; }
+    .tabs { gap: 4px; }
+    .tab-about { margin-left: 0; }
+    .folder-body { padding: 24px; }
+    .outcome-grid { grid-template-columns: 1fr; }
+  }
+  .project-card {
+    border: 1px solid rgba(26,24,20,0.12);
+    border-radius: 10px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    border-color: rgba(26,24,20,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26,24,20,0.08);
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+  .card-best::before     { background: #E8C547; }
+  .card-shoplift::before { background: #6BBFA3; }
+  .card-elementor::before{ background: #D05C95; }
+  .card-other::before    { background: #A09DE0; }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .project-arrow {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    font-size: 18px;
+    color: rgba(26,24,20,0.2);
+    transition: all 0.2s;
+  }
+  .project-card:hover .project-arrow { color: var(--ink); transform: translate(2px,-2px); }
+
+  /* Coming soon */
+  .coming-soon {
+    border: 1px dashed rgba(26,24,20,0.15);
+    border-radius: 10px;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .coming-soon-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.4; }
+  .coming-soon-text { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--muted); margin-bottom: 8px; }
+  .coming-soon-sub  { font-size: 13px; color: var(--muted); opacity: 0.7; }
+
+  /* Detail view */
+  .detail-view { display: none; }
+  .detail-view.open { display: block; }
+
+  .back-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    border: none;
+    background: none;
+    padding: 0;
+    transition: color 0.15s;
+  }
+  .back-btn:hover { color: var(--ink); }
+
+  .hero-banner {
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .hero-best     { background: linear-gradient(135deg,#FDF8E1,#F5EDB5); }
+  .hero-shoplift { background: linear-gradient(135deg,#E8F7F2,#BDE9D9); }
+  .hero-elementor{ background: linear-gradient(135deg,#F9E8F3,#EDB5D8); }
+  .hero-other    { background: linear-gradient(135deg,#EEEDF9,#C9C7EF); }
+  .hero-banner-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .hero-banner-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .hero-banner-glyph { font-size: 48px; opacity: 0.35; flex-shrink: 0; }
+
+  .detail-section { margin-bottom: 28px; }
+  .detail-section h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .detail-section p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink);
+    opacity: 0.85;
+    margin-bottom: 10px;
+  }
+  .team-list { font-size: 13px; color: var(--muted); line-height: 1.9; }
+
+  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(26,24,20,0.15);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .outcome-box {
+    background: rgba(26,24,20,0.03);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .outcome-num {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .outcome-label { font-size: 12px; color: var(--muted); }
+
+  /* About */
+  .about-content { max-width: 540px; }
+  .about-content h2 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .about-content p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink);
+    opacity: 0.85;
+    margin-bottom: 16px;
+  }
+  .exp-item {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(26,24,20,0.07);
+    overflow: hidden;
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-company { font-weight: 600; font-size: 14px; }
+  .exp-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .exp-years {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    float: right;
+    letter-spacing: 0.04em;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(26,24,20,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  .footer-rights { font-size: 11px; color: rgba(26,24,20,0.25); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="header-name">Jey Tsymbaluk</div>
+      <div class="header-sub">Product &amp; UX Designer · New York</div>
+    </div>
+    <div class="header-meta">
+      <a href="mailto:jey@jeyness.com">jey@jeyness.com</a><br>
+      <a href="https://www.linkedin.com/in/jey-tsymbaluk/" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <!-- Folder nav -->
+  <div class="folders" id="mainFolders">
+    <div class="tabs">
+      <div class="tab active"   onclick="switchTab('best')">     <span class="dot dot-best"></span>best</div>
+      <div class="tab"          onclick="switchTab('shoplift')">  <span class="dot dot-shoplift"></span>shoplift</div>
+      <div class="tab"          onclick="switchTab('elementor')"> <span class="dot dot-elementor"></span>elementor</div>
+      <div class="tab"          onclick="switchTab('clover')">    <span class="dot dot-clover"></span>clover</div>
+      <div class="tab"          onclick="switchTab('other')">     <span class="dot dot-other"></span>other</div>
+      <div class="tab tab-about"onclick="switchTab('about')">about</div>
+    </div>
+
+    <div class="folder-body">
+
+      <!-- BEST -->
+      <div class="panel active" id="panel-best">
+        <div class="section-label">selected work</div>
+        <div class="project-grid">
+          <div class="project-card card-shoplift" onclick="openDetail('reporting')">
+            <div class="project-tag">Shoplift · Product Design</div>
+            <div class="project-title">Test Reporting 2.0</div>
+            <div class="project-desc">Statistical data in a human language</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-shoplift" onclick="openDetail('urlbeta')">
+            <div class="project-tag">Shoplift · Product Design</div>
+            <div class="project-title">URL Split Testing Beta</div>
+            <div class="project-desc">Building a beta program around a feature release</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-shoplift" onclick="openDetail('testcreation')">
+            <div class="project-tag">Shoplift · Product Design</div>
+            <div class="project-title">Test Creation Flow</div>
+            <div class="project-desc">Rethinking the core flow of the platform</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-elementor" onclick="openDetail('dsm')">
+            <div class="project-tag">Elementor · Web Design System</div>
+            <div class="project-title">Elementor Website DSM</div>
+            <div class="project-desc">A full design system built for a team at scale</div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOPLIFT -->
+      <div class="panel" id="panel-shoplift">
+        <div class="section-label">shoplift · 2022–2024</div>
+        <div class="project-grid">
+          <div class="project-card card-shoplift" onclick="openDetail('reporting')">
+            <div class="project-tag">Core Product</div>
+            <div class="project-title">Test Reporting 2.0</div>
+            <div class="project-desc">Statistical data in a human language</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-shoplift" onclick="openDetail('urlbeta')">
+            <div class="project-tag">Feature Release</div>
+            <div class="project-title">URL Split Testing Beta Program</div>
+            <div class="project-desc">Building a beta program around a new feature</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-shoplift" onclick="openDetail('testcreation')">
+            <div class="project-tag">Core Flow</div>
+            <div class="project-title">Test Creation Flow</div>
+            <div class="project-desc">Rethinking the core flow of the platform</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-shoplift" onclick="openDetail('pricing')">
+            <div class="project-tag">Monetization</div>
+            <div class="project-title">Pricing Model Update</div>
+            <div class="project-desc">Introducing new pricing &amp; paywall for features</div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ELEMENTOR -->
+      <div class="panel" id="panel-elementor">
+        <div class="section-label">elementor · 2020–2022</div>
+        <div class="project-grid">
+          <div class="project-card card-elementor" onclick="openDetail('dsm')">
+            <div class="project-tag">Systems Design</div>
+            <div class="project-title">Elementor Website DSM</div>
+            <div class="project-desc">A complete web design system built from scratch</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-elementor" onclick="openDetail('experts')">
+            <div class="project-tag">Platform</div>
+            <div class="project-title">Elementor Experts</div>
+            <div class="project-desc">Marketplace platform for web creators</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-elementor" onclick="openDetail('playground')">
+            <div class="project-tag">Product Feature</div>
+            <div class="project-title">Container Feature Playground</div>
+            <div class="project-desc">New product feature playground for Flexbox</div>
+            <div class="project-arrow">↗</div>
+          </div>
+          <div class="project-card card-elementor" onclick="openDetail('redesign')">
+            <div class="project-tag">Website</div>
+            <div class="project-title">Elementor Website Redesign</div>
+            <div class="project-desc">Full redesign of the product marketing site</div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLOVER -->
+      <div class="panel" id="panel-clover">
+        <div class="coming-soon">
+          <div class="coming-soon-icon">🍀</div>
+          <div class="coming-soon-text">Clover projects coming soon</div>
+          <div class="coming-soon-sub">Senior Product Designer · 2024–present</div>
+        </div>
+      </div>
+
+      <!-- OTHER -->
+      <div class="panel" id="panel-other">
+        <div class="section-label">other projects</div>
+        <div class="project-grid">
+          <div class="project-card card-other" onclick="openDetail('ifever')">
+            <div class="project-tag">Personal · Editorial</div>
+            <div class="project-title">If Ever</div>
+            <div class="project-desc">A personal essay on motherhood, identity, and expectations in Israel</div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="panel" id="panel-about">
+        <div class="about-content">
+          <h2>Designing things people actually use.</h2>
+          <p>I'm Jey — a product designer with a background in brand and web design. I care deeply about the details that make a product feel good: the clarity of a flow, the precision of a system, the warmth of a copy choice.</p>
+          <p>I've led design at Shoplift, built design systems at scale at Elementor, and I'm currently a Senior Product Designer at Clover Network.</p>
+          <p>I believe in designing with the team, not just for it — which means workshops, documentation, and sharing knowledge as seriously as shipping screens.</p>
+          <div style="margin-top:32px;border-top:1px solid rgba(26,24,20,0.1);padding-top:24px">
+            <div class="section-label" style="margin-bottom:16px">experience</div>
+            <div class="exp-item">
+              <span class="exp-years">2024–present</span>
+              <div class="exp-company">Clover Network</div>
+              <div class="exp-role">Senior Product Designer</div>
+            </div>
+            <div class="exp-item">
+              <span class="exp-years">2022–2024</span>
+              <div class="exp-company">Shoplift</div>
+              <div class="exp-role">Product Design Lead → Senior Product Designer</div>
+            </div>
+            <div class="exp-item">
+              <span class="exp-years">2020–2022</span>
+              <div class="exp-company">Elementor</div>
+              <div class="exp-role">Product Web Designer</div>
+            </div>
+            <div class="exp-item">
+              <span class="exp-years">earlier</span>
+              <div class="exp-company">Firma / Studio&amp;more</div>
+              <div class="exp-role">Brand Designer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /folder-body -->
+  </div><!-- /folders -->
+
+  <!-- ── DETAIL VIEWS ── -->
+
+  <div class="detail-view" id="detail-reporting">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-shoplift">
+      <div>
+        <div class="hero-banner-label">Shoplift · Core Product</div>
+        <div class="hero-banner-title">Test Reporting 2.0</div>
+      </div>
+      <div class="hero-banner-glyph">📊</div>
+    </div>
+    <div class="detail-section">
+      <h3>Overview</h3>
+      <p>Statistical data is powerful — but only if people can understand it. The original reporting in Shoplift showed raw numbers and significance scores that confused merchants. Reporting 2.0 translated statistical results into plain language outcomes, making it clear whether a test won, lost, or needed more data, and why.</p>
+    </div>
+    <div class="detail-section">
+      <h3>My role</h3>
+      <p>Led end-to-end product design — from discovery and user research to final specs and handoff. Collaborated closely with data science to accurately represent statistical concepts without dumbing them down.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">UX Research</span>
+        <span class="pill">Data Visualization</span>
+        <span class="pill">Content Design</span>
+        <span class="pill">Prototyping</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-urlbeta">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-shoplift">
+      <div>
+        <div class="hero-banner-label">Shoplift · Feature Release</div>
+        <div class="hero-banner-title">URL Split Testing Beta Program</div>
+      </div>
+      <div class="hero-banner-glyph">🔗</div>
+    </div>
+    <div class="detail-section">
+      <h3>Overview</h3>
+      <p>URL split testing was a long-awaited capability — allowing merchants to test entirely different pages against each other, rather than just template variations. I designed the beta program experience: the onboarding, the feature UI, and the feedback loops that shaped the public release.</p>
+    </div>
+    <div class="detail-section">
+      <h3>My role</h3>
+      <p>Designed the beta sign-up flow, in-app feature experience, and communication touchpoints. Ran feedback sessions with beta users to iterate quickly before full rollout.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Feature Design</span>
+        <span class="pill">Beta Programs</span>
+        <span class="pill">User Research</span>
+        <span class="pill">Flows</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-testcreation">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-shoplift">
+      <div>
+        <div class="hero-banner-label">Shoplift · Core Flow</div>
+        <div class="hero-banner-title">Test Creation Flow</div>
+      </div>
+      <div class="hero-banner-glyph">⚗️</div>
+    </div>
+    <div class="detail-section">
+      <h3>Overview</h3>
+      <p>The test creation flow is the heart of Shoplift. As the platform grew — adding URL testing, theme testing, audience targeting — the original flow became confusing and couldn't scale. I led a rethink of the entire creation experience, making it feel simple regardless of test complexity.</p>
+    </div>
+    <div class="detail-section">
+      <h3>My role</h3>
+      <p>Led design of the new multi-step creation flow. Ran user testing sessions and collaborated with engineering to ship incrementally without breaking existing user patterns.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Information Architecture</span>
+        <span class="pill">Interaction Design</span>
+        <span class="pill">User Testing</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-pricing">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-shoplift">
+      <div>
+        <div class="hero-banner-label">Shoplift · Monetization</div>
+        <div class="hero-banner-title">Pricing Model Update</div>
+      </div>
+      <div class="hero-banner-glyph">💳</div>
+    </div>
+    <div class="detail-section">
+      <h3>Overview</h3>
+      <p>Introducing new pricing tiers and paywalls without alienating existing users. This project required balancing business needs with user trust — designing upgrade paths that felt natural and earned, not forced.</p>
+    </div>
+    <div class="detail-section">
+      <h3>My role</h3>
+      <p>Designed all in-app paywall moments, upgrade flows, and the pricing page redesign. Worked closely with product and growth teams to define which features gate which tiers.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Growth Design</span>
+        <span class="pill">Monetization</span>
+        <span class="pill">Copywriting</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-dsm">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Design System</div>
+        <div class="hero-banner-title">Elementor Website Design System</div>
+      </div>
+      <div class="hero-banner-glyph">⚡</div>
+    </div>
+    <div class="detail-section">
+      <h3>Why we built it</h3>
+      <p>Many people were involved in the elementor.com project — new designers, developers, and product marketing managers joined constantly, making consistency harder to maintain. Other teams also wanted guidelines for landing pages, emails, and release material. We needed to spend less time on repetitive parts and more on complex layouts.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Fundamentals</h3>
+      <p>Converting the brand language to a web language: primary brand colors plus sub-colors and greys. Three fonts became a design challenge — the two headline fonts (Ivar Text Bold, Oli Grotesk Bold) were divided into primary and secondary. Later we bought the full Ivar family for better web headlines. All hierarchies documented: H1–H6, body blocks, bullets.</p>
+      <p>~87% of users browse on desktop, so we worked desktop-first. Designed for 1920px wide screens with a narrow 1280px grid, later moving to 1440px as standard. Mobile breakpoints: 360px minimum, 1024px tablet at 768px grid.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Components</h3>
+      <p>Limited image/video to 4 sizes: 3:4 in 2 sizes, 16:9, and 1:1. Paired with full text blocks (label, headline, body, bullets, button). Full page blocks cut page production from 2 days to a few hours. Added headers, footers, carousels, tabs, and showcase components.</p>
+    </div>
+    <div class="detail-section">
+      <h3>My role</h3>
+      <p>The DSM started as a passion project with Yanki Bindman. I documented the web language decisions, added UI atoms, then built out all remaining components and made them responsive. I owned the project from start to handoff. Just before leaving, I held a workshop so the team could keep growing it — which led to more workshops for the marketing and education teams.</p>
+    </div>
+    <div class="detail-section">
+      <h3>The team</h3>
+      <div class="team-list">
+        Head of Design: Ronit Cyjon<br>
+        Team Lead: Erez Eden<br>
+        Design: Yanki Bindman, Danielle Stelman, Alon Braier, Omri Avraham, Yael Zlotnik<br>
+        Dev: Asaf Rotstain, Alan Kaler
+      </div>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Design Systems</span>
+        <span class="pill">Component Design</span>
+        <span class="pill">Documentation</span>
+        <span class="pill">Workshop Facilitation</span>
+        <span class="pill">Figma</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-experts">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Platform</div>
+        <div class="hero-banner-title">Elementor Experts</div>
+      </div>
+      <div class="hero-banner-glyph">🌐</div>
+    </div>
+    <div class="detail-section">
+      <h3>Overview</h3>
+      <p>A marketplace platform connecting web creators with clients who need websites built with Elementor. The Experts platform had to serve two very different audiences — the freelancers and agencies listing their services, and the business owners searching for help.</p>
+    </div>
+    <div class="detail-section">
+      <h3>My role</h3>
+      <p>Designed the web experience for the Experts marketplace — including listing pages, search and filter, and expert profiles. Worked to make the platform feel trustworthy and discoverable for both sides of the marketplace.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Marketplace Design</span>
+        <span class="pill">Web Design</span>
+        <span class="pill">Dual-audience UX</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-playground">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Product Feature</div>
+        <div class="hero-banner-title">Container Feature Playground</div>
+      </div>
+      <div class="hero-banner-glyph">🧩</div>
+    </div>
+    <div class="detail-section">
+      <h3>Overview</h3>
+      <p>The Flexbox Container was a long-anticipated Elementor feature that changed how people build websites. We created a product playground — a first for Elementor — to help users at all skill levels understand the new way of working. We consulted community leaders, the education team, and developers to invent the platform from scratch.</p>
+    </div>
+    <div class="detail-section">
+      <h3>The challenge</h3>
+      <p>Some users knew Flexbox, many didn't — and many weren't looking to change how they worked. We excluded brand-new users and started lessons with simple shapes before moving to real web components like hero sections, headers, and cards. Hints were hidden by default to encourage trying first.</p>
+    </div>
+    <div class="outcome-grid">
+      <div class="outcome-box">
+        <div class="outcome-num">81%</div>
+        <div class="outcome-label">Users reached the final slide</div>
+      </div>
+      <div class="outcome-box">
+        <div class="outcome-num">First</div>
+        <div class="outcome-label">Product playground Elementor ever shipped</div>
+      </div>
+    </div>
+    <div class="detail-section" style="margin-top:20px">
+      <h3>What we learned</h3>
+      <p>Less is more — small changes in copy and layout dramatically changed how fast users resolved lessons. Communication and trust within the team was the most crucial part. The potential for this format — new features, onboarding for Pro — is endless.</p>
+    </div>
+    <div class="detail-section">
+      <h3>The team</h3>
+      <div class="team-list">
+        Team Lead: Erez Eden<br>
+        Product Marketing: Gabriella Laster, Asaf Shevach<br>
+        Design: Danielle Stelman<br>
+        Dev: Asaf Rotstain, Nofar Shlomo
+      </div>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Product Design</span>
+        <span class="pill">Interactive Learning</span>
+        <span class="pill">User Testing</span>
+        <span class="pill">New Platform</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-redesign">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Website</div>
+        <div class="hero-banner-title">Elementor Website Redesign</div>
+      </div>
+      <div class="hero-banner-glyph">✦</div>
+    </div>
+    <div class="detail-section">
+      <h3>Overview</h3>
+      <p>Led the redesign of elementor.com while incorporating a new visual brand language — a large undertaking involving design, dev, and product marketing teams all moving under tight deadlines.</p>
+    </div>
+    <div class="detail-section">
+      <h3>My role</h3>
+      <p>One of the first designers on Elementor's Product Web team. Designed the website while creating a massive design system, conducting research, running A/B tests, and helping develop the new visual brand language — all under very tight schedules.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Web Design</span>
+        <span class="pill">Brand Systems</span>
+        <span class="pill">A/B Testing</span>
+        <span class="pill">Research</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-view" id="detail-ifever">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="hero-banner hero-other">
+      <div>
+        <div class="hero-banner-label">Personal · Editorial</div>
+        <div class="hero-banner-title">If Ever</div>
+      </div>
+      <div class="hero-banner-glyph">✍️</div>
+    </div>
+    <div class="detail-section">
+      <h3>About</h3>
+      <p>A personal essay exploring the question of whether I ever want to be a mother. It's supposed to be obvious — especially in Israel, where motherhood is highly encouraged. This piece sits at the intersection of identity, expectation, and the quiet complexity of not being sure.</p>
+    </div>
+    <div class="detail-section">
+      <h3>Type</h3>
+      <div class="pill-row">
+        <span class="pill">Personal Writing</span>
+        <span class="pill">Editorial Design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span class="footer-copy">© Jey Tsymbaluk 2025</span>
+    <span class="footer-rights">All rights reserved</span>
+  </div>
+
+</div><!-- /shell -->
+
+<script>
+  var currentTab = 'best';
+
+  function switchTab(t) {
+    currentTab = t;
+    var tabEls = document.querySelectorAll('.tab');
+    var names = ['best','shoplift','elementor','clover','other','about'];
+    tabEls.forEach(function(el, i) {
+      el.classList.toggle('active', names[i] === t);
+    });
+    document.querySelectorAll('.panel').forEach(function(el) {
+      el.classList.remove('active');
+    });
+    var p = document.getElementById('panel-' + t);
+    if (p) p.classList.add('active');
+  }
+
+  function openDetail(id) {
+    document.getElementById('mainFolders').style.display = 'none';
+    document.querySelectorAll('.detail-view').forEach(function(el) {
+      el.classList.remove('open');
+    });
+    var d = document.getElementById('detail-' + id);
+    if (d) d.classList.add('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeDetail() {
+    document.querySelectorAll('.detail-view').forEach(function(el) {
+      el.classList.remove('open');
+    });
+    document.getElementById('mainFolders').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
