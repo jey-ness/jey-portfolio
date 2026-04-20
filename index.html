@@ -31,19 +31,20 @@
   .tab { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; font-weight: 500; padding: 9px 20px 10px; cursor: pointer; border: 1px solid rgba(26,24,20,0.1); border-radius: 10px 10px 0 0; color: var(--muted); background: rgba(26,24,20,0.04); border-bottom: none; transition: all 0.18s ease; position: relative; top: 1px; white-space: nowrap; user-select: none; }
   .tab:hover { color: var(--ink); background: rgba(26,24,20,0.07); }
   .tab.active { background: var(--cream); color: var(--ink); border-color: rgba(26,24,20,0.18); z-index: 2; }
-  .tab-about { margin-left: auto; }
-  .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; vertical-align: middle; position: relative; top: -1px; }
-  .dot-best{background:#E8C547}.dot-shoplift{background:#6BBFA3}.dot-elementor{background:#D05C95}.dot-clover{background:#78C25A}.dot-other{background:#A09DE0}
+  .tab-highlights { color: var(--ink); font-weight: 600; }
+  .tab-highlights.active { background: var(--cream); border-color: rgba(26,24,20,0.18); }
+  .tab-about { margin-left: auto; background: #FFF1A8; border-color: rgba(214,180,43,0.42); border-radius: 3px 3px 2px 2px; transform: rotate(-2deg); box-shadow: 0 7px 16px rgba(26,24,20,0.1), inset 0 -10px 18px rgba(214,180,43,0.12); color: var(--ink); }
+  .tab-about:hover { background: #FFE977; transform: rotate(-1deg) translateY(-1px); }
+  .tab-about.active { background: #FFF1A8; transform: rotate(-2deg); }
   .folder-body { border: 1px solid rgba(26,24,20,0.18); border-radius: 0 12px 12px 12px; background: var(--cream); padding: 40px; position: relative; z-index: 1; }
   .panel { display: none; }
   .panel.active { display: block; }
   .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 24px; }
   .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 600px) { .project-grid { grid-template-columns: 1fr; } .tab-about { margin-left: 0; } .folder-body { padding: 24px; } .outcome-grid { grid-template-columns: 1fr; } }
-  .project-card { border: 1px solid rgba(26,24,20,0.12); border-radius: 10px; cursor: pointer; transition: all 0.2s ease; background: white; position: relative; overflow: hidden; }
-  .project-card:hover { border-color: rgba(26,24,20,0.3); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,24,20,0.08); }
-  .project-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; z-index: 1; }
-  .card-best::before{background:#E8C547}.card-shoplift::before{background:#6BBFA3}.card-elementor::before{background:#D05C95}.card-other::before{background:#A09DE0}
+  .project-card { --card-accent: rgba(26,24,20,0.18); border: 1px solid rgba(26,24,20,0.12); border-radius: 10px; cursor: pointer; transition: all 0.2s ease; background: white; position: relative; overflow: hidden; }
+  .project-card:hover { border-color: var(--card-accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,24,20,0.08); }
+  .card-best{--card-accent:#E8C547}.card-shoplift{--card-accent:#DFFF2F}.card-elementor{--card-accent:#D05C95}.card-other{--card-accent:#A09DE0}
   .card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; display: block; background: rgba(26,24,20,0.04); }
   .card-body { padding: 20px 20px 32px; }
   .project-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
@@ -64,13 +65,45 @@
   .back-btn:hover { color: var(--ink); }
   .hero-banner { border-radius: 10px; padding: 28px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .hero-best{background:linear-gradient(135deg,#FDF8E1,#F5EDB5)}.hero-shoplift{background:linear-gradient(135deg,#E8F7F2,#BDE9D9)}.hero-elementor{background:linear-gradient(135deg,#F9E8F3,#EDB5D8)}.hero-other{background:linear-gradient(135deg,#EEEDF9,#C9C7EF)}
+  .hero-reporting { align-items: flex-start; background: rgba(255,255,255,0.62); border: 1px solid rgba(26,24,20,0.1); box-shadow: 0 12px 28px rgba(26,24,20,0.05); }
+  .hero-reporting .hero-banner-label, .hero-reporting .hero-banner-title { color: var(--ink); }
+  .hero-reporting .hero-banner-title { font-size: 30px; }
   .hero-banner-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
   .hero-banner-title { font-family: var(--serif); font-size: 22px; font-style: italic; line-height: 1.2; color: var(--ink); }
   .hero-banner-glyph { font-size: 48px; opacity: 0.35; flex-shrink: 0; }
-  .detail-img { width: 100%; border-radius: 10px; margin-bottom: 28px; display: block; border: 1px solid rgba(26,24,20,0.08); }
+  .detail-img { width: 100%; border-radius: 10px; margin-bottom: 28px; display: block; border: 1px solid rgba(26,24,20,0.08); cursor: zoom-in; background: white; }
   .detail-section { margin-bottom: 28px; }
   .detail-section h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
   .detail-section p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.85; margin-bottom: 10px; }
+  .case-summary { display: grid; grid-template-columns: 1.35fr 0.85fr; gap: 16px; margin-bottom: 28px; }
+  .case-stack { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
+  .case-card { background: rgba(255,255,255,0.68); border: 1px solid rgba(26,24,20,0.1); border-radius: 8px; padding: 20px; }
+  .case-card h3, .case-meta-card h3, .case-callout h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .case-card p, .case-callout p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.86; margin-bottom: 10px; }
+  .case-meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0 30px; }
+  .case-meta-card { background: rgba(26,24,20,0.035); border: 1px solid rgba(26,24,20,0.08); border-radius: 8px; padding: 16px; }
+  .case-meta-card p { font-size: 13px; line-height: 1.65; color: var(--ink); opacity: 0.82; }
+  .case-list { margin-left: 18px; font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.86; }
+  .case-list li { margin-bottom: 6px; }
+  .case-list strong { color: var(--ink); opacity: 1; }
+  .case-numbered { display: grid; gap: 14px; margin-top: 14px; }
+  .case-insight { background: rgba(255,255,255,0.62); border: 1px solid rgba(26,24,20,0.1); border-radius: 8px; padding: 0; overflow: hidden; }
+  .case-insight summary { list-style: none; cursor: pointer; font-family: var(--serif); font-size: 18px; line-height: 1.25; font-style: italic; padding: 18px 44px 18px 18px; position: relative; }
+  .case-insight summary::-webkit-details-marker { display: none; }
+  .case-insight summary::after { content: '+'; position: absolute; right: 18px; top: 16px; font-family: var(--mono); font-size: 18px; color: var(--muted); }
+  .case-insight[open] summary::after { content: '–'; }
+  .case-insight .case-list { margin: 0 18px 18px 36px; }
+  .case-figure { margin: 28px 0; }
+  .case-figure img { margin-bottom: 0; }
+  .case-caption { font-size: 12px; line-height: 1.5; color: var(--muted); margin-top: 8px; }
+  .case-callout { background: #FFF8D7; border: 1px solid rgba(214,180,43,0.28); border-radius: 8px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 26px rgba(26,24,20,0.05); }
+  .case-callout .detail-img { margin: 0 0 14px; }
+  .case-prototype-link { display: inline-flex; align-items: center; justify-content: center; margin-top: 12px; border: 1px solid rgba(26,24,20,0.18); border-radius: 8px; background: var(--ink); color: var(--cream); font: 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 11px 15px; text-decoration: none; }
+  .case-prototype-link:hover { background: var(--accent2); }
+  .case-hero-skills { margin-top: 18px; }
+  .case-hero-skills .pill { border-color: rgba(26,24,20,0.24); color: rgba(26,24,20,0.74); background: rgba(255,255,255,0.3); }
+  .case-thanks { font-family: var(--serif); font-size: 28px; font-style: italic; margin-top: 28px; }
+  @media (max-width: 700px) { .case-summary, .case-meta-grid { grid-template-columns: 1fr; } }
   .team-list { font-size: 13px; color: var(--muted); line-height: 1.9; }
   .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
   .pill { font-family: var(--mono); font-size: 11px; padding: 4px 10px; border-radius: 100px; border: 1px solid rgba(26,24,20,0.15); color: var(--muted); letter-spacing: 0.04em; }
@@ -108,6 +141,13 @@
   .home-link:hover { background: var(--accent2); }
   .modal-close { border: none; background: transparent; color: var(--muted); font: 12px var(--mono); letter-spacing: 0.06em; cursor: pointer; padding: 8px 0; }
   .modal-close:hover { color: var(--ink); }
+  .image-lightbox { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 28px; background: rgba(26,24,20,0.82); z-index: 30; }
+  .image-lightbox.open { display: flex; }
+  .image-lightbox-inner { max-width: min(1400px, 96vw); max-height: 92vh; }
+  .image-lightbox img { max-width: 100%; max-height: 86vh; display: block; border-radius: 8px; background: white; box-shadow: 0 26px 80px rgba(0,0,0,0.35); }
+  .image-lightbox-caption { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: rgba(255,255,255,0.78); margin-top: 10px; }
+  .image-lightbox-close { position: fixed; top: 18px; right: 22px; width: 36px; height: 36px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.24); background: rgba(255,255,255,0.1); color: white; font-size: 24px; line-height: 1; cursor: pointer; }
+  .image-lightbox-close:hover { background: rgba(255,255,255,0.18); }
   .exp-item { padding: 16px 0; border-bottom: 1px solid rgba(26,24,20,0.07); overflow: hidden; }
   .exp-item:last-child { border-bottom: none; }
   .exp-company { font-weight: 600; font-size: 14px; }
@@ -135,17 +175,17 @@
 
   <div class="folders" id="mainFolders">
     <div class="tabs">
-      <div class="tab active"    onclick="switchTab('best')">     <span class="dot dot-best"></span>best</div>
-      <div class="tab"           onclick="switchTab('clover')">    <span class="dot dot-clover"></span>clover</div>
-      <div class="tab"           onclick="switchTab('shoplift')">  <span class="dot dot-shoplift"></span>shoplift</div>
-      <div class="tab"           onclick="switchTab('elementor')"> <span class="dot dot-elementor"></span>elementor</div>
-      <div class="tab"           onclick="switchTab('other')">     <span class="dot dot-other"></span>other</div>
+      <div class="tab tab-highlights active" onclick="switchTab('highlights')">highlights</div>
+      <div class="tab"           onclick="switchTab('clover')">clover</div>
+      <div class="tab"           onclick="switchTab('shoplift')">shoplift</div>
+      <div class="tab"           onclick="switchTab('elementor')">elementor</div>
+      <div class="tab"           onclick="switchTab('other')">other</div>
       <div class="tab tab-about" onclick="switchTab('about')">about</div>
     </div>
     <div class="folder-body">
 
       <!-- BEST -->
-      <div class="panel active" id="panel-best">
+      <div class="panel active" id="panel-highlights">
         <div class="section-label">selected work</div>
         <div class="project-grid">
           <div class="project-card card-shoplift" onclick="openDetail('reporting')">
@@ -340,11 +380,182 @@
 
   <div class="detail-view" id="detail-reporting">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-shoplift"><div><div class="hero-banner-label">Shoplift · Core Product</div><div class="hero-banner-title">Test Reporting 2.0</div></div><div class="hero-banner-glyph">📊</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1500/q/75/i/913a4cc48dd444a1784c39068d0c662cdc38d7d5e96edb76107499fd45eab4bb/Reporting2x.png" alt="Test Reporting 2.0">
-    <div class="detail-section"><h3>Overview</h3><p>Statistical data is powerful — but only if people can understand it. The original reporting in Shoplift showed raw numbers and significance scores that confused merchants. Reporting 2.0 translated statistical results into plain language outcomes, making it clear whether a test won, lost, or needed more data, and why.</p></div>
-    <div class="detail-section"><h3>My role</h3><p>Led end-to-end product design — from discovery and user research to final specs and handoff. Collaborated closely with data science to accurately represent statistical concepts without dumbing them down.</p></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">UX Research</span><span class="pill">Data Visualization</span><span class="pill">Content Design</span><span class="pill">Prototyping</span></div></div>
+    <div class="hero-banner hero-reporting">
+      <div>
+        <div class="hero-banner-label">Shoplift · Core Product</div>
+        <div class="hero-banner-title">Test Reporting 2.0</div>
+        <div class="pill-row case-hero-skills"><span class="pill">UX Research</span><span class="pill">Data Visualization</span><span class="pill">Content Design</span><span class="pill">Prototyping</span><span class="pill">Usability Testing</span><span class="pill">Cross-functional Collaboration</span></div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/63b3cf8b936c8b2654a2c96155f7b8cad2134fa721cc71d2b6dbbc891e2db5e1/Reporting2x.png" alt="Test Reporting 2.0 dashboard">
+      <figcaption class="case-caption">Test Reporting 2.0</figcaption>
+    </figure>
+
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>I redesigned the Test Reporting experience to reduce trial churn by helping users better understand and trust their A/B testing results. Setting up tests was easy, but many users ended them too early because of confusion, mistrust in metrics, or overwhelming data.</p>
+        <p>I focused on making insights more discoverable, improving usability, and communicating the statistical model's state in human-friendly language.</p>
+        <p>This was a cross-functional effort rooted in real user feedback, designed to build clarity, trust, and confidence into the product.</p>
+      </div>
+      <div class="case-card">
+        <h3>Impact measured through</h3>
+        <ul class="case-list">
+          <li>Reduction in trial churn</li>
+          <li>Support ticket volume</li>
+          <li>Usability and satisfaction via CSAT scores and surveys</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Release date</h3><p>May 2025</p></div>
+      <div class="case-meta-card"><h3>Users</h3><p>Trial users and new users</p></div>
+      <div class="case-meta-card"><h3>Team</h3><p>CPO, product manager, statistician/data scientist, backend engineer, and full-stack engineer</p></div>
+    </div>
+
+    <div class="detail-section">
+      <h3>Background</h3>
+      <p>In Shoplift's early days as an A/B testing tool for e-commerce brands, our focus was on expanding testing capabilities to stay competitive, answering user questions like "Can I test X?" and driving growth. However, as we scaled, we noticed retention gaps: while users loved launching tests, they struggled to grasp key insights from their results. This meant some of our core value propositions were not landing, limiting our differentiation from competitors.</p>
+      <p>Over about eight months, through support tickets, user calls, and session recordings, we identified a major friction point: the Test Reporting screen. Setting up tests was seamless, but interpreting results over time was not. Users needed a clearer, more actionable reporting experience to turn their tests into decisions, and that is where we focused our efforts.</p>
+    </div>
+
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/bfe3591c129ebfaa4db6b4d851b39c06d650d295ad46ff25a31f083a9657f00c/before-after-reporting2x.png" alt="Before and after designs for the reporting page">
+      <figcaption class="case-caption">Before &amp; after — reporting page</figcaption>
+    </figure>
+
+    <div class="detail-section">
+      <h3>Discovery</h3>
+      <p>The reporting experience is where users discover the value of Shoplift, and it is the core of the product. The reporting screen contains sensitive financial information users need to base business decisions on every day. Our product goal was to keep it simple, clear, and actionable. But as the product grew, the product evolved, and so did our users. We needed to expand its capabilities while still maintaining our core values.</p>
+      <p>I broke down the lifecycle of a test by time and analyzed user sentiment for each period.</p>
+    </div>
+
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/e2e52fbbec357847bb8bc16c9216b899a87a4a6e22fb984c3825e70933183ba4/User-journey-map.png" alt="User journey analysis for the reporting experience">
+      <figcaption class="case-caption">User journey analysis</figcaption>
+    </figure>
+
+    <div class="detail-section">
+      <h3>Learnings</h3>
+      <p>Through user analysis during the test-running phase, we discovered that most friction occurred within the first 72 hours, especially for new users. Here's what we learned:</p>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. Users were ending tests too soon</summary>
+          <ul class="case-list">
+            <li>Many users prematurely stopped tests due to uncertainty.</li>
+            <li>Some were not confident their test was set up correctly.</li>
+            <li>Small sample sizes led to exaggerated results: big green or red numbers and drastic lifts, positive or negative, made users anxious and prompted them to stop tests early.</li>
+            <li>Conflicting data added to the confusion. We ran two models: Bayesian, with rolling hourly updates, and Frequentist, updated daily. Some users saw a negative lift while the test was "trending positive," which created doubt.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>2. Trust in data was an important consideration</summary>
+          <ul class="case-list">
+            <li>Some users noticed differences between our data and Shopify or GA4, which raised questions about how we calculated metrics.</li>
+            <li>Our metric definitions and calculation methods varied from Shopify and GA4, sometimes resulting in different conversion-rate figures.</li>
+            <li>Strong bot filtering led to variations in visitor counts, which required further explanation.</li>
+            <li>As a newer product, Shoplift was still establishing credibility, so helping users understand our approach became a key focus.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>3. The reporting experience was overwhelming</summary>
+          <ul class="case-list">
+            <li>The volume of numbers, charts, and tables caused cognitive overload, especially for first-time users.</li>
+            <li>Some framing felt scary or negative, such as "Inconclusive Data" or "Insufficient Data," leading users to second-guess their tests.</li>
+            <li>Managed accounts, with hands-on guidance, had a significantly smoother experience compared with self-serve users. Having someone explain the data, set expectations, and guide best practices helped users focus on what mattered most.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>4. Improving reporting meant more than UI changes; it needed to add value</summary>
+          <ul class="case-list">
+            <li>We were capturing valuable data but not surfacing it effectively.</li>
+            <li>We needed to future-proof the product. Multivariate testing, DOM testing, and custom goals were on the roadmap and would require deeper reporting changes.</li>
+            <li>Users frequently requested additional features such as goal progress tracking, time-based and segment filtering, and more granular breakdowns.</li>
+            <li>We had created high expectations with our advanced capabilities, yet we were missing some basic features that other A/B testing tools had built in.</li>
+          </ul>
+        </details>
+      </div>
+      <p>These insights guided our redesign efforts, ensuring that improvements were not just cosmetic but strategically addressed user concerns and friction points.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Feedback loop</h3>
+      <p>The insights we gathered shaped the scope of our focus, allowing me to define a clear design hypothesis and establish success metrics. With these foundations in place, I began working on wireframes and conceptual ideas, gathering iterative feedback from key stakeholders, including engineering, our statistician, the customer success team, and sales. Our discussions focused on several critical areas:</p>
+      <ul class="case-list">
+        <li><strong>Statistical integrity and accessibility:</strong> Ensuring that our calculations were mathematically sound while presenting them in a way users could understand. We aimed to balance scientific accuracy with clear, human-centered communication.</li>
+        <li><strong>Technical feasibility:</strong> Evaluating development effort and prioritizing efficiency by leveraging existing data rather than introducing entirely new backend structures. The goal was to minimize complexity while maximizing the value of surfaced insights.</li>
+        <li><strong>Addressing customer confusion:</strong> Ensuring the design directly tackled the key pain points users faced when interpreting test results. We worked closely with the customer success team to understand recurring challenges and reduce reliance on support for self-service users.</li>
+        <li><strong>Business and growth impact:</strong> Gathering input from leadership, including the CEO and sales team, to align the project with broader business objectives. This included assessing how the redesign would influence user activation, growth, and investor-relevant metrics like churn reduction.</li>
+      </ul>
+    </div>
+
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/8d95f61295194ec2086bc412716ea52cfb082b17503551597985b9d68c8cb908/Explorations2x.png" alt="Concepts, explorations, and early tests">
+      <figcaption class="case-caption">Concepts, explorations, and early tests</figcaption>
+    </figure>
+
+    <div class="detail-section">
+      <h3>Usability testing</h3>
+      <p>As we prepared for significant changes, it was crucial to ensure that existing users felt supported and not disrupted. To achieve this, we tested a prototype with them, including some out-of-scope elements we were curious to explore.</p>
+    </div>
+
+    <div class="case-stack">
+      <div class="case-card">
+        <h3>Testing goals</h3>
+        <ul class="case-list">
+          <li>Evaluate the new navigation: determine whether users could easily find what they were looking for.</li>
+          <li>Assess the perceived value of the new additions to reporting.</li>
+          <li>Gain deeper insights into how users analyze their test results.</li>
+        </ul>
+      </div>
+      <div class="case-card">
+        <h3>Key takeaways</h3>
+        <ul class="case-list">
+          <li><strong>Positive-to-neutral reception:</strong> While some users appreciated the new look, others were indifferent and immediately focused on exploring the data.</li>
+          <li><strong>Navigation clarity:</strong> Users had no difficulty finding relevant information. When asked to locate specific segment data, they correctly identified the corresponding tab on the first attempt.</li>
+          <li><strong>Data transparency preference:</strong> Experienced users preferred seeing raw data up front rather than having it pre-interpreted. They valued our analysis as a secondary layer.</li>
+          <li><strong>Visual variant views:</strong> Users actively engaged with image-based variant displays in the previous design. This feature was a key part of their workflow and needed to be preserved in the new iteration.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="case-callout">
+      <h3>Prototype</h3>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/ce5441b982ec2e9c9c01af4ed0b581fee0e137cbe7ec2e1012908ad0493c1574/Usability2x.png" alt="Usability testing prototype screens">
+      <a class="case-prototype-link" href="https://www.figma.com/proto/1NU3HI0XcmWTumKRWFwY63/Usability-testing---reporting?page-id=0%3A1&amp;node-id=11-1008&amp;viewport=251%2C112%2C0.1&amp;t=JvLerZWgxoizM4Ek-1&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;starting-point-node-id=11%3A1008" target="_blank" rel="noopener">View the prototype</a>
+    </div>
+
+    <div class="detail-section">
+      <h3>Final designs</h3>
+      <p>After incorporating the final refinements based on usability testing and adjusting for planned scope reductions, we arrived at the final experience for developer handoff. During this phase, we addressed a few remaining edge cases, including:</p>
+      <ul class="case-list">
+        <li>Ensuring compatibility with tests launched before the update.</li>
+        <li>Validating that updates to the statistical model did not retroactively alter results.</li>
+        <li>Accounting for all potential test states and scenarios to ensure a seamless experience.</li>
+      </ul>
+    </div>
+
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/9babb34f051f290302e0d401b065902c11a32bf1007e32b68d44696183f3e46a/Reporting-all2x.png" alt="Final Test Reporting designs">
+      <figcaption class="case-caption">Final designs</figcaption>
+    </figure>
+
+    <div class="detail-section">
+      <h3>Next steps</h3>
+      <p>Following impact analysis and user feedback, we prioritized the remaining enhancements for future development:</p>
+      <ul class="case-list">
+        <li><strong>Metrics/Goal tab:</strong> Introduce an advanced view that allows users to explore all test metrics simultaneously, with day-by-day breakdowns.</li>
+        <li><strong>Segment performance charts:</strong> Users heavily rely on daily test performance tracking, so we aim to extend this view to include segment-level insights over time.</li>
+        <li><strong>Expanded test timeline view:</strong> Enhance the timeline to display test progress, key milestones, and changes such as trend shifts and statistical significance achievements.</li>
+        <li><strong>Upcoming feature integration:</strong> The introduction of multivariate testing and DOM testing will require dedicated representation within the reporting framework.</li>
+        <li><strong>Comprehensive overview charts:</strong> Initially scrapped by the product team, but resurfaced as a critical need from the customer success team. This feature will help users and support teams cross-validate test data across multiple analytics platforms, such as Shopify and GA4.</li>
+        <li><strong>Expanded reporting capabilities:</strong> Extend reporting to include additional dimensions such as landing pages, product performance, geo-based analysis, and custom segment insights.</li>
+      </ul>
+    </div>
+
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-urlbeta">
@@ -485,15 +696,23 @@
     <h2 id="confirmationTitle">Thank you.</h2>
     <p>Your note is on its way to Jey. Head back home and keep browsing while the message finds its place.</p>
     <div class="confirmation-actions">
-      <a class="home-link" href="#best" onclick="returnToHome()">Back to homepage</a>
+      <a class="home-link" href="#highlights" onclick="returnToHome()">Back to homepage</a>
       <button class="modal-close" type="button" onclick="closeConfirmation()">Close</button>
     </div>
   </div>
 </div>
 
+<div class="image-lightbox" id="imageLightbox" role="dialog" aria-modal="true" aria-label="Expanded project image">
+  <button class="image-lightbox-close" type="button" onclick="closeImageLightbox()" aria-label="Close expanded image">×</button>
+  <div class="image-lightbox-inner">
+    <img id="lightboxImage" src="" alt="">
+    <div class="image-lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
 <script>
-  var currentTab = 'best';
-  var tabNames = ['best','clover','shoplift','elementor','other','about'];
+  var currentTab = 'highlights';
+  var tabNames = ['highlights','clover','shoplift','elementor','other','about'];
   var projectIds = ['reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','ifever'];
 
   function setHash(hash) {
@@ -540,14 +759,39 @@
     document.getElementById('confirmationModal').classList.remove('open');
   }
 
+  function openImageLightbox(img) {
+    var lightbox = document.getElementById('imageLightbox');
+    var lightboxImage = document.getElementById('lightboxImage');
+    var lightboxCaption = document.getElementById('lightboxCaption');
+    lightboxImage.src = img.currentSrc || img.src;
+    lightboxImage.alt = img.alt || 'Expanded project image';
+    var caption = '';
+    var figure = img.closest('figure');
+    if (figure) {
+      var figcaption = figure.querySelector('figcaption');
+      if (figcaption) caption = figcaption.textContent;
+    }
+    lightboxCaption.textContent = caption || img.alt || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageLightbox() {
+    var lightbox = document.getElementById('imageLightbox');
+    var lightboxImage = document.getElementById('lightboxImage');
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lightboxImage.src = '';
+  }
+
   function returnToHome() {
     closeConfirmation();
-    switchTab('best');
+    switchTab('highlights');
     return true;
   }
 
   function closeDetail() {
-    switchTab(currentTab || 'best');
+    switchTab(currentTab || 'highlights');
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
@@ -564,20 +808,37 @@
         return;
       }
     }
+    if (slug === 'best') {
+      switchTab('highlights', false);
+      return;
+    }
     if (tabNames.indexOf(slug) > -1) {
       switchTab(slug, false);
       return;
     }
-    switchTab('best', false);
+    switchTab('highlights', false);
   }
 
   window.addEventListener('hashchange', routeFromHash);
+  document.addEventListener('click', function(event) {
+    if (event.target.classList && event.target.classList.contains('detail-img')) {
+      openImageLightbox(event.target);
+    }
+    if (event.target.id === 'imageLightbox') {
+      closeImageLightbox();
+    }
+  });
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeImageLightbox();
+    }
+  });
 
   var contactForm = document.querySelector('.contact-form');
   var formNote = document.getElementById('formNote');
   var formNextUrl = document.getElementById('formNextUrl');
   if (formNextUrl) {
-    formNextUrl.value = window.location.origin + window.location.pathname + '#best';
+    formNextUrl.value = window.location.origin + window.location.pathname + '#highlights';
   }
   if (contactForm) {
     contactForm.addEventListener('submit', function(event) {
