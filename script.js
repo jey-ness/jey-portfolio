@@ -1,5 +1,5 @@
   var currentTab = 'highlights';
-  var tabNames = ['highlights','clover','shoplift','elementor','other','about'];
+  var tabNames = ['highlights','clover','shoplift','elementor','other'];
   var projectIds = ['reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','ifever'];
   var lightboxScale = 1;
 
@@ -39,12 +39,28 @@
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
+  function openAbout(updateUrl) {
+    if (updateUrl !== false) setHash('#about');
+    document.getElementById('mainFolders').style.display = 'none';
+    document.querySelectorAll('.detail-view').forEach(function(el){ el.classList.remove('open'); });
+    document.getElementById('aboutView').classList.add('open');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
   function showConfirmation() {
     document.getElementById('confirmationModal').classList.add('open');
   }
 
   function closeConfirmation() {
     document.getElementById('confirmationModal').classList.remove('open');
+  }
+
+  function toggleAboutContactPopover() {
+    document.getElementById('aboutContactPopover').classList.toggle('open');
+  }
+
+  function closeAboutContactPopover() {
+    document.getElementById('aboutContactPopover').classList.remove('open');
   }
 
   function applyImageZoom() {
@@ -104,6 +120,10 @@
 
   function routeFromHash() {
     var slug = window.location.hash.replace('#','');
+    if (slug === 'about') {
+      openAbout(false);
+      return;
+    }
     if (slug === 'contact') {
       openContact(false);
       return;
@@ -142,6 +162,7 @@
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       closeImageLightbox();
+      closeAboutContactPopover();
     } else if (document.getElementById('imageLightbox').classList.contains('open') && (event.key === '+' || event.key === '=')) {
       changeImageZoom(0.25);
     } else if (document.getElementById('imageLightbox').classList.contains('open') && event.key === '-') {
@@ -151,18 +172,21 @@
     }
   });
 
-  var contactForm = document.querySelector('.contact-form');
-  var formNote = document.getElementById('formNote');
   var formNextUrl = document.getElementById('formNextUrl');
   if (formNextUrl) {
     formNextUrl.value = window.location.origin + window.location.pathname + '#highlights';
   }
-  if (contactForm) {
+  document.querySelectorAll('.contact-form').forEach(function(contactForm) {
+    var formNote = contactForm.nextElementSibling;
+    var localNextField = contactForm.querySelector('input[name=\"_next\"]');
+    if (localNextField && !localNextField.id) {
+      localNextField.value = window.location.origin + window.location.pathname + '#about';
+    }
     contactForm.addEventListener('submit', function(event) {
       event.preventDefault();
       var submitButton = contactForm.querySelector('button[type="submit"]');
       var originalText = submitButton.textContent;
-      formNote.classList.remove('visible');
+      if (formNote && formNote.classList.contains('form-note')) formNote.classList.remove('visible');
       submitButton.disabled = true;
       submitButton.textContent = 'Sending...';
 
@@ -173,13 +197,14 @@
       }).then(function(response) {
         if (!response.ok) throw new Error('Form submit failed');
         contactForm.reset();
+        closeAboutContactPopover();
         showConfirmation();
       }).catch(function() {
-        formNote.classList.add('visible');
+        if (formNote && formNote.classList.contains('form-note')) formNote.classList.add('visible');
       }).finally(function() {
         submitButton.disabled = false;
         submitButton.textContent = originalText;
       });
     });
-  }
+  });
   routeFromHash();

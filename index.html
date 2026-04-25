@@ -15,12 +15,11 @@
   <div class="header">
     <div>
       <div class="header-name">Jey Tsymbaluk</div>
-      <div class="header-sub">Product &amp; UX Designer · New York</div>
+      <div class="header-sub">Product Design Lead · New York</div>
     </div>
     <div class="header-meta">
-      <a href="#about" onclick="switchTab('about')">About</a><br>
+      <button type="button" onclick="openAbout()">About</button><br>
       <button type="button" onclick="openContact()">Contact</button><br>
-      <a href="https://www.linkedin.com/in/jey-tsymbaluk/" target="_blank">LinkedIn ↗</a>
     </div>
   </div>
 
@@ -31,7 +30,6 @@
       <div class="tab"           onclick="switchTab('shoplift')">shoplift</div>
       <div class="tab"           onclick="switchTab('elementor')">elementor</div>
       <div class="tab"           onclick="switchTab('other')">other</div>
-      <div class="tab tab-about" onclick="switchTab('about')">about</div>
     </div>
     <div class="folder-body">
 
@@ -206,28 +204,60 @@
           </div>
         </div>
       </div>
-
-      <!-- ABOUT -->
-      <div class="panel" id="panel-about">
-        <div class="about-content">
-          <h2>Designing things people actually use.</h2>
-          <p>I'm Jey — a product designer with a background in brand and web design. I care deeply about the details that make a product feel good: the clarity of a flow, the precision of a system, the warmth of a copy choice.</p>
-          <p>I've led design at Shoplift, built design systems at scale at Elementor, and I'm currently a Senior Product Designer at Clover Network.</p>
-          <p>I believe in designing with the team, not just for it — which means workshops, documentation, and sharing knowledge as seriously as shipping screens.</p>
-          <div style="margin-top:32px;border-top:1px solid rgba(26,24,20,0.1);padding-top:24px">
-            <div class="section-label" style="margin-bottom:16px">experience</div>
-            <div class="exp-item"><span class="exp-years">2024–present</span><div class="exp-company">Clover Network</div><div class="exp-role">Senior Product Designer</div></div>
-            <div class="exp-item"><span class="exp-years">2022–2024</span><div class="exp-company">Shoplift</div><div class="exp-role">Product Design Lead → Senior Product Designer</div></div>
-            <div class="exp-item"><span class="exp-years">2020–2022</span><div class="exp-company">Elementor</div><div class="exp-role">Product Web Designer</div></div>
-            <div class="exp-item"><span class="exp-years">earlier</span><div class="exp-company">Firma / Studio&amp;more</div><div class="exp-role">Brand Designer</div></div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
   <!-- DETAIL VIEWS -->
+
+  <div class="detail-view" id="aboutView">
+    <button class="back-btn" onclick="closeDetail()">← back</button>
+    <div class="about-content">
+      <h2>Designing products with clarity, warmth, and a little grit.</h2>
+      <p>I'm Jey, a product designer based in New York. I started in brand and web design, which probably explains why I still care so much about the feeling of things: the tone of a sentence, the logic of a flow, the rhythm of a page, and the tiny details that make a product feel calm and human.</p>
+      <p>Over the years I've worked across startups and scale-ups, building design systems, shaping product direction, and helping teams make sense of ambiguity. At Shoplift I built the design practice from the ground up. At Elementor I created web language and systems used at scale. At Clover, I'm working on product experiences that connect business needs, team workflows, and real user behavior.</p>
+      <p>I like being close to the messy middle of product work: research, roadmapping, workshops, writing things down, bringing engineers in early, and turning unclear problems into something people can actually use. The work I enjoy most is thoughtful, collaborative, and useful, with enough room left for delight.</p>
+      <div class="link-list">
+        <button class="link-chip" type="button" onclick="toggleAboutContactPopover()">Contact</button>
+        <a class="link-chip" href="https://www.linkedin.com/in/jey-tsymbaluk/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a class="link-chip" href="https://drive.google.com/file/d/1rNdN6H2tnqdfVqMEH11-eTbeOEtlIg1x/view?usp=sharing" target="_blank" rel="noreferrer">Resume ↗</a>
+      </div>
+      <div class="about-contact-popover" id="aboutContactPopover">
+        <div class="about-contact-popover-header">
+          <div class="about-contact-popover-title">Let's talk.</div>
+          <button class="about-contact-popover-close" type="button" onclick="closeAboutContactPopover()">Close</button>
+        </div>
+        <p>Send a note about a project, collaboration, or anything that feels worth starting with a conversation.</p>
+        <form class="contact-form" action="https://formsubmit.co/jey.tsym@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New portfolio message">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="">
+          <input type="text" name="_honey" style="display:none">
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label>
+            Message
+            <textarea name="message" required></textarea>
+          </label>
+          <button type="submit">Send message</button>
+        </form>
+        <p class="form-note">The message could not send from this page. Please try again in a moment.</p>
+      </div>
+      <div class="about-divider">
+        <div class="section-label" style="margin-bottom:16px">experience</div>
+        <div class="exp-item"><span class="exp-years">2025–present</span><div class="exp-company">Clover</div><div class="exp-role">Senior Product Designer</div></div>
+        <div class="exp-item"><span class="exp-years">2022–2025</span><div class="exp-company">Shoplift</div><div class="exp-role">Product Design Lead</div></div>
+        <div class="exp-item"><span class="exp-years">2020–2022</span><div class="exp-company">Elementor</div><div class="exp-role">Product Web Designer</div></div>
+        <div class="exp-item"><span class="exp-years">2015–2024</span><div class="exp-company">Independent / Studio &amp; More / Firma</div><div class="exp-role">UI, brand, web, and creative design</div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="detail-view" id="detail-reporting">
     <button class="back-btn" onclick="closeDetail()">← back</button>
@@ -509,7 +539,11 @@
     <button class="back-btn" onclick="closeDetail()">← back</button>
     <div class="contact-intro">
       <h2>Let's talk.</h2>
-      <p>Send a note about a project, collaboration, or anything that feels worth starting with a conversation.</p>
+      <p>Send a note about a project, collaboration, or anything that feels worth starting with a conversation. If you'd rather browse first, you can also find me on LinkedIn or download my resume below.</p>
+      <div class="link-list">
+        <a class="link-chip" href="https://www.linkedin.com/in/jey-tsymbaluk/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a class="link-chip" href="https://drive.google.com/file/d/1rNdN6H2tnqdfVqMEH11-eTbeOEtlIg1x/view?usp=sharing" target="_blank" rel="noreferrer">Resume ↗</a>
+      </div>
     </div>
     <form class="contact-form" action="https://formsubmit.co/jey.tsym@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New portfolio message">
