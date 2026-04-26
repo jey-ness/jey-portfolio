@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,12 +25,27 @@
   </div>
 
   <div class="folders" id="mainFolders">
+    <div class="mobile-project-nav">
+      <div class="mobile-project-nav-title">Browse</div>
+      <button class="mobile-project-nav-toggle" type="button" onclick="toggleMobileProjectMenu()" aria-label="Open project navigation">
+        <i class="ph ph-list"></i>
+      </button>
+      <div class="mobile-project-menu" id="mobileProjectMenu">
+        <button type="button" onclick="switchTab('highlights')">Highlights</button>
+        <button type="button" onclick="switchTab('clover')">Clover</button>
+        <button type="button" onclick="switchTab('shoplift')">Shoplift</button>
+        <button type="button" onclick="switchTab('elementor')">Elementor</button>
+        <button type="button" onclick="switchTab('archive')">Archive</button>
+        <button type="button" onclick="openAbout()">About</button>
+        <button type="button" onclick="openContact()">Contact</button>
+      </div>
+    </div>
     <div class="tabs">
       <div class="tab tab-highlights active" onclick="switchTab('highlights')">highlights</div>
-      <div class="tab"           onclick="switchTab('clover')">clover</div>
-      <div class="tab"           onclick="switchTab('shoplift')">shoplift</div>
-      <div class="tab"           onclick="switchTab('elementor')">elementor</div>
-      <div class="tab"           onclick="switchTab('other')">other</div>
+      <div class="tab tab-dot tab-dot-clover" onclick="switchTab('clover')">clover</div>
+      <div class="tab tab-dot tab-dot-shoplift" onclick="switchTab('shoplift')">shoplift</div>
+      <div class="tab tab-dot tab-dot-elementor" onclick="switchTab('elementor')">elementor</div>
+      <div class="tab" onclick="switchTab('archive')">archive</div>
     </div>
     <div class="folder-body">
 
@@ -171,9 +187,9 @@
         </div>
       </div>
 
-      <!-- OTHER -->
-      <div class="panel" id="panel-other">
-        <div class="section-label">other projects</div>
+      <!-- ARCHIVE -->
+      <div class="panel" id="panel-archive">
+        <div class="section-label">archive projects</div>
         <div class="project-grid">
           <div class="project-card card-other" onclick="openDetail('andco')">
             <img class="card-img" src="https://freight.cargo.site/w/1000/q/75/i/59b9a444407b313fd386f2bdb7e741aa60e1f1e19401aa637f3743bf8be7ce4b/03-2.png" alt="And.Co home page" loading="lazy">
@@ -309,7 +325,7 @@
 
     <div class="detail-section">
       <h3>Discovery</h3>
-      <p>The reporting experience is where users discover the value of Shoplift, and it is the core of the product. The reporting screen contains sensitive financial information users need to base business decisions on every day. Our product goal was to keep it simple, clear, and actionable. But as the product grew, the product evolved, and so did our users. We needed to expand its capabilities while still maintaining our core values.</p>
+      <p>The reporting experience is where users discover the value of Shoplift, and it sits at the center of the product. It contains sensitive financial information people use to make business decisions every day, so it needed to feel simple, clear, and actionable. As Shoplift expanded its testing capabilities and our users became more sophisticated, the reporting experience had to evolve too, without losing those core principles.</p>
       <p>I broke down the lifecycle of a test by time and analyzed user sentiment for each period.</p>
     </div>
 
@@ -332,7 +348,7 @@
           </ul>
         </details>
         <details class="case-insight">
-          <summary>2. Trust in data was an important consideration</summary>
+          <summary>2. Users did not trust that we calculated their data correctly</summary>
           <ul class="case-list">
             <li>Some users noticed differences between our data and Shopify or GA4, which raised questions about how we calculated metrics.</li>
             <li>Our metric definitions and calculation methods varied from Shopify and GA4, sometimes resulting in different conversion-rate figures.</li>
@@ -358,18 +374,42 @@
           </ul>
         </details>
       </div>
-      <p>These insights guided our redesign efforts, ensuring that improvements were not just cosmetic but strategically addressed user concerns and friction points.</p>
+      <p class="case-section-note">These insights guided our redesign efforts, ensuring that improvements were not just cosmetic but strategically addressed user concerns and friction points.</p>
     </div>
 
     <div class="detail-section">
       <h3>Feedback loop</h3>
-      <p>The insights we gathered shaped the scope of our focus, allowing me to define a clear design hypothesis and establish success metrics. With these foundations in place, I began working on wireframes and conceptual ideas, gathering iterative feedback from key stakeholders, including engineering, our statistician, the customer success team, and sales. Our discussions focused on several critical areas:</p>
-      <ul class="case-list">
-        <li><strong>Statistical integrity and accessibility:</strong> Ensuring that our calculations were mathematically sound while presenting them in a way users could understand. We aimed to balance scientific accuracy with clear, human-centered communication.</li>
-        <li><strong>Technical feasibility:</strong> Evaluating development effort and prioritizing efficiency by leveraging existing data rather than introducing entirely new backend structures. The goal was to minimize complexity while maximizing the value of surfaced insights.</li>
-        <li><strong>Addressing customer confusion:</strong> Ensuring the design directly tackled the key pain points users faced when interpreting test results. We worked closely with the customer success team to understand recurring challenges and reduce reliance on support for self-service users.</li>
-        <li><strong>Business and growth impact:</strong> Gathering input from leadership, including the CEO and sales team, to align the project with broader business objectives. This included assessing how the redesign would influence user activation, growth, and investor-relevant metrics like churn reduction.</li>
-      </ul>
+      <p>The insights we gathered shaped the scope of our focus, allowing me to define a clear design hypothesis and establish success metrics. With these foundations in place, I began working on wireframes and conceptual ideas, gathering iterative feedback from key stakeholders, including the engineering team, our statistician, the customer success (CS) team, and sales. Our discussions focused on several critical areas:</p>
+      <div class="case-icon-grid">
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-math-operations"></i>
+          </div>
+          <h4>Statistical Integrity &amp; Accessibility</h4>
+          <p>Ensuring that our calculations were mathematically sound while presenting them in a way that was understandable and approachable for users. We aimed to balance scientific accuracy with clear, human-centered communication.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-list-checks"></i>
+          </div>
+          <h4>Technical Feasibility</h4>
+          <p>Evaluating the development effort required, prioritizing efficiency by leveraging existing data rather than introducing entirely new backend structures. The goal was to minimize complexity while maximizing the value of surfaced insights.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-chat-centered-dots"></i>
+          </div>
+          <h4>Addressing Customer Confusion</h4>
+          <p>Ensuring the design directly tackled the key pain points users faced in interpreting their test results. We worked closely with the CS team to understand recurring challenges and ensure the new design reduced reliance on support for self-service users.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-chart-line-up"></i>
+          </div>
+          <h4>Business &amp; Growth Impact</h4>
+          <p>Gathering input from leadership, including the CEO and sales team, to align the project with broader business objectives. This included assessing how the redesign would influence user activation, growth, and investor-relevant metrics like churn reduction.</p>
+        </div>
+      </div>
     </div>
 
     <figure class="case-figure">
@@ -426,14 +466,50 @@
     <div class="detail-section">
       <h3>Next steps</h3>
       <p>Following impact analysis and user feedback, we prioritized the remaining enhancements for future development:</p>
-      <ul class="case-list">
-        <li><strong>Metrics/Goal tab:</strong> Introduce an advanced view that allows users to explore all test metrics simultaneously, with day-by-day breakdowns.</li>
-        <li><strong>Segment performance charts:</strong> Users heavily rely on daily test performance tracking, so we aim to extend this view to include segment-level insights over time.</li>
-        <li><strong>Expanded test timeline view:</strong> Enhance the timeline to display test progress, key milestones, and changes such as trend shifts and statistical significance achievements.</li>
-        <li><strong>Upcoming feature integration:</strong> The introduction of multivariate testing and DOM testing will require dedicated representation within the reporting framework.</li>
-        <li><strong>Comprehensive overview charts:</strong> Initially scrapped by the product team, but resurfaced as a critical need from the customer success team. This feature will help users and support teams cross-validate test data across multiple analytics platforms, such as Shopify and GA4.</li>
-        <li><strong>Expanded reporting capabilities:</strong> Extend reporting to include additional dimensions such as landing pages, product performance, geo-based analysis, and custom segment insights.</li>
-      </ul>
+      <div class="case-icon-grid case-next-grid">
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-table"></i>
+          </div>
+          <h4>Metrics/Goal tab</h4>
+          <p>Introduce an advanced view so users can explore all test metrics together with day-by-day breakdowns.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-chart-line"></i>
+          </div>
+          <h4>Segment performance charts</h4>
+          <p>Extend daily performance tracking to include segment-level insights over time, since users rely heavily on this view.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-timeline"></i>
+          </div>
+          <h4>Expanded test timeline view</h4>
+          <p>Show progress, milestones, trend shifts, and statistical significance in a clearer chronological story.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-cube"></i>
+          </div>
+          <h4>Upcoming feature integration</h4>
+          <p>Represent multivariate testing and DOM testing cleanly inside the reporting framework as those capabilities launch.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-chart-pie-slice"></i>
+          </div>
+          <h4>Comprehensive overview charts</h4>
+          <p>Bring back cross-platform overview charts so users and support teams can compare Shoplift data with tools like Shopify and GA4.</p>
+        </div>
+        <div class="case-icon-card">
+          <div class="case-icon" aria-hidden="true">
+            <i class="ph ph-faders-horizontal"></i>
+          </div>
+          <h4>Expanded reporting capabilities</h4>
+          <p>Add dimensions like landing pages, product performance, geo-based analysis, and custom segment insights.</p>
+        </div>
+      </div>
     </div>
 
     <div class="case-thanks">Thank you!</div>
@@ -441,74 +517,591 @@
 
   <div class="detail-view" id="detail-urlbeta">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-shoplift"><div><div class="hero-banner-label">Shoplift · Feature Release</div><div class="hero-banner-title">URL Split Testing Beta Program</div></div><div class="hero-banner-glyph">🔗</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1500/q/75/i/923f68dde3fdb088504e5f8c8a3d88995d781dc45301f307f79a5f8a69824f46/URL-Cover2x.png" alt="URL Split Testing Beta">
-    <div class="detail-section"><h3>Overview</h3><p>URL split testing was a long-awaited capability — allowing merchants to test entirely different pages against each other, rather than just template variations. I designed the beta program experience: the onboarding, the feature UI, and the feedback loops that shaped the public release.</p></div>
-    <div class="detail-section"><h3>My role</h3><p>Designed the beta sign-up flow, in-app feature experience, and communication touchpoints. Ran feedback sessions with beta users to iterate quickly before full rollout.</p></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">Feature Design</span><span class="pill">Beta Programs</span><span class="pill">User Research</span><span class="pill">Flows</span></div></div>
+    <div class="hero-banner hero-shoplift">
+      <div>
+        <div class="hero-banner-label">Shoplift · Feature Release</div>
+        <div class="hero-banner-title">URL Split Testing Beta Program</div>
+        <div class="pill-row case-hero-skills"><span class="pill">Beta Design</span><span class="pill">Feature Strategy</span><span class="pill">User Research</span><span class="pill">Customer Feedback</span><span class="pill">Monetization Discovery</span></div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/49459587741cbd8f16075d5f5fff2ba55a0574f08f39d8843409caf27fbca57c/URL2x.png" alt="URL split testing beta program hero">
+      <figcaption class="case-caption">Building a beta around one of Shoplift's most-requested capabilities.</figcaption>
+    </figure>
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>URL split testing unlocked a major gap in Shoplift's product offering: the ability to test entirely different pages, not just template variations. It was a highly requested feature and also a major internal need for our customer success team, who were spending time guiding merchants through workarounds.</p>
+        <p>I designed the beta program from the ground up so we could validate the feature in real conditions, learn from actual merchant behavior, and shape a more confident public release.</p>
+      </div>
+      <div class="case-card">
+        <h3>Impact measured through</h3>
+        <ul class="case-list">
+          <li>Adoption and beta activation rates</li>
+          <li>Support ticket volume and resolution time</li>
+          <li>Qualitative feedback about setup, clarity, and usefulness</li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Beta</h3><p>September 2024</p></div>
+      <div class="case-meta-card"><h3>Release</h3><p>December 2024</p></div>
+      <div class="case-meta-card"><h3>Users</h3><p>E-commerce marketers, growth teams, and self-serve merchants running landing-page and product experiments</p></div>
+    </div>
+    <div class="detail-section">
+      <h3>Background</h3>
+      <p>Before URL split testing, Shoplift users could experiment within theme and template constraints, but they could not easily compare two entirely different URLs. That gap showed up repeatedly in feature requests, trial churn, and support conversations. It also created a lot of operational overhead for our CS team, who were manually helping users approximate workflows the product should have handled natively.</p>
+      <p>The beta was not just a launch tactic. It became a structured way to learn quickly, reduce risk, and bring the team closer to real use cases before general availability.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/efc6b623c751b3cc493b6b45df0f3f9c43e328413d86e8e4ff62a9677428ece4/flow2x.png" alt="URL split testing beta flow">
+      <figcaption class="case-caption">The beta experience covered onboarding, setup, and feedback loops.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Discovery</h3>
+      <p>I framed the beta around two questions: what would merchants actually use URL testing for, and where would the experience break down first? We tracked requests coming through support, talked with users directly, and paid close attention to setup friction and post-launch questions.</p>
+      <ul class="case-list">
+        <li>Early hypotheses centered around campaign and landing-page testing.</li>
+        <li>Real behavior showed even stronger demand for price testing and product-detail-page experiments.</li>
+        <li>Users also surfaced needs around audience segmentation, product-specific redirects, and more advanced merchandising workflows.</li>
+      </ul>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/5468a773043def6b480e5dc52821e3b8b642cc6a4aeacefd79d7403c3e37e053/screens2x.png" alt="URL split testing beta screens">
+      <figcaption class="case-caption">Core product screens for URL setup, review, and launch.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>What we learned</h3>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. Our initial assumptions were directionally right, but incomplete</summary>
+          <ul class="case-list">
+            <li>Users absolutely wanted landing-page experimentation.</li>
+            <li>But some of the most urgent value came from pricing, offer, and product-page testing.</li>
+            <li>That shifted how we thought about future roadmap opportunities, especially around profit optimization.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>2. The beta itself became a valuable product-development mechanism</summary>
+          <ul class="case-list">
+            <li>We could validate feature-market fit before a broad release.</li>
+            <li>Support and product stayed tightly connected to real user questions.</li>
+            <li>The process became reusable for future launches, not just this one feature.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>3. Some of the biggest opportunities sat one step beyond the initial release</summary>
+          <ul class="case-list">
+            <li>Smarter handling of URLs with UTMs or strings could create smoother setup.</li>
+            <li>Single-product testing deserved a more tailored path.</li>
+            <li>Audience-aware upgrades and profit reporting opened up future monetization and research directions.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/7052695cb4a55f1434a7a698f12fd1125648f4022eeea37490929bc01427e716/Search2x.png" alt="URL split testing search flow">
+      <figcaption class="case-caption">The beta surfaced clear opportunities to streamline product search and advanced setup flows.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Outcome</h3>
+      <p>The beta showed strong adoption, helped reduce friction for support, and gave us clarity that the feature solved a real problem. More importantly, it gave us a richer picture of what merchants were actually trying to optimize, which shaped how we thought about the next generation of experimentation tools inside Shoplift.</p>
+    </div>
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-testcreation">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-shoplift"><div><div class="hero-banner-label">Shoplift · Core Flow</div><div class="hero-banner-title">Test Creation Flow</div></div><div class="hero-banner-glyph">⚗️</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1500/q/75/i/1852809cfa43f7bc2ab2ce90e12da83efda57bfda537f5343a395c243a273ef6/Preview32x.png" alt="Test Creation Flow">
-    <div class="detail-section"><h3>Overview</h3><p>The test creation flow is the heart of Shoplift. As the platform grew — adding URL testing, theme testing, audience targeting — the original flow became confusing and couldn't scale. I led a rethink of the entire creation experience, making it feel simple regardless of test complexity.</p></div>
-    <div class="detail-section"><h3>My role</h3><p>Led design of the new multi-step creation flow. Ran user testing sessions and collaborated with engineering to ship incrementally without breaking existing user patterns.</p></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">Information Architecture</span><span class="pill">Interaction Design</span><span class="pill">User Testing</span></div></div>
+    <div class="hero-banner hero-shoplift">
+      <div>
+        <div class="hero-banner-label">Shoplift · Core Flow</div>
+        <div class="hero-banner-title">Test Creation Flow</div>
+        <div class="pill-row case-hero-skills"><span class="pill">Information Architecture</span><span class="pill">Interaction Design</span><span class="pill">Usability Testing</span><span class="pill">Design Systems</span><span class="pill">Product Strategy</span></div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/a6a08210be4c4935cc3528866e3065e323f3f014631957f611b576f00ab2340b/Cover222x.png" alt="Test creation flow hero">
+      <figcaption class="case-caption">Rethinking the most important flow in the product as Shoplift's testing capabilities expanded.</figcaption>
+    </figure>
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>Creating an A/B test is the core user journey in Shoplift, but the original wizard was built for a simpler product. As the platform expanded, the flow started to feel rigid, cognitively heavy, and difficult to scale.</p>
+        <p>I redesigned the creation experience to reduce friction for new users, support future testing modes, and make advanced experimentation feel approachable rather than overwhelming.</p>
+      </div>
+      <div class="case-card">
+        <h3>My role included</h3>
+        <ul class="case-list">
+          <li>Planning and PRD collaboration with the CPO</li>
+          <li>User research with CS and direct interviews</li>
+          <li>Hands-on design, prototyping, testing, QA, and post-launch analysis</li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Release</h3><p>September 2023</p></div>
+      <div class="case-meta-card"><h3>Users</h3><p>CMOs, e-commerce managers, and store founders</p></div>
+      <div class="case-meta-card"><h3>Constraint</h3><p>Designed during a React-to-Vue migration and rollout of a new design system</p></div>
+    </div>
+    <div class="detail-section">
+      <h3>Background</h3>
+      <p>The old test creation flow asked users to make one decision at a time in a narrow wizard pattern. That worked when Shoplift supported fewer experiment types, but it stopped scaling once the product introduced more testing options and more nuanced setup needs.</p>
+      <p>We needed a flow that could reduce cognitive load for beginners while creating a stronger foundation for future capabilities.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/9c960619986ad14267037c8d71058a3050949e1c3da05d2033e4831c9de6c18d/before-after2x.png" alt="Before and after for Shoplift test creation">
+      <figcaption class="case-caption">Before and after: simplifying decision-making while making room for a more capable system.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Research</h3>
+      <p>I pulled from multiple inputs to understand where the flow was breaking down: Hotjar recordings, customer success conversations, user interviews, and UX and copy reviews. Across those sources, the same themes came up repeatedly.</p>
+      <ul class="case-list">
+        <li>Users did not always understand what kind of test to create.</li>
+        <li>The experience felt too linear for a more complex product.</li>
+        <li>New users needed guidance, while experienced users wanted to move faster.</li>
+      </ul>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/b64b781af0f7c314b31b3148231dfe91fd1e9a656120566d6f55d202c061f396/find2x.png" alt="Research findings for test creation flow">
+      <figcaption class="case-caption">Distilling friction points into clearer design priorities.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Design goals</h3>
+      <div class="case-stack">
+        <div class="case-card">
+          <h3>Primary goals</h3>
+          <ul class="case-list">
+            <li>Reduce cognitive overload during setup</li>
+            <li>Shorten time to create a valid test</li>
+            <li>Help newer users get started through a test library</li>
+            <li>Make the architecture flexible enough for future experimentation modes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/3173d7bf89ad9c35062b20283d84230391911240a9c7d14a4edc02c0dab12fc3/flow2x.png" alt="New Shoplift test creation flow architecture">
+      <figcaption class="case-caption">A more scalable flow with better structure, clearer decision points, and room to grow.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Process</h3>
+      <p>I worked through wireframes, internal usability testing, and iterative refinement with engineering so we could improve the flow without destabilizing a critical part of the product. The redesign had to be clearer for users and also realistic to implement in phases.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/126f16fb58446a8b377408279dd16d8fa23d4d22dcec2ca0404409b3860597ae/wireframes2x.png" alt="Wireframes for Shoplift test creation flow">
+      <figcaption class="case-caption">Early exploration focused on reducing friction without removing necessary control.</figcaption>
+    </figure>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/8f1cf4b2105a16749a46cc1377f50070355831d89d4fd02b86c1fc2116780442/final123.png" alt="Final designs for Shoplift test creation flow">
+      <figcaption class="case-caption">Final designs for handoff and rollout.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Outcome</h3>
+      <p>The new creation flow made the core product journey feel more intentional and future-ready. It gave new users a stronger starting point, gave the team more space to expand experimentation capabilities, and aligned the experience with the evolving product strategy.</p>
+    </div>
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-pricing">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-shoplift"><div><div class="hero-banner-label">Shoplift · Monetization</div><div class="hero-banner-title">Pricing Model Update</div></div><div class="hero-banner-glyph">💳</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1500/q/75/i/27f7031bbb74ea886062884c63e6c9ad18ca3f24e16e09587a821b871bcf71c1/Preview-timely.png" alt="Pricing Model Update">
-    <div class="detail-section"><h3>Overview</h3><p>Introducing new pricing tiers and paywalls without alienating existing users. This project required balancing business needs with user trust — designing upgrade paths that felt natural and earned, not forced.</p></div>
-    <div class="detail-section"><h3>My role</h3><p>Designed all in-app paywall moments, upgrade flows, and the pricing page redesign. Worked closely with product and growth teams to define which features gate which tiers.</p></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">Growth Design</span><span class="pill">Monetization</span><span class="pill">Copywriting</span></div></div>
+    <div class="hero-banner hero-shoplift">
+      <div>
+        <div class="hero-banner-label">Shoplift · Monetization</div>
+        <div class="hero-banner-title">Pricing Model Update</div>
+        <div class="pill-row case-hero-skills"><span class="pill">Growth Design</span><span class="pill">Monetization</span><span class="pill">Systems Thinking</span><span class="pill">Content Design</span><span class="pill">Cross-functional Planning</span></div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/1e1d2d8e3f2415bde31bbab4cb6d88ab6079251428c7ed8c3fbd9b7a01b6836c/Cover-pricing2.png" alt="Pricing model update hero">
+      <figcaption class="case-caption">Evolving Shoplift's pricing model across the product, billing flows, and upgrade moments.</figcaption>
+    </figure>
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>This project touched almost every part of the product. We moved from a simpler usage-based structure to a more flexible pricing model that introduced usage options, feature-based access, and annual plans.</p>
+        <p>The challenge was not just designing a pricing page. It was redesigning every place where pricing showed up so monetization could feel transparent, understandable, and emotionally manageable.</p>
+      </div>
+      <div class="case-card">
+        <h3>Scope included</h3>
+        <ul class="case-list">
+          <li>Signup and onboarding</li>
+          <li>Upgrade and downgrade flows</li>
+          <li>Paywalls and usage moments</li>
+          <li>Billing and reporting surfaces</li>
+          <li>Support for legacy plans</li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Release window</h3><p>March to June 2023</p></div>
+      <div class="case-meta-card"><h3>Users</h3><p>Prospects, new users, and customers on legacy plans</p></div>
+      <div class="case-meta-card"><h3>Partners</h3><p>CPO, PM, CEO, marketing, and engineering</p></div>
+    </div>
+    <div class="detail-section">
+      <h3>Background</h3>
+      <p>Pricing changes are never just a business exercise. They change how users perceive value, fairness, and trust. In Shoplift's case, the new model affected almost every screen where a customer could discover, compare, or pay for value.</p>
+      <p>That meant the work had to be both strategic and deeply operational. We needed to align the business on what we were selling, then make every touchpoint communicate that clearly.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/2a038ec99c2adea35f6c4a07b592e87e6f05e704fbbd63d2460e7fdb2585defe/before-after-pricing.png" alt="Before and after Shoplift pricing model update">
+      <figcaption class="case-caption">The shift required rethinking both the pricing language and the surrounding product experience.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Challenges</h3>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. Pricing was connected to nearly every core flow</summary>
+          <ul class="case-list">
+            <li>The redesign touched sign-up, billing, reporting, usage tracking, paywalls, and account settings.</li>
+            <li>We could not treat any of these screens as isolated moments.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>2. Monetization friction can quickly become churn</summary>
+          <ul class="case-list">
+            <li>Upgrade prompts, overages, and feature gates can feel punitive if not framed carefully.</li>
+            <li>The product needed to communicate value before asking for commitment.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>3. The system had to support both new and legacy realities</summary>
+          <ul class="case-list">
+            <li>Existing customers had different expectations and plan structures.</li>
+            <li>We needed a clear internal map so development and QA could handle edge cases confidently.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/935468bd7da716e5764a14c89df1d5c35d2540c7bd63886384afd1ea92ea2358/Proccess2x.png" alt="Pricing update process map">
+      <figcaption class="case-caption">A collaborative planning process helped keep a large, cross-team rollout aligned.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Process</h3>
+      <p>I worked with leadership and product partners to map the full scope in Figma and Asana, creating a shared source of truth for design, engineering, and QA. This helped us keep stakeholders aligned and made an otherwise sprawling change set far more manageable.</p>
+      <p>I also researched pricing psychology and paywall patterns to balance clarity with conversion, especially in moments where users would feel the change most sharply.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/253dbacbb919378731fb6a7ad42e8200828dc888eef24f2b9c9fff7721a703ac/Scope2x.png" alt="Pricing update scope map">
+      <figcaption class="case-caption">The scope map was essential for handoff, QA, and shared understanding across teams.</figcaption>
+    </figure>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/2b77ab074252de0f1060961682cd1c8d7b8c22db705bf703f58329e040256fcb/Design-12x.png" alt="Pricing update final designs">
+      <figcaption class="case-caption">Final pricing and upgrade experiences introduced more warmth and hierarchy into a previously black-and-white product.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Outcome</h3>
+      <p>The final system supported a more flexible business model without losing sight of user trust. It gave the team a cohesive framework for how pricing should appear across the product and made monetization moments feel more deliberate, understandable, and brand-consistent.</p>
+    </div>
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-dsm">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-elementor"><div><div class="hero-banner-label">Elementor · Design System</div><div class="hero-banner-title">Elementor Website Design System</div></div><div class="hero-banner-glyph">⚡</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1080/q/94/i/9bd92252ee93ccfbe48f642c494aac093a772d0c10f7a95b9804f66b64eb1543/Preview4.png" alt="Elementor Website DSM">
-    <div class="detail-section"><h3>Why we built it</h3><p>Many people were involved in the elementor.com project — new designers, developers, and product marketing managers joined constantly, making consistency harder to maintain. Other teams also wanted guidelines for landing pages, emails, and release material. We needed to spend less time on repetitive parts and more on complex layouts.</p></div>
-    <div class="detail-section"><h3>Fundamentals</h3><p>Converting the brand language to a web language: primary brand colors plus sub-colors and greys. Three fonts became a design challenge — the two headline fonts (Ivar Text Bold, Oli Grotesk Bold) were divided into primary and secondary. Later we bought the full Ivar family for better web headlines. All hierarchies documented: H1–H6, body blocks, bullets.</p><p>~87% of users browse on desktop, so we worked desktop-first. Designed for 1920px wide screens with a narrow 1280px grid, later moving to 1440px as standard. Mobile breakpoints: 360px minimum, 1024px tablet at 768px grid.</p></div>
-    <div class="detail-section"><h3>Components</h3><p>Limited image/video to 4 sizes: 3:4 in 2 sizes, 16:9, and 1:1. Paired with full text blocks (label, headline, body, bullets, button). Full page blocks cut page production from 2 days to a few hours. Added headers, footers, carousels, tabs, and showcase components.</p></div>
-    <div class="detail-section"><h3>My role</h3><p>The DSM started as a passion project with Yanki Bindman. I documented the web language decisions, added UI atoms, then built out all remaining components and made them responsive. I owned the project from start to handoff. Just before leaving, I held a workshop so the team could keep growing it — which led to more workshops for the marketing and education teams.</p></div>
-    <div class="detail-section"><h3>The team</h3><div class="team-list">Head of Design: Ronit Cyjon<br>Team Lead: Erez Eden<br>Design: Yanki Bindman, Danielle Stelman, Alon Braier, Omri Avraham, Yael Zlotnik<br>Dev: Asaf Rotstain, Alan Kaler</div></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">Design Systems</span><span class="pill">Component Design</span><span class="pill">Documentation</span><span class="pill">Workshop Facilitation</span><span class="pill">Figma</span></div></div>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Design System</div>
+        <div class="hero-banner-title">Elementor Website Design System</div>
+        <div class="pill-row case-hero-skills"><span class="pill">Design Systems</span><span class="pill">Documentation</span><span class="pill">Component Design</span><span class="pill">Responsive Design</span><span class="pill">Workshop Facilitation</span></div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/4a623fe433777f3691e25a92c73714c12a980c80005b62526b1452053fb4550c/DSM-wide.png" alt="Elementor website design system hero">
+      <figcaption class="case-caption">Creating a shared web design language for one of Elementor's most visible products.</figcaption>
+    </figure>
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>The Elementor website was growing quickly, with more contributors, more launch work, and more teams needing to build within the same brand system. Consistency was getting harder to maintain and repetitive page work was slowing everyone down.</p>
+        <p>I helped turn the website's visual language into a real design system so teams could move faster, stay aligned, and build with much more confidence.</p>
+      </div>
+      <div class="case-card">
+        <h3>My role</h3>
+        <ul class="case-list">
+          <li>Documented the web language and foundational decisions</li>
+          <li>Built UI atoms and components</li>
+          <li>Made the system responsive and production-ready</li>
+          <li>Owned handoff and ran workshops so teams could keep using it</li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Context</h3><p>Built for Elementor's marketing website and adjacent teams</p></div>
+      <div class="case-meta-card"><h3>Core problem</h3><p>Too many contributors, not enough shared rules</p></div>
+      <div class="case-meta-card"><h3>Team</h3><p>Design leadership, product web designers, and development partners</p></div>
+    </div>
+    <div class="detail-section">
+      <h3>Why we built it</h3>
+      <p>The website had become a cross-functional product in its own right. Designers, developers, and PMMs were all contributing, and other teams needed guidance for landing pages, campaigns, and supporting materials. Without a shared system, consistency was fragile and production speed suffered.</p>
+      <p>The design system started as a passion project and quickly became infrastructure for how the team worked.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/3a22296505df933cb5403f4351f194d19f10d52757fcc15209ceb3e44d5b0bbd/DSM-screenshot.png" alt="Elementor design system overview">
+      <figcaption class="case-caption">A system that connected brand expression, practical UI building blocks, and production workflows.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Foundations</h3>
+      <p>We translated Elementor's brand language into a usable web system: colors, typography, layout logic, and content hierarchy. Typography was especially nuanced because the brand relied on multiple typefaces and headline styles, so the system had to define where each one belonged and how they worked together.</p>
+      <p>We also designed desktop-first, based on actual usage patterns, and documented responsive rules so the system could scale reliably across breakpoints.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/28d450741fb90108d9371e6a9e0b78059e1dc8fdf7afc879dd017d95c41c8bdb/Basics.png" alt="Elementor design system basics">
+      <figcaption class="case-caption">Foundational decisions covered typography, color, grids, and responsive behavior.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Component thinking</h3>
+      <p>To make the system genuinely useful, we standardized more than tokens. We defined repeatable content blocks, media ratios, headers, footers, carousels, tabs, showcase modules, and other reusable structures that turned page building from a bespoke exercise into a faster, more reliable workflow.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/a627e16dd3dc556b947539867f17d34c88fbe244b76c8c49439784d094d5fd96/UI-Atoms.png" alt="Elementor design system UI atoms">
+      <figcaption class="case-caption">Atoms and repeatable UI blocks made the system practical, not just aspirational.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Outcome</h3>
+      <p>The system reduced repetitive work, improved consistency across teams, and gave new contributors a clearer runway into the product web language. Just as importantly, it created shared understanding. By the time I left, the team was continuing to grow it through workshops and internal adoption beyond the original website team.</p>
+    </div>
+    <div class="detail-section">
+      <h3>The team</h3>
+      <div class="team-list">Head of Design: Ronit Cyjon<br>Team Lead: Erez Eden<br>Design: Yanki Bindman, Danielle Stelman, Alon Braier, Omri Avraham, Yael Zlotnik<br>Dev: Asaf Rotstain, Alan Kaler</div>
+    </div>
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-experts">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-elementor"><div><div class="hero-banner-label">Elementor · Platform</div><div class="hero-banner-title">Elementor Experts</div></div><div class="hero-banner-glyph">🌐</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1080/q/75/i/f5a33560b382fda21bcbb1bf13099139507c028e73f4533f0e88e8060afd82ef/Preview3.png" alt="Elementor Experts Platform">
-    <div class="detail-section"><h3>Overview</h3><p>A marketplace platform connecting web creators with clients who need websites built with Elementor. The Experts platform had to serve two very different audiences — the freelancers and agencies listing their services, and the business owners searching for help.</p></div>
-    <div class="detail-section"><h3>My role</h3><p>Designed the web experience for the Experts marketplace — including listing pages, search and filter, and expert profiles. Worked to make the platform feel trustworthy and discoverable for both sides of the marketplace.</p></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">Marketplace Design</span><span class="pill">Web Design</span><span class="pill">Dual-audience UX</span></div></div>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Platform</div>
+        <div class="hero-banner-title">Elementor Experts Platform</div>
+        <div class="pill-row case-hero-skills"><span class="pill">Marketplace UX</span><span class="pill">Research</span><span class="pill">IA</span><span class="pill">Prototyping</span><span class="pill">Trust Design</span></div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/061c13b97744cb976839a0b41140182bf0a0cb32e4f85627fbd5332e23b20757/Home-Page-wide.png" alt="Elementor Experts Platform hero">
+      <figcaption class="case-caption">Reimagining the marketplace where businesses discover Elementor creators and agencies.</figcaption>
+    </figure>
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>The Experts platform had to serve two different audiences at once: people offering Elementor services and people trying to hire them. The beta product already existed, but it struggled with discovery, trust, and information architecture.</p>
+        <p>I redesigned the experience to make it easier to search, compare, and evaluate experts while preserving alignment with Elementor's existing brand.</p>
+      </div>
+      <div class="case-card">
+        <h3>My role</h3>
+        <ul class="case-list">
+          <li>Competitive and platform research</li>
+          <li>User interviews and community listening</li>
+          <li>Information architecture and user flows</li>
+          <li>UX ideation, low-fi design, prototyping, and UI refinement</li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Format</h3><p>UX course project in collaboration with Elementor</p></div>
+      <div class="case-meta-card"><h3>Users</h3><p>Freelancers, agencies, and business owners hiring web help</p></div>
+      <div class="case-meta-card"><h3>Problem</h3><p>The marketplace lacked clarity, trust signals, and strong navigation</p></div>
+    </div>
+    <div class="detail-section">
+      <h3>Challenge</h3>
+      <p>The existing platform was already live in beta, which meant the redesign had to start from real limitations rather than a blank slate. Navigation and search were weak, categories and filters were unclear, and expert profiles did not reflect the different roles and strengths of the people using the platform.</p>
+      <p>There was also a deeper trust issue: without stronger reviews, ratings, differentiation, and profile structure, it was hard for clients to feel confident hiring through the marketplace.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/2bec3d40bb8b871de5f378f85dacf042e612b7cf9f34ca429436ac23eda28486/Before---After.png" alt="Before and after for Elementor Experts Platform">
+      <figcaption class="case-caption">The redesign focused on clearer discovery, stronger hierarchy, and more confidence-building signals.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Research</h3>
+      <p>I combined competitive analysis with interviews, casual conversations, and social feedback from the community. That helped clarify not just what users said they wanted, but what the platform needed to communicate in order to feel credible.</p>
+      <ul class="case-list">
+        <li>Search and filtering needed to be far more helpful and legible.</li>
+        <li>Profiles needed to reflect meaningful differences between creators, agencies, and specialists.</li>
+        <li>Trust had to be designed into the platform, not added as an afterthought.</li>
+      </ul>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/a379153f405328e623b4d4c5ef914604aa4406ff6d8763094ca8c9b587392302/Persona-01.png" alt="Persona research for Elementor Experts Platform">
+      <figcaption class="case-caption">Research helped anchor the platform around distinct user needs instead of a one-size-fits-all marketplace model.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Outcome</h3>
+      <p>The project reframed the Experts platform as a trust-building experience, not just a directory. By improving information architecture, search, profile structure, and platform credibility, the redesign made the marketplace more useful for both sides of the interaction.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/bc18dadd69b3ea8fa70a7035b40bedca411d7590e2a346d50e2952a2112e5222/concusions.png" alt="Elementor Experts Platform conclusions">
+      <figcaption class="case-caption">Final recommendations tied the visual redesign back to discoverability, trust, and business viability.</figcaption>
+    </figure>
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-playground">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-elementor"><div><div class="hero-banner-label">Elementor · Product Feature</div><div class="hero-banner-title">Container Feature Playground</div></div><div class="hero-banner-glyph">🧩</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1080/q/94/i/f97922eb35a65a84985384be39861749a814671aaed5ccaf8a176aef58c86a1d/Preview1.png" alt="Container Feature Playground">
-    <div class="detail-section"><h3>Overview</h3><p>The Flexbox Container was a long-anticipated Elementor feature that changed how people build websites. We created a product playground — a first for Elementor — to help users at all skill levels understand the new way of working. We consulted community leaders, the education team, and developers to invent the platform from scratch.</p></div>
-    <div class="detail-section"><h3>The challenge</h3><p>Some users knew Flexbox, many didn't — and many weren't looking to change how they worked. We excluded brand-new users and started lessons with simple shapes before moving to real web components. Hints were hidden by default to encourage trying first.</p></div>
-    <div class="outcome-grid">
-      <div class="outcome-box"><div class="outcome-num">81%</div><div class="outcome-label">Users reached the final slide</div></div>
-      <div class="outcome-box"><div class="outcome-num">First</div><div class="outcome-label">Product playground Elementor ever shipped</div></div>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Product Feature</div>
+        <div class="hero-banner-title">Container Feature Playground</div>
+        <div class="pill-row case-hero-skills"><span class="pill">Product Design</span><span class="pill">Interactive Learning</span><span class="pill">Education UX</span><span class="pill">Experimentation</span><span class="pill">Cross-functional Collaboration</span></div>
+      </div>
     </div>
-    <div class="detail-section" style="margin-top:20px"><h3>What we learned</h3><p>Less is more — small changes in copy and layout dramatically changed how fast users resolved lessons. Communication and trust within the team was the most crucial part.</p></div>
-    <div class="detail-section"><h3>The team</h3><div class="team-list">Team Lead: Erez Eden<br>Product Marketing: Gabriella Laster, Asaf Shevach<br>Design: Danielle Stelman<br>Dev: Asaf Rotstain, Nofar Shlomo</div></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">Product Design</span><span class="pill">Interactive Learning</span><span class="pill">User Testing</span><span class="pill">New Platform</span></div></div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/34bfbf7832e36eef7ff317ad437a2901dd5271d09b9b4f749cd4dce6ffeab0fb/Home-Page-wide.png" alt="Container feature playground hero">
+      <figcaption class="case-caption">Helping Elementor users learn a major new building paradigm through a guided playground.</figcaption>
+    </figure>
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>Elementor's Flexbox Container was a foundational product shift. It changed how users built websites, which meant education was just as important as feature release. We created Elementor's first product playground to help users understand the new model through hands-on learning.</p>
+        <p>The challenge was teaching a different mental model without overwhelming people who were already comfortable with the old way of working.</p>
+      </div>
+      <div class="case-card">
+        <h3>Outcome highlights</h3>
+        <ul class="case-list">
+          <li>First product playground Elementor shipped</li>
+          <li>81% of users reached the final slide</li>
+          <li>Created a new format for product education inside the ecosystem</li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Audience</h3><p>Existing Elementor users learning Containers for the first time</p></div>
+      <div class="case-meta-card"><h3>Constraint</h3><p>Users had mixed familiarity with Flexbox and strong existing habits</p></div>
+      <div class="case-meta-card"><h3>Team</h3><p>Design, product marketing, education, community, and development</p></div>
+    </div>
+    <div class="detail-section">
+      <h3>First thoughts</h3>
+      <p>We knew many users were unfamiliar with Flexbox, and many others were resistant to changing their workflow. That shaped the learning strategy immediately. We excluded brand-new users, began with simple shapes instead of full website components, and tried to keep instructions light enough that users could discover by doing.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/4d6597e824b6a175e204eaf33fa74e39f6c1a449e1b06a9621bd4641d597c469/First-test.png" alt="First concept for the container playground">
+      <figcaption class="case-caption">The earliest lesson concepts focused on introducing the new logic with low stakes.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Designing the learning flow</h3>
+      <p>The playground needed to feel guided without becoming a tutorial wall. We built it around clear next and back navigation, instructions, hints, a final result preview, progress indicators, and contextual container guidance. The whole thing was built inside Elementor itself using the same primitives users were learning.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/2ca00f18d59b0485c7abf86abdbff5b2fdbbcee402d7b0ff81025db0d40bb1de/Instructions.png" alt="Container playground instructions">
+      <figcaption class="case-caption">Instruction design was a core part of the product experience, not supporting decoration.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Challenges and tradeoffs</h3>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. Simplicity won over feature completeness</summary>
+          <ul class="case-list">
+            <li>Long-scroll lesson ideas became difficult to load and navigate, so we simplified the structure.</li>
+            <li>Hints became collapsible to reduce clutter and let users try first.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>2. We prioritized understanding over flourish</summary>
+          <ul class="case-list">
+            <li>GIF-heavy approaches were dropped because of loading and development cost.</li>
+            <li>Keeping the final-result image visible helped users understand what they were building toward.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>3. Team trust mattered as much as interface choices</summary>
+          <ul class="case-list">
+            <li>Because this format was new, we needed close collaboration across teams.</li>
+            <li>Small copy and layout changes had outsized effects on completion and clarity.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/f323d11e56c475b9403aa3f7e16567debc6dd36b975e0d718da39b94af1004cd/Final-result---intro.png" alt="Container playground final result preview">
+      <figcaption class="case-caption">Showing the expected result gave users confidence and orientation throughout the lesson.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>The team</h3>
+      <div class="team-list">Team Lead: Erez Eden<br>Product Marketing: Gabriella Laster, Asaf Shevach<br>Design: Danielle Stelman<br>Dev: Asaf Rotstain, Nofar Shlomo</div>
+    </div>
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-redesign">
     <button class="back-btn" onclick="closeDetail()">← back</button>
-    <div class="hero-banner hero-elementor"><div><div class="hero-banner-label">Elementor · Website</div><div class="hero-banner-title">Elementor Website Redesign</div></div><div class="hero-banner-glyph">✦</div></div>
-    <img class="detail-img" src="https://freight.cargo.site/w/1080/q/75/i/1f168ca35e40a9e654b73f3c2b14267394560a41b4c04531ced1a32632585f17/Preview.png" alt="Elementor Website Redesign">
-    <div class="detail-section"><h3>Overview</h3><p>Led the redesign of elementor.com while incorporating a new visual brand language — a large undertaking involving design, dev, and product marketing teams all moving under tight deadlines.</p></div>
-    <div class="detail-section"><h3>My role</h3><p>One of the first designers on Elementor's Product Web team. Designed the website while creating a massive design system, conducting research, running A/B tests, and helping develop the new visual brand language — all under very tight schedules.</p></div>
-    <div class="detail-section"><h3>Skills</h3><div class="pill-row"><span class="pill">Web Design</span><span class="pill">Brand Systems</span><span class="pill">A/B Testing</span><span class="pill">Research</span></div></div>
+    <div class="hero-banner hero-elementor">
+      <div>
+        <div class="hero-banner-label">Elementor · Website</div>
+        <div class="hero-banner-title">Elementor Website Redesign</div>
+        <div class="pill-row case-hero-skills"><span class="pill">Web Design</span><span class="pill">Brand Systems</span><span class="pill">Research</span><span class="pill">A/B Testing</span><span class="pill">Cross-functional Leadership</span></div>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/74d15404e850f5c2115037637e9b14e11225ef31f490ba83f2f9e0a5c9d2d9bd/Home-Page.png" alt="Elementor website redesign hero">
+      <figcaption class="case-caption">Redesigning elementor.com as the brand, business, and product story all evolved at once.</figcaption>
+    </figure>
+    <div class="case-summary">
+      <div class="case-card">
+        <h3>TL;DR</h3>
+        <p>I helped redesign elementor.com during a major brand transition and a pivotal stage in the company's growth. The job was not simply to make the site look new. It had to express a changing brand, support business goals, serve a broad community, and become a more scalable platform for the teams building it.</p>
+        <p>The project later won the 2022 Israeli Brand Awards for Best Web User Experience.</p>
+      </div>
+      <div class="case-card">
+        <h3>My role included</h3>
+        <ul class="case-list">
+          <li>Research into the existing site, competitors, and KPIs</li>
+          <li>UX hierarchy, page structure, and design-system thinking</li>
+          <li>UI design and brand expression for the new website</li>
+          <li>Onboarding teammates, supporting dev workflows, and partnering on roadmap decisions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-meta-grid">
+      <div class="case-meta-card"><h3>Recognition</h3><p>2022 Israeli Brand Awards · Best Web User Experience</p></div>
+      <div class="case-meta-card"><h3>Audience reality</h3><p>Heavy desktop usage informed a desktop-first approach</p></div>
+      <div class="case-meta-card"><h3>Build approach</h3><p>Designed and implemented within Elementor's own ecosystem</p></div>
+    </div>
+    <div class="detail-section">
+      <h3>Why redesign a site that already worked?</h3>
+      <p>The old website was not failing in the obvious sense, but the company had outgrown it. The brand had changed, the business goals had changed, and the product needed a more expressive, modern, community-oriented home. The site architecture was also aging, and responsiveness and accessibility needed attention.</p>
+      <p>This made the redesign a strategic product problem as much as a visual one.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/195b0842b39d9d3bd3902db543880520a8fe1fe113f0b4bae2a5d344f31011c9/Before---After.png" alt="Before and after for Elementor website redesign">
+      <figcaption class="case-caption">The redesign modernized the brand experience while improving clarity, structure, and scalability.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Guiding principles</h3>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. Design for how people actually browse</summary>
+          <ul class="case-list">
+            <li>Most users browsed and purchased on desktop, which shaped page structure and hierarchy.</li>
+            <li>We still needed a responsive system that translated well to smaller screens.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>2. Build a website system, not a set of pages</summary>
+          <ul class="case-list">
+            <li>The work fed directly into a broader web design system.</li>
+            <li>That gave the site a coherent language and made future page building much faster.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>3. Keep the community visible in the experience</summary>
+          <ul class="case-list">
+            <li>The redesign needed to feel bold and branded, but also open and creator-focused.</li>
+            <li>It had to reflect what Elementor meant to its ecosystem, not just what the company wanted to say about itself.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/5cb0b7e886ef3297f18a6f6f44e43bd85eda9bc41e8825afc5e110c742db2a3f/More-pages.png" alt="Additional pages from Elementor website redesign">
+      <figcaption class="case-caption">The redesign extended beyond the homepage into a broader, more cohesive website language.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Outcome</h3>
+      <p>The new site gave Elementor a stronger brand presence, clearer information hierarchy, and a more scalable foundation for future web work. It also helped define how the product web team collaborated across design, development, and product marketing during a time of rapid growth.</p>
+    </div>
+    <div class="detail-section">
+      <h3>The team</h3>
+      <div class="team-list">Head of Design: Ronit Cyjon<br>Team Lead: Erez Eden<br>PMM: Sarah Nielsen, Daniela Soibelman, Johnathan Maimon<br>With design, development, product, and leadership partners across Elementor</div>
+    </div>
+    <div class="case-thanks">Thank you!</div>
   </div>
 
   <div class="detail-view" id="detail-andco">
@@ -569,7 +1162,7 @@
   </div>
 
   <div class="footer">
-    <span class="footer-copy">© Jey Tsymbaluk 2025</span>
+    <span class="footer-copy">© Jey Tsymbaluk 2026</span>
     <span class="footer-rights">All rights reserved</span>
   </div>
 
@@ -596,8 +1189,9 @@
   </div>
   <button class="image-lightbox-close" type="button" onclick="closeImageLightbox()" aria-label="Close expanded image">×</button>
   <div class="image-lightbox-inner">
-    <img id="lightboxImage" src="" alt="">
-    <div class="image-lightbox-caption" id="lightboxCaption"></div>
+    <div class="image-lightbox-canvas" id="lightboxCanvas">
+      <img id="lightboxImage" src="" alt="">
+    </div>
   </div>
 </div>
 
