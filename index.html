@@ -26,26 +26,35 @@
 
   <div class="folders" id="mainFolders">
     <div class="mobile-project-nav">
-      <div class="mobile-project-nav-title">Browse</div>
+      <div class="mobile-project-nav-title">Jey Tsymbaluk</div>
       <button class="mobile-project-nav-toggle" type="button" onclick="toggleMobileProjectMenu()" aria-label="Open project navigation">
         <i class="ph ph-list"></i>
       </button>
       <div class="mobile-project-menu" id="mobileProjectMenu">
-        <button type="button" onclick="switchTab('highlights')">Highlights</button>
-        <button type="button" onclick="switchTab('clover')">Clover</button>
-        <button type="button" onclick="switchTab('shoplift')">Shoplift</button>
-        <button type="button" onclick="switchTab('elementor')">Elementor</button>
-        <button type="button" onclick="switchTab('archive')">Archive</button>
+        <button type="button" data-tab="highlights" onclick="switchTab('highlights')">Highlights</button>
+        <button type="button" data-tab="clover" onclick="switchTab('clover')">Clover</button>
+        <button type="button" data-tab="shoplift" onclick="switchTab('shoplift')">Shoplift</button>
+        <button type="button" data-tab="elementor" onclick="switchTab('elementor')">Elementor</button>
+        <button type="button" data-tab="archive" onclick="switchTab('archive')">Archive</button>
         <button type="button" onclick="openAbout()">About</button>
         <button type="button" onclick="openContact()">Contact</button>
       </div>
     </div>
     <div class="tabs">
-      <div class="tab tab-highlights active" onclick="switchTab('highlights')">highlights</div>
-      <div class="tab tab-dot tab-dot-clover" onclick="switchTab('clover')">clover</div>
-      <div class="tab tab-dot tab-dot-shoplift" onclick="switchTab('shoplift')">shoplift</div>
-      <div class="tab tab-dot tab-dot-elementor" onclick="switchTab('elementor')">elementor</div>
-      <div class="tab" onclick="switchTab('archive')">archive</div>
+      <button class="project-back-link" type="button" onclick="closeDetail()">← back</button>
+      <div class="tab tab-highlights active" data-tab="highlights" onclick="switchTab('highlights')">highlights</div>
+      <div class="tab tab-dot tab-dot-clover" data-tab="clover" onclick="switchTab('clover')">clover</div>
+      <div class="tab tab-dot tab-dot-shoplift" data-tab="shoplift" onclick="switchTab('shoplift')">shoplift</div>
+      <div class="tab tab-dot tab-dot-elementor" data-tab="elementor" onclick="switchTab('elementor')">elementor</div>
+      <div class="tab" data-tab="archive" onclick="switchTab('archive')">archive</div>
+    </div>
+    <div class="side-project-nav" aria-hidden="true">
+      <button class="side-back-link" type="button" onclick="closeDetail()">← back</button>
+      <button class="side-pill side-pill-highlights" data-tab="highlights" type="button" onclick="switchTab('highlights')">highlights</button>
+      <button class="side-pill side-pill-dot side-pill-dot-clover" data-tab="clover" type="button" onclick="switchTab('clover')">clover</button>
+      <button class="side-pill side-pill-dot side-pill-dot-shoplift" data-tab="shoplift" type="button" onclick="switchTab('shoplift')">shoplift</button>
+      <button class="side-pill side-pill-dot side-pill-dot-elementor" data-tab="elementor" type="button" onclick="switchTab('elementor')">elementor</button>
+      <button class="side-pill" data-tab="archive" type="button" onclick="switchTab('archive')">archive</button>
     </div>
     <div class="folder-body">
 
