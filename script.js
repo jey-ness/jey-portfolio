@@ -1,6 +1,6 @@
   var currentTab = 'highlights';
   var tabNames = ['highlights','clover','shoplift','elementor','archive'];
-  var projectIds = ['reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','ifever'];
+  var projectIds = ['reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','eshel','argaz','doodles','kinder','ifever'];
   var lightboxScale = 1;
   var lightboxFitScale = 1;
   var projectTabMap = {
@@ -14,6 +14,10 @@
     redesign: 'elementor',
     andco: 'archive',
     storemaven: 'archive',
+    eshel: 'archive',
+    argaz: 'archive',
+    doodles: 'archive',
+    kinder: 'archive',
     ifever: 'archive'
   };
   var projectRecommendations = {
@@ -26,8 +30,12 @@
     playground: ['experts', 'dsm'],
     redesign: ['dsm', 'experts'],
     andco: ['reporting', 'dsm'],
-    storemaven: ['testcreation', 'redesign'],
-    ifever: ['urlbeta', 'playground']
+    storemaven: ['urlbeta', 'testcreation'],
+    eshel: ['dsm', 'redesign'],
+    argaz: ['redesign', 'playground'],
+    doodles: ['experts', 'playground'],
+    kinder: ['dsm', 'reporting'],
+    ifever: ['reporting', 'redesign']
   };
   var projectCatalog = {
     reporting: {
