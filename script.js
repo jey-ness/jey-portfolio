@@ -422,6 +422,5 @@
     });
   });
   injectDetailNav();
-  injectContinueSections();
   routeFromHash();
   syncProjectTabMode();
