@@ -1,8 +1,6 @@
   var currentTab = 'highlights';
   var tabNames = ['highlights','clover','shoplift','elementor','archive'];
   var projectIds = ['reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','eshel','argaz','doodles','kinder','ifever'];
-  var lightboxScale = 1;
-  var lightboxFitScale = 1;
   var projectTabMap = {
     reporting: 'shoplift',
     urlbeta: 'shoplift',
@@ -105,13 +103,14 @@
   }
 
   function updateActiveNavigation(tabName) {
-    document.querySelectorAll('.tab[data-tab], .side-pill[data-tab], .mobile-project-menu button[data-tab]').forEach(function(el) {
+    document.querySelectorAll('.tab[data-tab], .side-pill[data-tab], .mobile-project-menu button[data-tab], .mobile-burger-menu button[data-tab]').forEach(function(el) {
       el.classList.toggle('active', el.getAttribute('data-tab') === tabName);
     });
   }
 
   function switchTab(t, updateUrl) {
     closeMobileProjectMenu();
+    closeMobileBurger();
     currentTab = t;
     if (updateUrl !== false) setHash('#' + t);
     document.getElementById('mainFolders').classList.remove('project-mode', 'project-scrolled', 'side-nav-collapsed');
@@ -125,6 +124,7 @@
 
   function openDetail(id, updateUrl) {
     closeMobileProjectMenu();
+    closeMobileBurger();
     currentTab = projectTabMap[id] || currentTab || 'highlights';
     if (updateUrl !== false) setHash('#project-' + id);
     document.getElementById('mainFolders').style.display = 'block';
@@ -139,6 +139,7 @@
 
   function openContact(updateUrl) {
     closeMobileProjectMenu();
+    closeMobileBurger();
     if (updateUrl !== false) setHash('#contact');
     document.getElementById('mainFolders').classList.remove('project-mode', 'project-scrolled', 'side-nav-collapsed');
     document.getElementById('mainFolders').style.display = 'none';
@@ -149,6 +150,7 @@
 
   function openAbout(updateUrl) {
     closeMobileProjectMenu();
+    closeMobileBurger();
     if (updateUrl !== false) setHash('#about');
     document.getElementById('mainFolders').classList.remove('project-mode', 'project-scrolled', 'side-nav-collapsed');
     document.getElementById('mainFolders').style.display = 'none';
@@ -182,6 +184,16 @@
     if (menu) menu.classList.remove('open');
   }
 
+  function toggleMobileBurger() {
+    var menu = document.getElementById('mobileBurgerMenu');
+    if (menu) menu.classList.toggle('open');
+  }
+
+  function closeMobileBurger() {
+    var menu = document.getElementById('mobileBurgerMenu');
+    if (menu) menu.classList.remove('open');
+  }
+
   function syncProjectTabMode() {
     var folders = document.getElementById('mainFolders');
     if (!folders || !folders.classList.contains('project-mode')) {
@@ -206,7 +218,7 @@
 
     var sideNav = document.querySelector('.side-project-nav');
     var navWidth = sideNav ? sideNav.offsetWidth || 148 : 148;
-    var desiredGap = 8;
+    var desiredGap = -1; /* negative = 1px overlap so tab borders merge with detail panel */
     var minLeft = 20;
     var availableWidth = detailRect.left - minLeft - desiredGap;
     var collapsed = !projectScrolled || availableWidth < navWidth;
@@ -219,76 +231,18 @@
     }
   }
 
-  function applyImageZoom() {
-    var lightboxInner = document.querySelector('.image-lightbox-inner');
-    var lightboxCanvas = document.getElementById('lightboxCanvas');
-    var lightboxImage = document.getElementById('lightboxImage');
-    var lightboxZoom = document.getElementById('lightboxZoom');
-    if (!lightboxImage.naturalWidth || !lightboxImage.naturalHeight || !lightboxInner || !lightboxCanvas) return;
-    var scaledWidth = Math.round(lightboxImage.naturalWidth * lightboxScale);
-    var scaledHeight = Math.round(lightboxImage.naturalHeight * lightboxScale);
-    lightboxImage.style.width = scaledWidth + 'px';
-    lightboxImage.style.height = scaledHeight + 'px';
-    lightboxImage.style.maxWidth = 'none';
-    lightboxImage.style.maxHeight = 'none';
-    lightboxCanvas.style.width = Math.max(scaledWidth, lightboxInner.clientWidth) + 'px';
-    lightboxCanvas.style.height = Math.max(scaledHeight, lightboxInner.clientHeight) + 'px';
-    lightboxZoom.textContent = Math.round(lightboxScale * 100) + '%';
-  }
-
-  function changeImageZoom(amount) {
-    lightboxScale = Math.max(lightboxFitScale, Math.min(6, lightboxScale + amount));
-    applyImageZoom();
-  }
-
-  function resetImageZoom() {
-    lightboxScale = lightboxFitScale;
-    applyImageZoom();
-  }
-
-  function fitImageToViewport() {
-    var lightboxInner = document.querySelector('.image-lightbox-inner');
-    var lightboxCanvas = document.getElementById('lightboxCanvas');
-    var lightboxImage = document.getElementById('lightboxImage');
-    if (!lightboxInner || !lightboxCanvas || !lightboxImage.naturalWidth || !lightboxImage.naturalHeight) return;
-    var availableWidth = Math.max(lightboxInner.clientWidth - 8, 240);
-    var availableHeight = Math.max(lightboxInner.clientHeight - 8, 240);
-    lightboxFitScale = Math.min(
-      availableWidth / lightboxImage.naturalWidth,
-      availableHeight / lightboxImage.naturalHeight,
-      1
-    );
-    lightboxScale = lightboxFitScale;
-    applyImageZoom();
-    lightboxInner.scrollTop = Math.max((lightboxCanvas.offsetHeight - lightboxInner.clientHeight) / 2, 0);
-    lightboxInner.scrollLeft = Math.max((lightboxCanvas.offsetWidth - lightboxInner.clientWidth) / 2, 0);
-  }
-
   function openImageLightbox(img) {
-    var lightbox = document.getElementById('imageLightbox');
     var lightboxImage = document.getElementById('lightboxImage');
     lightboxImage.src = img.currentSrc || img.src;
-    lightboxImage.alt = img.alt || 'Expanded project image';
-    lightbox.classList.add('open');
+    lightboxImage.alt = img.alt || '';
+    document.getElementById('imageLightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
-    lightboxImage.onload = fitImageToViewport;
-    if (lightboxImage.complete) fitImageToViewport();
   }
 
   function closeImageLightbox() {
-    var lightbox = document.getElementById('imageLightbox');
-    var lightboxCanvas = document.getElementById('lightboxCanvas');
-    var lightboxImage = document.getElementById('lightboxImage');
-    lightbox.classList.remove('open');
+    document.getElementById('imageLightbox').classList.remove('open');
     document.body.style.overflow = '';
-    lightboxImage.src = '';
-    lightboxImage.style.width = '';
-    lightboxImage.style.height = '';
-    lightboxImage.onload = null;
-    lightboxCanvas.style.width = '';
-    lightboxCanvas.style.height = '';
-    lightboxScale = 1;
-    lightboxFitScale = 1;
+    document.getElementById('lightboxImage').src = '';
   }
 
   function returnToHome() {
@@ -334,6 +288,29 @@
       grid.appendChild(card);
     });
     return section;
+  }
+
+  function injectDetailNav() {
+    projectIds.forEach(function(projectId, index) {
+      var detailView = document.getElementById('detail-' + projectId);
+      if (!detailView) return;
+      var backBtn = detailView.querySelector('.back-btn');
+      if (!backBtn) return;
+      var nextId = projectIds[(index + 1) % projectIds.length];
+      var nav = document.createElement('div');
+      nav.className = 'detail-nav';
+      var back = document.createElement('button');
+      back.type = 'button'; back.className = 'back-btn';
+      back.textContent = '← back';
+      back.addEventListener('click', function() { closeDetail(); });
+      var next = document.createElement('button');
+      next.type = 'button'; next.className = 'next-btn';
+      next.textContent = 'next →';
+      next.addEventListener('click', function() { openDetail(nextId); });
+      nav.appendChild(back);
+      nav.appendChild(next);
+      backBtn.parentNode.replaceChild(nav, backBtn);
+    });
   }
 
   function injectContinueSections() {
@@ -395,30 +372,17 @@
     if (mobileNav && !mobileNav.contains(event.target)) {
       closeMobileProjectMenu();
     }
-  });
-  document.getElementById('imageLightbox').addEventListener('wheel', function(event) {
-    if (event.ctrlKey || event.metaKey) {
-      event.preventDefault();
-      changeImageZoom(event.deltaY > 0 ? -0.2 : 0.2);
+    var mobileHeader = document.querySelector('.mobile-header-right');
+    if (mobileHeader && !mobileHeader.contains(event.target)) {
+      closeMobileBurger();
     }
-  }, { passive: false });
-  window.addEventListener('resize', function() {
-    if (document.getElementById('imageLightbox').classList.contains('open')) {
-      fitImageToViewport();
-    }
-    syncProjectTabMode();
   });
+  window.addEventListener('resize', syncProjectTabMode);
   window.addEventListener('scroll', syncProjectTabMode, { passive: true });
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       closeImageLightbox();
       closeAboutContactPopover();
-    } else if (document.getElementById('imageLightbox').classList.contains('open') && (event.key === '+' || event.key === '=')) {
-      changeImageZoom(0.25);
-    } else if (document.getElementById('imageLightbox').classList.contains('open') && event.key === '-') {
-      changeImageZoom(-0.25);
-    } else if (document.getElementById('imageLightbox').classList.contains('open') && event.key === '0') {
-      resetImageZoom();
     }
   });
 
@@ -457,6 +421,7 @@
       });
     });
   });
+  injectDetailNav();
   injectContinueSections();
   routeFromHash();
   syncProjectTabMode();

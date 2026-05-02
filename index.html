@@ -22,6 +22,21 @@
       <button type="button" onclick="openAbout()">About</button><br>
       <button type="button" onclick="openContact()">Contact</button><br>
     </div>
+    <div class="mobile-header-right">
+      <button class="mobile-burger-btn" type="button" onclick="toggleMobileBurger()" aria-label="Open navigation" id="mobileBurgerBtn">
+        <i class="ph ph-list"></i>
+      </button>
+      <div class="mobile-burger-menu" id="mobileBurgerMenu">
+        <button type="button" data-tab="highlights" onclick="switchTab('highlights')">highlights</button>
+        <button type="button" data-tab="clover" onclick="switchTab('clover')">clover</button>
+        <button type="button" data-tab="shoplift" onclick="switchTab('shoplift')">shoplift</button>
+        <button type="button" data-tab="elementor" onclick="switchTab('elementor')">elementor</button>
+        <button type="button" data-tab="archive" onclick="switchTab('archive')">archive</button>
+        <div class="mobile-burger-divider"></div>
+        <button type="button" onclick="openAbout()">about</button>
+        <button type="button" onclick="openContact()">contact</button>
+      </div>
+    </div>
   </div>
 
   <div class="folders" id="mainFolders">
@@ -780,7 +795,7 @@
     <div class="case-meta-grid">
       <div class="case-meta-card"><h3>Release window</h3><p>March to June 2023</p></div>
       <div class="case-meta-card"><h3>Users</h3><p>Prospects, new users, and customers on legacy plans</p></div>
-      <div class="case-meta-card"><h3>Partners</h3><p>CPO, PM, CEO, marketing, and engineering</p></div>
+      <div class="case-meta-card"><h3>Team</h3><p>CPO, PM, CEO, marketing, and engineering</p></div>
     </div>
     <div class="detail-section">
       <h3>Background</h3>
@@ -873,7 +888,7 @@
     <div class="case-meta-grid">
       <div class="case-meta-card"><h3>Context</h3><p>Built for Elementor's marketing website and adjacent teams</p></div>
       <div class="case-meta-card"><h3>Core problem</h3><p>Too many contributors, not enough shared rules</p></div>
-      <div class="case-meta-card"><h3>Team</h3><p>Design leadership, product web designers, and development partners</p></div>
+      <div class="case-meta-card"><h3>Team</h3><p>Head of Design: Ronit Cyjon<br>Lead: Erez Eden<br>Design: Yanki Bindman, Danielle Stelman, Alon Braier, Omri Avraham, Yael Zlotnik<br>Dev: Asaf Rotstain, Alan Kaler</p></div>
     </div>
     <div class="detail-section">
       <h3>Why we built it</h3>
@@ -904,10 +919,6 @@
     <div class="detail-section">
       <h3>Outcome</h3>
       <p>The system reduced repetitive work, improved consistency across teams, and gave new contributors a clearer runway into the product web language. Just as importantly, it created shared understanding. By the time I left, the team was continuing to grow it through workshops and internal adoption beyond the original website team.</p>
-    </div>
-    <div class="detail-section">
-      <h3>The team</h3>
-      <div class="team-list">Head of Design: Ronit Cyjon<br>Team Lead: Erez Eden<br>Design: Yanki Bindman, Danielle Stelman, Alon Braier, Omri Avraham, Yael Zlotnik<br>Dev: Asaf Rotstain, Alan Kaler</div>
     </div>
     <div class="case-thanks">Thank you!</div>
   </div>
@@ -1010,7 +1021,7 @@
     <div class="case-meta-grid">
       <div class="case-meta-card"><h3>Audience</h3><p>Existing Elementor users learning Containers for the first time</p></div>
       <div class="case-meta-card"><h3>Constraint</h3><p>Users had mixed familiarity with Flexbox and strong existing habits</p></div>
-      <div class="case-meta-card"><h3>Team</h3><p>Design, product marketing, education, community, and development</p></div>
+      <div class="case-meta-card"><h3>Team</h3><p>Lead: Erez Eden<br>PMM: Gabriella Laster, Asaf Shevach<br>Design: Danielle Stelman<br>Dev: Asaf Rotstain, Nofar Shlomo</p></div>
     </div>
     <div class="detail-section">
       <h3>First thoughts</h3>
@@ -1058,10 +1069,6 @@
       <img class="detail-img" src="https://freight.cargo.site/t/original/i/f323d11e56c475b9403aa3f7e16567debc6dd36b975e0d718da39b94af1004cd/Final-result---intro.png" alt="Container playground final result preview">
       <figcaption class="case-caption">Showing the expected result gave users confidence and orientation throughout the lesson.</figcaption>
     </figure>
-    <div class="detail-section">
-      <h3>The team</h3>
-      <div class="team-list">Team Lead: Erez Eden<br>Product Marketing: Gabriella Laster, Asaf Shevach<br>Design: Danielle Stelman<br>Dev: Asaf Rotstain, Nofar Shlomo</div>
-    </div>
     <div class="case-thanks">Thank you!</div>
   </div>
 
@@ -1097,7 +1104,7 @@
     <div class="case-meta-grid">
       <div class="case-meta-card"><h3>Recognition</h3><p>2022 Israeli Brand Awards · Best Web User Experience</p></div>
       <div class="case-meta-card"><h3>Audience reality</h3><p>Heavy desktop usage informed a desktop-first approach</p></div>
-      <div class="case-meta-card"><h3>Build approach</h3><p>Designed and implemented within Elementor's own ecosystem</p></div>
+      <div class="case-meta-card"><h3>Team</h3><p>Head of Design: Ronit Cyjon<br>Lead: Erez Eden<br>PMM: Sarah Nielsen, Daniela Soibelman, Johnathan Maimon</p></div>
     </div>
     <div class="detail-section">
       <h3>Why redesign a site that already worked?</h3>
@@ -1141,10 +1148,6 @@
     <div class="detail-section">
       <h3>Outcome</h3>
       <p>The new site gave Elementor a stronger brand presence, clearer information hierarchy, and a more scalable foundation for future web work. It also helped define how the product web team collaborated across design, development, and product marketing during a time of rapid growth.</p>
-    </div>
-    <div class="detail-section">
-      <h3>The team</h3>
-      <div class="team-list">Head of Design: Ronit Cyjon<br>Team Lead: Erez Eden<br>PMM: Sarah Nielsen, Daniela Soibelman, Johnathan Maimon<br>With design, development, product, and leadership partners across Elementor</div>
     </div>
     <div class="case-thanks">Thank you!</div>
   </div>
@@ -1648,17 +1651,9 @@
 </div>
 
 <div class="image-lightbox" id="imageLightbox" role="dialog" aria-modal="true" aria-label="Expanded project image">
-  <div class="image-lightbox-controls" aria-label="Image zoom controls">
-    <button type="button" onclick="changeImageZoom(-0.25)" aria-label="Zoom out">−</button>
-    <span class="image-lightbox-zoom" id="lightboxZoom">100%</span>
-    <button type="button" onclick="changeImageZoom(0.25)" aria-label="Zoom in">+</button>
-    <button type="button" onclick="resetImageZoom()" aria-label="Reset image zoom">Fit</button>
-  </div>
   <button class="image-lightbox-close" type="button" onclick="closeImageLightbox()" aria-label="Close expanded image">×</button>
-  <div class="image-lightbox-inner">
-    <div class="image-lightbox-canvas" id="lightboxCanvas">
-      <img id="lightboxImage" src="" alt="">
-    </div>
+<div class="image-lightbox-inner" id="lightboxInner">
+    <img id="lightboxImage" src="" alt="">
   </div>
 </div>
 
