@@ -58,8 +58,8 @@
   .folders.project-mode .tab.active { background: #FFFDF8; color: var(--ink); border-color: rgba(26,24,20,0.18); z-index: 3; box-shadow: 0 -8px 18px rgba(26,24,20,0.04); }
   .folders.project-mode.project-scrolled .tabs { opacity: 0; transform: translateY(-10px); pointer-events: none; }
   .folders.project-mode.side-nav-collapsed.project-scrolled .tabs { opacity: 0; transform: translateY(-10px); pointer-events: none; }
-  .folders.project-mode.project-scrolled .side-project-nav { position: fixed; top: 132px; left: 20px; width: 148px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; z-index: 3; opacity: 1; transform: translateX(0); pointer-events: auto; }
-  .folders.project-mode .side-project-nav { position: fixed; top: 132px; left: 20px; width: 148px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; z-index: 3; opacity: 0; transform: translateX(-10px); pointer-events: none; transition: opacity 0.24s ease, transform 0.24s ease; }
+  .folders.project-mode.project-scrolled .side-project-nav { position: fixed; top: 132px; left: 20px; width: 148px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; z-index: 15; opacity: 1; transform: translateX(0); pointer-events: auto; }
+  .folders.project-mode .side-project-nav { position: fixed; top: 132px; left: 20px; width: 148px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; z-index: 15; opacity: 0; transform: translateX(-10px); pointer-events: none; transition: opacity 0.24s ease, transform 0.24s ease; }
   .folders.project-mode.side-nav-collapsed .side-project-nav, .folders.project-mode.side-nav-collapsed.project-scrolled .side-project-nav { opacity: 0; transform: translateX(-10px); pointer-events: none; }
   .side-back-link { display: inline-flex; align-items: center; justify-content: flex-start; border: none; background: transparent; color: var(--muted); font: 12px var(--mono); letter-spacing: 0.06em; padding: 0 0 4px; cursor: pointer; }
   .side-back-link:hover { color: var(--ink); }
@@ -91,12 +91,7 @@
   .coming-soon-text { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--muted); margin-bottom: 8px; }
   .coming-soon-sub { font-size: 13px; color: var(--muted); opacity: 0.7; }
   .detail-view { display: none; }
-  .detail-view.open { display: block; background: #FFFDF8; border: 1px solid rgba(26,24,20,0.12); border-radius: 8px; padding: 34px; box-shadow: 0 18px 50px rgba(26,24,20,0.08), inset 0 0 0 1px rgba(255,255,255,0.75); position: relative; z-index: 1; }
-  .folders.project-mode ~ .detail-view.open { margin-left: 0; }
-  .folders.project-mode.project-scrolled ~ .detail-view.open { margin-left: 0; }
-  .detail-view.open::before { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: 8px; background: linear-gradient(90deg, rgba(26,24,20,0.035) 0 1px, transparent 1px), linear-gradient(180deg, rgba(26,24,20,0.025), transparent 120px); background-size: 28px 100%, 100% 100%; opacity: 0.45; }
-  .detail-view > * { position: relative; z-index: 1; }
-  @media (max-width: 600px) { .detail-view.open { padding: 24px; } }
+  .detail-view.open { display: block; position: fixed; inset: 0; overflow-y: auto; z-index: 10; background: var(--cream); padding: 40px max(24px, calc(50vw - 430px)) 80px; }
   .detail-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
   .back-btn, .next-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; border: none; background: none; padding: 0; transition: color 0.15s; margin-bottom: 0; }
   .back-btn:hover, .next-btn:hover { color: var(--ink); }
@@ -117,6 +112,9 @@
   .case-card h3, .case-meta-card h3, .case-callout h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
   .case-card p, .case-callout p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.86; margin-bottom: 10px; }
   .case-meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0 30px; }
+  .case-summary:has(> .case-card:only-child) { grid-template-columns: 1fr; }
+  .case-meta-grid:has(> .case-meta-card:only-child) { grid-template-columns: 1fr; }
+  .case-meta-grid:has(> .case-meta-card:nth-child(2):last-child) { grid-template-columns: 1fr 1fr; }
   .case-meta-card { background: rgba(26,24,20,0.035); border: 1px solid rgba(26,24,20,0.08); border-radius: 8px; padding: 16px; }
   .case-meta-card p { font-size: 13px; line-height: 1.65; color: var(--ink); opacity: 0.82; }
   .case-list { margin-left: 18px; font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.86; }
@@ -155,7 +153,7 @@
   @media (max-width: 700px) {
     .header-meta { display: none; }
     .project-back-link, .folders.project-mode .tabs, .folders.project-mode.project-scrolled .tabs, .side-project-nav, .folders.project-mode .side-project-nav, .folders.project-mode.project-scrolled .side-project-nav { display: none; }
-    .folders.project-mode ~ .detail-view.open, .folders.project-mode.project-scrolled ~ .detail-view.open { margin-left: 0; margin-top: 70px; }
+    .detail-view.open { padding: 70px 20px 60px; }
     .mobile-project-nav { display: none; }
     .folders.project-mode .mobile-project-nav, .folders.project-mode.project-scrolled.side-nav-collapsed .mobile-project-nav { position: fixed; top: 10px; left: 12px; right: 12px; display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border: 1px solid rgba(26,24,20,0.12); border-radius: 14px; background: rgba(255,253,248,0.94); box-shadow: 0 14px 30px rgba(26,24,20,0.08); backdrop-filter: blur(10px); z-index: 24; }
     .mobile-project-nav-title { order: 1; font: 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; }
@@ -252,9 +250,7 @@
     /* Offset body content below fixed header */
     .shell { padding-top: 74px; }
 
-    /* Remove old mobile detail-view top margin (shell padding handles it now) */
-    .folders.project-mode ~ .detail-view.open,
-    .folders.project-mode.project-scrolled ~ .detail-view.open { margin-top: 0; }
+    /* detail-view overlay padding handled above */
 
     /* Always hide tab bar on mobile — burger handles navigation */
     .tabs { display: none !important; }

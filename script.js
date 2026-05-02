@@ -133,8 +133,7 @@
     updateActiveNavigation(currentTab);
     document.querySelectorAll('.detail-view').forEach(function(el){ el.classList.remove('open'); });
     var d = document.getElementById('detail-'+id);
-    if(d) d.classList.add('open');
-    window.scrollTo({top:0,behavior:'smooth'});
+    if (d) { d.classList.add('open'); d.scrollTop = 0; }
   }
 
   function openContact(updateUrl) {
@@ -144,8 +143,8 @@
     document.getElementById('mainFolders').classList.remove('project-mode', 'project-scrolled', 'side-nav-collapsed');
     document.getElementById('mainFolders').style.display = 'none';
     document.querySelectorAll('.detail-view').forEach(function(el){ el.classList.remove('open'); });
-    document.getElementById('contactView').classList.add('open');
-    window.scrollTo({top:0,behavior:'smooth'});
+    var cv = document.getElementById('contactView');
+    if (cv) { cv.classList.add('open'); cv.scrollTop = 0; }
   }
 
   function openAbout(updateUrl) {
@@ -155,8 +154,8 @@
     document.getElementById('mainFolders').classList.remove('project-mode', 'project-scrolled', 'side-nav-collapsed');
     document.getElementById('mainFolders').style.display = 'none';
     document.querySelectorAll('.detail-view').forEach(function(el){ el.classList.remove('open'); });
-    document.getElementById('aboutView').classList.add('open');
-    window.scrollTo({top:0,behavior:'smooth'});
+    var av = document.getElementById('aboutView');
+    if (av) { av.classList.add('open'); av.scrollTop = 0; }
   }
 
   function showConfirmation() {
@@ -210,22 +209,24 @@
       folders.classList.add('side-nav-collapsed');
       return;
     }
-    var detailRect = detail.getBoundingClientRect();
-    var detailTop = detailRect.top + window.scrollY;
-    var threshold = Math.max(detailTop + 140, 220);
-    var projectScrolled = window.scrollY > threshold;
+    /* detail-view is now a fixed overlay — use its scrollTop, not window.scrollY */
+    var scrolled = detail.scrollTop;
+    var threshold = 140;
+    var projectScrolled = scrolled > threshold;
     folders.classList.toggle('project-scrolled', projectScrolled);
 
+    /* Content inside the overlay is centered at max-width 860px (padding: calc(50vw - 430px)) */
     var sideNav = document.querySelector('.side-project-nav');
     var navWidth = sideNav ? sideNav.offsetWidth || 148 : 148;
-    var desiredGap = -1; /* negative = 1px overlap so tab borders merge with detail panel */
+    var desiredGap = -1;
     var minLeft = 20;
-    var availableWidth = detailRect.left - minLeft - desiredGap;
+    var contentLeft = Math.max(24, (window.innerWidth - 860) / 2);
+    var availableWidth = contentLeft - minLeft - desiredGap;
     var collapsed = !projectScrolled || availableWidth < navWidth;
     folders.classList.toggle('side-nav-collapsed', collapsed);
 
     if (sideNav && !collapsed) {
-      sideNav.style.left = Math.max(minLeft, Math.round(detailRect.left - navWidth - desiredGap)) + 'px';
+      sideNav.style.left = Math.max(minLeft, Math.round(contentLeft - navWidth - desiredGap)) + 'px';
     } else if (sideNav) {
       sideNav.style.left = minLeft + 'px';
     }
@@ -253,7 +254,6 @@
 
   function closeDetail() {
     switchTab(currentTab || 'highlights');
-    window.scrollTo({top:0,behavior:'smooth'});
   }
 
   function buildContinueSection(projectId) {
@@ -378,7 +378,10 @@
     }
   });
   window.addEventListener('resize', syncProjectTabMode);
-  window.addEventListener('scroll', syncProjectTabMode, { passive: true });
+  /* Scroll events come from the fixed overlay, not the window */
+  document.querySelectorAll('.detail-view').forEach(function(el) {
+    el.addEventListener('scroll', syncProjectTabMode, { passive: true });
+  });
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       closeImageLightbox();
