@@ -321,4 +321,18 @@
     .mobile-burger-menu button[data-tab="shoplift"]::before { background: #DFFF2F; }
     .mobile-burger-menu button[data-tab="elementor"]::before { background: #D05C95; }
     .mobile-burger-divider { height: 1px; background: rgba(26,24,20,0.1); margin: 2px 0; }
+
+    /* Stack side-by-side grids vertically */
+    .case-summary { grid-template-columns: 1fr; }
+    .case-meta-grid { grid-template-columns: 1fr; }
+    .case-icon-grid { grid-template-columns: 1fr; }
+    .case-next-grid { grid-template-columns: 1fr !important; }
+
+    /* Detail view padding */
+    .detail-view.open { padding: 20px 16px; }
+
+    /* Hero banner: tighten and hide decorative glyph */
+    .hero-banner { padding: 20px; }
+    .hero-banner-glyph { display: none; }
+    .hero-banner-title { font-size: 20px; }
   }
