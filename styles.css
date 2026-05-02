@@ -131,6 +131,9 @@
   .case-insight .case-list { margin: 0 18px 18px 36px; }
   .case-section-note { margin-top: 24px; }
   .case-icon-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+  .case-img-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+  .case-img-row .case-figure { margin: 0; }
+  .case-img-row .detail-img { margin-bottom: 0; }
   .case-icon-card { background: rgba(255,255,255,0.7); border: 1px solid rgba(26,24,20,0.1); border-radius: 10px; padding: 18px; box-shadow: 0 10px 24px rgba(26,24,20,0.04); }
   .case-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; margin-bottom: 14px; background: rgba(26,24,20,0.05); color: var(--accent2); }
   .case-icon svg { width: 22px; height: 22px; }
@@ -326,6 +329,7 @@
     .case-summary { grid-template-columns: 1fr; }
     .case-meta-grid { grid-template-columns: 1fr; }
     .case-icon-grid { grid-template-columns: 1fr; }
+    .case-img-row { grid-template-columns: 1fr; }
     .case-next-grid { grid-template-columns: 1fr !important; }
 
     /* Detail view padding */
