@@ -729,110 +729,143 @@
       </div>
     </div>
     <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/49459587741cbd8f16075d5f5fff2ba55a0574f08f39d8843409caf27fbca57c/URL2x.png" alt="URL split testing beta program hero">
-      <figcaption class="case-caption">Building Shoplift's first beta program around one of its most-requested capabilities.</figcaption>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/2ffbde4921339c377b47cc4c1083f9540bcad3a09343c12764187b991dbbc27d/Cover2x.png" alt="URL split testing beta program — how to leverage a small feature to create a company-wide beta program">
+      <figcaption class="case-caption">How do you leverage a small feature to create a company-wide beta program?</figcaption>
     </figure>
     <div class="case-summary">
       <div class="case-card">
         <h3>TL;DR</h3>
-        <p>Shoplift had never shipped a feature through a controlled beta. New capabilities went through internal review and then directly to general availability — no structured validation layer in between.</p>
-        <p>URL split testing was the right feature to change that. It was highly requested, technically complex, and risky to ship blind. I used it as a gate to design Shoplift's first beta program from scratch — access model, onboarding, and feedback loops — so we could validate in real conditions and leave behind something reusable for every release that followed.</p>
+        <p>URL split testing was a highly requested feature — and also a key internal need for the CS team, who were manually supporting workarounds. Shoplift had never shipped a feature through a controlled beta, so I saw an opportunity to solve two problems at once: give merchants the capability they needed, and establish a repeatable beta process for the whole team.</p>
+        <p>I built the beta program from scratch — recruiting, onboarding, feedback loops, and a milestone framework — and it's now a core part of how Shoplift develops and releases features.</p>
       </div>
       <div class="case-card">
-        <h3>My role included</h3>
+        <h3>Impact</h3>
         <ul class="case-list">
-          <li>Proposing and scoping the beta program structure</li>
-          <li>Designing the feature experience and the program experience in parallel</li>
-          <li>Coordinating with CS, product, and leadership on access and feedback</li>
-          <li>Synthesizing merchant feedback into release decisions</li>
+          <li>High adoption and real-world usage across diverse test types</li>
+          <li>Support ticket resolution time dropped from 62 to 35 hours during the beta</li>
+          <li>Minimal friction and clear product-market fit validated before GA</li>
+          <li>Beta process now adopted across the team for future releases</li>
         </ul>
       </div>
     </div>
     <div class="case-meta-grid">
-      <div class="case-meta-card"><h3>Beta</h3><p>September 2024</p></div>
+      <div class="case-meta-card"><h3>Beta launch</h3><p>September 2024</p></div>
       <div class="case-meta-card"><h3>GA Release</h3><p>December 2024</p></div>
-      <div class="case-meta-card"><h3>Users</h3><p>E-commerce marketers, growth teams, and self-serve merchants running landing-page and product experiments</p></div>
+      <div class="case-meta-card"><h3>Beta size</h3><p>93 testers across self-serve, managed, and agency cohorts</p></div>
     </div>
     <div class="detail-section">
       <h3>The problem</h3>
-      <p>Shoplift's release process had no beta stage. Features were scoped, designed, built, and shipped — sometimes with internal testing, but never with a structured period of real-world validation before GA. For smaller changes, that was fine. For something like URL split testing, it was a real risk.</p>
-      <p>URL split testing let merchants compare two entirely different pages or URLs — not just template variants. That was a major capability gap the product had never supported. But it also introduced more setup complexity, more edge cases, and more ways for things to break. Shipping it cold felt like the wrong move.</p>
-      <p>At the same time, I had been thinking about the broader problem: we had no way to learn from real usage before committing to a full release. I saw an opportunity to solve both at once.</p>
+      <p>Shoplift's release process had no beta stage. Features were scoped, designed, built, and shipped — sometimes with internal testing, but never with a structured period of real-world validation before GA.</p>
+      <p>URL split testing was the right feature to change that. It let merchants compare two entirely different pages or URLs — not just template variants — which was a major capability gap. But it also introduced more setup complexity and more ways for things to break if we shipped it blind.</p>
+      <p>The gaps driving the decision were hard to ignore:</p>
+      <ul class="case-list">
+        <li><strong>Consistent feature requests:</strong> Users frequently asked for testing capabilities beyond themes and templates.</li>
+        <li><strong>Trial churn:</strong> High churn rates were attributed to the absence of URL testing as a core feature.</li>
+        <li><strong>Manual workarounds:</strong> CS teams invested significant time implementing manual solutions for customers.</li>
+        <li><strong>Support ticket volume:</strong> There was a high volume of tickets related to "how do I set up X."</li>
+      </ul>
     </div>
     <div class="detail-section">
       <h3>The strategy</h3>
       <div class="case-stack">
         <div class="case-card">
-          <p>I proposed using URL split testing as the vehicle to establish Shoplift's first formal beta program. The feature needed validation. The team needed a repeatable process. The beta would serve both goals at the same time.</p>
+          <p>I proposed using URL split testing as the vehicle to establish Shoplift's first formal beta program. The feature was small enough in scope to be low-risk, but meaningful enough to attract real merchant engagement. That made it the perfect gate.</p>
           <p>That meant designing two things in parallel: the feature itself, and the program that would wrap around it.</p>
           <h3>For the program, I worked through:</h3>
           <ul class="case-list">
             <li>How merchants would discover and request beta access</li>
-            <li>What criteria we would use to select participants — mix of plan tier, use case, and engagement level</li>
-            <li>How we would communicate with beta users throughout, and set expectations upfront</li>
-            <li>What feedback mechanisms to build in, and how to route feedback to product and CS</li>
-            <li>A clear timeline: beta period, review window, and GA cutover</li>
+            <li>What criteria we'd use to select 93 participants across cohorts, needs, and experience levels</li>
+            <li>How to communicate with beta users throughout, and set clear expectations upfront</li>
+            <li>What feedback mechanisms to build in — and how to route them to product and CS</li>
+            <li>A milestone framework: users invited → launch day → first test → 100 tests → public release</li>
           </ul>
         </div>
       </div>
     </div>
     <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/efc6b623c751b3cc493b6b45df0f3f9c43e328413d86e8e4ff62a9677428ece4/flow2x.png" alt="URL split testing beta flow">
-      <figcaption class="case-caption">The beta experience covered access, onboarding, setup, and structured feedback loops.</figcaption>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/84bbb807adbdb638902f1d3b87471980326aace5aa33a47c38704c24ca07c381/Cover222x.png" alt="URL split testing beta milestones timeline">
+      <figcaption class="case-caption">Beta milestones: from first users invited in late August 2024 to public release in December.</figcaption>
     </figure>
     <div class="detail-section">
       <h3>Discovery</h3>
-      <p>Before the beta launched, I framed two questions for the program to answer: what would merchants actually use URL testing for, and where would the experience break down first? We pulled from support requests, direct conversations with CS, and early user interviews to build initial hypotheses.</p>
+      <p>Before the beta, I collaborated with CS and sales to understand what merchants actually wanted to use URL testing for — and where the experience would break down first. Eight distinct use cases emerged:</p>
       <ul class="case-list">
-        <li>Support tickets and trial churn pointed repeatedly to the same gap: users wanted to test entirely different page experiences, not just visual variants within a theme.</li>
-        <li>CS was already spending significant time walking merchants through manual workarounds — a signal that the need was real and the existing product wasn't solving it.</li>
-        <li>Early hypotheses centered on campaign and landing-page testing. We expected those to dominate.</li>
+        <li><strong>Ad campaign testing:</strong> Landing pages linked from Google and Facebook ads with UTM parameters.</li>
+        <li><strong>Price testing:</strong> Redirecting users to pages with different prices for the same product.</li>
+        <li><strong>Product image testing:</strong> Comparing image variations to optimize conversions.</li>
+        <li><strong>Collection page testing:</strong> Testing product layouts and ordering within collections.</li>
+        <li><strong>Landing page testing:</strong> Comparing homepage and landing page designs, including pages built with tools like Replo.</li>
+        <li><strong>Shopper flow validation:</strong> Ensuring seamless redirection across multiple steps in a user journey.</li>
+        <li><strong>Product-specific redirects:</strong> Testing templates that showcase products differently.</li>
+        <li><strong>Audience segmentation:</strong> Redirecting specific audiences to tailored pages and measuring engagement.</li>
       </ul>
+      <p>We expected ad campaign and landing page testing to dominate. They didn't — and the real usage pattern reshaped how we thought about the roadmap.</p>
     </div>
     <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/5468a773043def6b480e5dc52821e3b8b642cc6a4aeacefd79d7403c3e37e053/screens2x.png" alt="URL split testing beta screens">
-      <figcaption class="case-caption">Core product screens for URL setup, review, and launch — designed alongside the beta program structure.</figcaption>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/efc6b623c751b3cc493b6b45df0f3f9c43e328413d86e8e4ff62a9677428ece4/flow2x.png" alt="URL split testing setup flow and validation logic">
+      <figcaption class="case-caption">Setup flow and validation logic — including how we handled UTM parameters and invalid URLs.</figcaption>
+    </figure>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/a2f2d2bb9e152dfebe368291b0d2601b24d3309199cde274f2251d5d3b02dd50/insert2x.png" alt="URL split testing product screens">
+      <figcaption class="case-caption">Core product screens: URL input, A/B compare view, traffic split, and test goal selection.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Recruiting testers</h3>
+      <p>We built five recruiting channels to source a diverse set of participants across plan tiers, experience levels, and relationships with the product:</p>
+      <ul class="case-list">
+        <li><strong>Organic:</strong> A link in our documentation invited users to apply directly.</li>
+        <li><strong>Identifying best candidates:</strong> A data query surfaced ~250 highly engaged, self-service users across all plan levels.</li>
+        <li><strong>Managed accounts:</strong> Our CS team hand-picked the most qualified accounts to participate.</li>
+        <li><strong>Agency partners:</strong> We reached out to partnering agencies to submit their clients.</li>
+        <li><strong>Support channels:</strong> Users who reached out with questions that URL testing could solve were invited to apply.</li>
+      </ul>
+      <p>After filtering through applications, we ended up with 93 testers — 56% supported accounts, 17% agency-managed, 16% managed by Shoplift directly, with the remainder self-serve.</p>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/e8ee3a455ad3632791f8f7b4246a9e089e9dda85f9883cc358b70e6700bdbedd/Screenshot-2025-01-05-at-4.31.59PM.png" alt="Beta recruiting: application form and candidate tracker">
+      <figcaption class="case-caption">The recruiting system: a Shopify application form on the left, and the Airtable tracker used to manage candidates across cohorts.</figcaption>
     </figure>
     <div class="detail-section">
       <h3>What we learned</h3>
       <div class="case-numbered">
         <details class="case-insight" open>
-          <summary>1. The use cases were right, but the priorities surprised us</summary>
+          <summary>1. Our assumptions about use cases were wrong in the best way</summary>
           <ul class="case-list">
-            <li>Landing-page experimentation was a clear need — but not the most urgent one.</li>
-            <li>Pricing tests and product-detail-page experiments showed even stronger early demand.</li>
-            <li>That shifted how we thought about future roadmap priorities, especially around profit optimization and offer testing.</li>
+            <li>Only 15% of beta users tested landing pages — we expected that to be the primary use case.</li>
+            <li>Price testing had 18% adoption, validating strong demand we had underestimated.</li>
+            <li>The most common behavior was PDP (product detail page) testing — merchants comparing entirely different product page designs.</li>
+            <li>This reshaped how we thought about the roadmap, especially around profit optimization features.</li>
           </ul>
         </details>
         <details class="case-insight">
-          <summary>2. The beta format surfaced friction that internal testing never would have</summary>
+          <summary>2. The beta caught real friction before it reached everyone</summary>
           <ul class="case-list">
-            <li>Real merchants hit edge cases around UTM strings and URLs with query parameters that our team had not anticipated.</li>
-            <li>Setup complexity was higher than expected for merchants doing single-product experiments.</li>
+            <li>Merchants hit unexpected edge cases around UTM strings and URLs with query parameters.</li>
+            <li>Single-product testing had higher setup friction than anticipated.</li>
             <li>These were fixable before GA — and we fixed them. They would have become support volume if we had shipped cold.</li>
           </ul>
         </details>
         <details class="case-insight">
-          <summary>3. The biggest future opportunities sat one step beyond the initial scope</summary>
+          <summary>3. The original goals were validated with real numbers</summary>
           <ul class="case-list">
-            <li>Audience-aware routing and segmentation came up repeatedly as a next-level need.</li>
-            <li>Profit reporting and revenue impact visibility opened up future monetization research directions.</li>
-            <li>Single-product testing deserved its own more tailored setup path.</li>
+            <li>Average support ticket resolution time dropped from 62 hours to 35 hours during the beta.</li>
+            <li>The feature addressed the "missing feature" cohort, reducing trial churn as expected.</li>
+            <li>Engagement and feedback confirmed the feature met a real user need — not just a requested one.</li>
           </ul>
         </details>
         <details class="case-insight">
           <summary>4. The program itself became the most durable output</summary>
           <ul class="case-list">
-            <li>By the end of the beta, we had a documented selection process, a feedback routing structure, and a timeline template.</li>
-            <li>CS and product were tightly synced throughout — a rhythm the team had not had before.</li>
-            <li>The program became reusable. Future launches had a starting point instead of starting from nothing.</li>
+            <li>By the end of the beta, we had a documented selection process, a feedback routing structure, and a milestone template.</li>
+            <li>CS and product stayed tightly connected throughout — a rhythm the team hadn't had before.</li>
+            <li>The beta program is now a standard part of how Shoplift ships complex features.</li>
           </ul>
         </details>
       </div>
     </div>
     <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/7052695cb4a55f1434a7a698f12fd1125648f4022eeea37490929bc01427e716/Search2x.png" alt="URL split testing search flow">
-      <figcaption class="case-caption">The beta surfaced clear opportunities to streamline product search and advanced setup flows.</figcaption>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/5468a773043def6b480e5dc52821e3b8b642cc6a4aeacefd79d7403c3e37e053/screens2x.png" alt="URL split testing final product screens">
+      <figcaption class="case-caption">Final product screens across the beta period — refined based on merchant feedback before GA.</figcaption>
     </figure>
     <div class="detail-section">
       <h3>Next steps</h3>
@@ -840,23 +873,23 @@
         <div class="case-card">
           <h3>For the feature</h3>
           <ul class="case-list">
-            <li>Smarter handling of URLs with UTM parameters and query strings to reduce setup friction</li>
-            <li>A tailored creation path for single-product page experiments</li>
-            <li>Profit and revenue reporting tied to URL test results</li>
+            <li>When a user pastes a URL with UTM parameters, auto-create an audience segment instead of just stripping them</li>
+            <li>A dedicated creation path for single-product page experiments — the most common use case</li>
+            <li>Profit and revenue reporting tied to URL test outcomes, informed by the strong price testing signal</li>
           </ul>
           <h3>For the program</h3>
           <ul class="case-list">
-            <li>Apply the beta model to future complex features before GA</li>
+            <li>Apply the beta model to future complex feature releases before GA</li>
             <li>Build a lightweight opt-in beta channel so interested merchants can self-select into future programs</li>
-            <li>Use the feedback loop structure to run earlier-stage concept validation, not just pre-release QA</li>
+            <li>Use the feedback loop structure for earlier-stage concept validation, not just pre-release QA</li>
           </ul>
         </div>
       </div>
     </div>
     <div class="detail-section">
       <h3>Outcome</h3>
-      <p>URL split testing launched to GA in December 2024 with strong adoption and a notably lower support burden than previous feature releases. The beta caught real friction before it reached all users, gave CS a runway to get ahead of common questions, and validated that the feature solved a problem merchants cared about.</p>
-      <p>The more lasting outcome was the process. Shoplift had a reusable beta framework for the first time — selection criteria, feedback loops, a timeline structure — built around a real launch rather than designed in the abstract. The next complex feature had a starting point.</p>
+      <p>URL split testing launched to GA in December 2024 with strong adoption, a measurably lower support burden (62 → 35 hour average resolution time), and clear product-market fit confirmed through real usage — not just intent. The beta caught friction that would have shipped otherwise.</p>
+      <p>The more lasting outcome was the process. Shoplift had a reusable beta framework for the first time — recruiting channels, selection criteria, a milestone structure, and feedback routing — built around a real launch rather than designed in the abstract. The next complex feature had a starting point.</p>
     </div>
     <div class="case-thanks">Thank you!</div>
   </div>
