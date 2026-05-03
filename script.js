@@ -1,7 +1,8 @@
   var currentTab = 'highlights';
   var tabNames = ['highlights','clover','shoplift','elementor','archive'];
-  var projectIds = ['reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','eshel','argaz','doodles','kinder','ifever'];
+  var projectIds = ['dinerprofiles','reporting','urlbeta','testcreation','pricing','dsm','experts','playground','redesign','andco','storemaven','eshel','argaz','doodles','kinder','ifever'];
   var projectTabMap = {
+    dinerprofiles: 'clover',
     reporting: 'shoplift',
     urlbeta: 'shoplift',
     testcreation: 'shoplift',
@@ -19,6 +20,7 @@
     ifever: 'archive'
   };
   var projectRecommendations = {
+    dinerprofiles: ['reporting', 'dsm'],
     reporting: ['testcreation', 'pricing'],
     urlbeta: ['reporting', 'pricing'],
     testcreation: ['reporting', 'urlbeta'],
@@ -36,6 +38,13 @@
     ifever: ['reporting', 'redesign']
   };
   var projectCatalog = {
+    dinerprofiles: {
+      title: 'Diner Profiles on POS',
+      tag: 'Clover · POS / Hospitality',
+      desc: 'Phase 1 foundation for a richer guest profile offering in hospitality',
+      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23F4F1E7'/%3E%3Cstop offset='100%25' stop-color='%23E2F1D9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23g)'/%3E%3Crect x='120' y='110' width='520' height='680' rx='34' fill='%23FFFFFF' opacity='0.9'/%3E%3Crect x='690' y='160' width='790' height='180' rx='30' fill='%23FFFFFF' opacity='0.78'/%3E%3Crect x='690' y='390' width='370' height='170' rx='28' fill='%23FFFFFF' opacity='0.7'/%3E%3Crect x='1110' y='390' width='370' height='170' rx='28' fill='%23FFFFFF' opacity='0.7'/%3E%3Crect x='690' y='610' width='790' height='120' rx='28' fill='%23FFFFFF' opacity='0.7'/%3E%3Ccircle cx='250' cy='220' r='54' fill='%2378C25A' opacity='0.85'/%3E%3Ccircle cx='380' cy='220' r='54' fill='%23DCEBCF'/%3E%3Crect x='220' y='330' width='310' height='34' rx='17' fill='%232A3428' opacity='0.9'/%3E%3Crect x='220' y='392' width='250' height='26' rx='13' fill='%23828A7B' opacity='0.9'/%3E%3Crect x='220' y='470' width='320' height='18' rx='9' fill='%23D8DDD3'/%3E%3Crect x='220' y='510' width='280' height='18' rx='9' fill='%23D8DDD3'/%3E%3Crect x='220' y='550' width='300' height='18' rx='9' fill='%23D8DDD3'/%3E%3Crect x='760' y='220' width='260' height='28' rx='14' fill='%232A3428' opacity='0.88'/%3E%3Crect x='760' y='272' width='520' height='18' rx='9' fill='%23D4DACF'/%3E%3Crect x='760' y='444' width='180' height='22' rx='11' fill='%232A3428' opacity='0.82'/%3E%3Crect x='1180' y='444' width='180' height='22' rx='11' fill='%232A3428' opacity='0.82'/%3E%3Crect x='760' y='654' width='540' height='22' rx='11' fill='%232A3428' opacity='0.82'/%3E%3C/svg%3E",
+      cardClass: 'card-clover'
+    },
     reporting: {
       title: 'Test Reporting 2.0',
       tag: 'Shoplift · Core Product',

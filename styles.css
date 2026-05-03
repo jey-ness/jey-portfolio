@@ -78,7 +78,7 @@
   @media (max-width: 600px) { .project-grid { grid-template-columns: 1fr; } .folder-body { padding: 24px; } .outcome-grid { grid-template-columns: 1fr; } }
   .project-card { --card-accent: rgba(26,24,20,0.18); border: 1px solid rgba(26,24,20,0.12); border-radius: 10px; cursor: pointer; transition: all 0.2s ease; background: white; position: relative; overflow: hidden; }
   .project-card:hover { border-color: var(--card-accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,24,20,0.08); }
-  .card-best{--card-accent:#E8C547}.card-shoplift{--card-accent:#DFFF2F}.card-elementor{--card-accent:#D05C95}.card-other{--card-accent:#A09DE0}
+  .card-best{--card-accent:#E8C547}.card-clover{--card-accent:#78C25A}.card-shoplift{--card-accent:#DFFF2F}.card-elementor{--card-accent:#D05C95}.card-other{--card-accent:#A09DE0}
   .card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; display: block; background: rgba(26,24,20,0.04); }
   .card-body { padding: 20px 20px 32px; }
   .project-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
@@ -101,7 +101,7 @@
   .back-btn, .next-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; border: none; background: none; padding: 0; transition: color 0.15s; margin-bottom: 0; }
   .back-btn:hover, .next-btn:hover { color: var(--ink); }
   .hero-banner { border-radius: 10px; padding: 28px; margin-bottom: 28px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; background: rgba(255,255,255,0.62); border: 1px solid rgba(26,24,20,0.1); box-shadow: 0 12px 28px rgba(26,24,20,0.05); }
-  .hero-best,.hero-shoplift,.hero-elementor,.hero-other,.hero-reporting{background:rgba(255,255,255,0.62)}
+  .hero-best,.hero-clover,.hero-shoplift,.hero-elementor,.hero-other,.hero-reporting{background:rgba(255,255,255,0.62)}
   .hero-reporting .hero-banner-label, .hero-reporting .hero-banner-title { color: var(--ink); }
   .hero-reporting .hero-banner-title, .hero-banner-title { font-size: 30px; }
   .hero-banner-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
@@ -143,6 +143,11 @@
   .case-icon-card h4 { font-family: var(--serif); font-size: 20px; line-height: 1.2; font-style: italic; color: var(--ink); margin-bottom: 10px; }
   .case-icon-card p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.85; }
   .case-next-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case-placeholder-grid, .case-roadmap-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 14px; }
+  .case-placeholder-card, .case-roadmap-card { background: rgba(255,255,255,0.7); border: 1px dashed rgba(26,24,20,0.16); border-radius: 10px; padding: 18px; min-height: 150px; }
+  .case-placeholder-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .case-placeholder-card h4, .case-roadmap-card h4 { font-family: var(--serif); font-size: 20px; line-height: 1.2; font-style: italic; color: var(--ink); margin-bottom: 10px; }
+  .case-placeholder-card p, .case-roadmap-card p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.76; }
   .case-continue { margin: 36px 0 10px; }
   .case-continue h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
   .case-continue-grid .project-card { background: rgba(255,255,255,0.88); }
@@ -334,6 +339,7 @@
     .case-icon-grid { grid-template-columns: 1fr; }
     .case-img-row { grid-template-columns: 1fr; }
     .case-next-grid { grid-template-columns: 1fr !important; }
+    .case-placeholder-grid, .case-roadmap-grid { grid-template-columns: 1fr; }
 
     /* Detail view padding */
     .detail-view.open { padding: 20px 16px; }
