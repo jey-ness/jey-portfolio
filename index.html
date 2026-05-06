@@ -822,68 +822,64 @@
       <p>After filtering through applications, we ended up with 93 testers — 56% supported accounts, 17% agency-managed, 16% managed by Shoplift directly, with the remainder self-serve.</p>
     </div>
     <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/1f2556cffeb4e5a7c9e28df792b31e14cbb4605a462ca719d5131ce65d492b01/beta2x.png" alt="Beta recruiting breakdown by relationship with Shoplift — 93 total testers">
+      <figcaption class="case-caption">Beta recruiting breakdown: 93 testers across supported, agency-managed, and Shoplift-managed accounts.</figcaption>
+    </figure>
+    <figure class="case-figure">
       <img class="detail-img" src="https://freight.cargo.site/t/original/i/e8ee3a455ad3632791f8f7b4246a9e089e9dda85f9883cc358b70e6700bdbedd/Screenshot-2025-01-05-at-4.31.59PM.png" alt="Beta recruiting: application form and candidate tracker">
       <figcaption class="case-caption">The recruiting system: a Shopify application form on the left, and the Airtable tracker used to manage candidates across cohorts.</figcaption>
     </figure>
     <div class="detail-section">
       <h3>What we learned</h3>
-      <div class="case-numbered">
-        <details class="case-insight" open>
-          <summary>1. Our assumptions about use cases were wrong in the best way</summary>
-          <ul class="case-list">
-            <li>Only 15% of beta users tested landing pages — we expected that to be the primary use case.</li>
-            <li>Price testing had 18% adoption, validating strong demand we had underestimated.</li>
-            <li>The most common behavior was PDP (product detail page) testing — merchants comparing entirely different product page designs.</li>
-            <li>This reshaped how we thought about the roadmap, especially around profit optimization features.</li>
-          </ul>
-        </details>
-        <details class="case-insight">
-          <summary>2. The beta caught real friction before it reached everyone</summary>
-          <ul class="case-list">
-            <li>Merchants hit unexpected edge cases around UTM strings and URLs with query parameters.</li>
-            <li>Single-product testing had higher setup friction than anticipated.</li>
-            <li>These were fixable before GA — and we fixed them. They would have become support volume if we had shipped cold.</li>
-          </ul>
-        </details>
-        <details class="case-insight">
-          <summary>3. The original goals were validated with real numbers</summary>
-          <ul class="case-list">
-            <li>Average support ticket resolution time dropped from 62 hours to 35 hours during the beta.</li>
-            <li>The feature addressed the "missing feature" cohort, reducing trial churn as expected.</li>
-            <li>Engagement and feedback confirmed the feature met a real user need — not just a requested one.</li>
-          </ul>
-        </details>
-        <details class="case-insight">
-          <summary>4. The program itself became the most durable output</summary>
-          <ul class="case-list">
-            <li>By the end of the beta, we had a documented selection process, a feedback routing structure, and a milestone template.</li>
-            <li>CS and product stayed tightly connected throughout — a rhythm the team hadn't had before.</li>
-            <li>The beta program is now a standard part of how Shoplift ships complex features.</li>
-          </ul>
-        </details>
-      </div>
+      <h4 style="margin-top: 20px; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.5;">Metrics Review on Use Cases</h4>
+      <p>The real usage patterns reshaped how we thought about the roadmap:</p>
+      <ul class="case-list">
+        <li>Only 15% of beta users tested ad campaign landing pages — our assumed primary use case.</li>
+        <li>Price testing had 18% adoption, validating strong demand we had underestimated.</li>
+        <li>Collection and product image testing saw moderate adoption, fitting well within the feature's scope.</li>
+        <li>Less than expected usage of advanced audience segmentation, which was still in early exploration.</li>
+      </ul>
+      <h4 style="margin-top: 24px; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.5;">Reflection on Original Goals</h4>
+      <ul class="case-list">
+        <li>Trial churn attributed to the missing URL testing feature showed measurable improvement after the beta launched.</li>
+        <li>CS support ticket resolution time dropped from 62 to 35 hours — the most concrete metric of the program.</li>
+        <li>High adoption and strong merchant engagement confirmed the feature met a real need, not just a requested one.</li>
+      </ul>
+      <h4 style="margin-top: 24px; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.5;">Challenges</h4>
+      <ul class="case-list">
+        <li>Feedback collection suffered during the holiday season — surveys had low response rates when merchants were at peak activity.</li>
+        <li>Manual onboarding was time-intensive; one-on-one setup calls weren't scalable beyond the initial cohort.</li>
+      </ul>
     </div>
     <figure class="case-figure">
       <img class="detail-img" src="https://freight.cargo.site/t/original/i/5468a773043def6b480e5dc52821e3b8b642cc6a4aeacefd79d7403c3e37e053/screens2x.png" alt="URL split testing final product screens">
       <figcaption class="case-caption">Final product screens across the beta period — refined based on merchant feedback before GA.</figcaption>
     </figure>
     <div class="detail-section">
-      <h3>Next steps</h3>
-      <div class="case-stack">
-        <div class="case-card">
-          <h3>For the feature</h3>
+      <h3>Opportunities</h3>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. Upgrade prompt &amp; better plan experience</summary>
           <ul class="case-list">
-            <li>When a user pastes a URL with UTM parameters, auto-create an audience segment instead of just stripping them</li>
-            <li>A dedicated creation path for single-product page experiments — the most common use case</li>
-            <li>Profit and revenue reporting tied to URL test outcomes, informed by the strong price testing signal</li>
+            <li>When a user pastes a URL with UTM parameters, auto-create an audience segment instead of just stripping them.</li>
+            <li>Surface clearer upgrade prompts for Advanced and Pro plans — merchants on Core hitting feature walls should see a clear path forward.</li>
+            <li>Reduce friction for Core plan users discovering URL testing for the first time.</li>
           </ul>
-          <h3>For the program</h3>
+        </details>
+        <details class="case-insight">
+          <summary>2. Testing single products</summary>
           <ul class="case-list">
-            <li>Apply the beta model to future complex feature releases before GA</li>
-            <li>Build a lightweight opt-in beta channel so interested merchants can self-select into future programs</li>
-            <li>Use the feedback loop structure for earlier-stage concept validation, not just pre-release QA</li>
+            <li>A dedicated creation path for single-product page experiments — the most common real-world use case that emerged from the beta.</li>
+            <li>Current setup flow isn't optimized for this pattern; a product-first entry point would reduce friction significantly.</li>
           </ul>
-        </div>
+        </details>
+        <details class="case-insight">
+          <summary>3. Profit optimization &amp; profit reporting (research)</summary>
+          <ul class="case-list">
+            <li>Profit and revenue reporting tied to URL test outcomes — informed directly by the strong price testing signal from beta data.</li>
+            <li>Early-stage research into optimization recommendations, starting with margin-aware split testing.</li>
+          </ul>
+        </details>
       </div>
     </div>
     <div class="detail-section">
