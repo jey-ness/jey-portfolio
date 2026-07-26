@@ -56,6 +56,17 @@ Single source of truth for styling and structure. **Every UI change goes through
 ```
 Use `.case-stack` instead of `.case-summary` for one full-width card (e.g. Outcome box).
 
+To stack two cards in one `.case-summary` column (e.g. Background + Outcome on the left, role on the right), wrap them in **`.case-col`**:
+```html
+<div class="case-summary">
+  <div class="case-col">
+    <div class="case-card"><h3>Background</h3><p>…</p></div>
+    <div class="case-card"><h3>Outcome</h3><p>…</p></div>
+  </div>
+  <div class="case-card"><h3>My role included</h3>…</div>
+</div>
+```
+
 ### Meta grid (3 fact tiles)
 ```html
 <div class="case-meta-grid">
@@ -94,7 +105,7 @@ Images live on the Cargo CDN: `https://freight.cargo.site/t/original/i/<hash>/<f
 </div>
 ```
 
-### Icon card grid (affected areas / next steps)
+### Icon card grid (affected areas / research methods / next steps)
 ```html
 <div class="case-icon-grid">
   <div class="case-icon-card">
@@ -104,6 +115,16 @@ Images live on the Cargo CDN: `https://freight.cargo.site/t/original/i/<hash>/<f
   </div>
 </div>
 ```
+**Compact variant** — add `.case-icon-grid-compact` for 3-across, smaller cards. Use for short labels. The `<p>` may be omitted entirely (title-only cards); `.case-icon-card h4:last-child` drops the trailing margin automatically.
+```html
+<div class="case-icon-grid case-icon-grid-compact">
+  <div class="case-icon-card">
+    <div class="case-icon" aria-hidden="true"><i class="ph ph-target"></i></div>
+    <h4>Short label</h4>
+  </div>
+</div>
+```
+Don't invent descriptions just to fill a card — a title-only card is better than fabricated prose. If one list item is a catch-all ("various improvements"), make it a closing sentence instead of a card.
 
 ### Callout (highlighted note)
 `<div class="case-callout"><h3>…</h3><p>…</p></div>` — yellow tinted box.
@@ -149,7 +170,21 @@ State classes on `#mainFolders`: `project-mode` (a case study is open) · `proje
 
 Routing: hash-based. `#TAB`, `#project-ID`, `#about`, `#contact` → `routeFromHash()`. New page = add to `projectIds`, `projectTabMap`, `projectRecommendations`, `projectCatalog` (script.js top) + a `detail-` div (index.html).
 
-## 7. Rules
+## 7. CSS gotchas (real bugs that have happened here)
+
+**`:last-child` resets outrank component rules.** `.detail-section p:last-child { margin-bottom: 0 }` is specificity (0,2,1); `.case-insight p` is (0,1,1) — so the reset silently killed the accordion's bottom padding. Any component rule for a `<p>` inside `.detail-section` or `.case-card` must also carry `:last-child` to compete:
+```css
+.case-insight p, .case-insight p:last-child { margin: 0 18px 18px; }
+```
+Only bulleted accordions were unaffected (they use `.case-list`), which is why it showed on one page and not another. **When a spacing change "doesn't apply", check for a `:last-child` reset before adding `!important`.**
+
+**Modifier classes must come after the base class in the file.** `.card-img-contain` was defined before `.card-img`, so `object-fit: cover` won and logos cropped. Same specificity = source order decides.
+
+**A missing rule looks like a broken rule.** `.case-card p + h3` had spacing but `.case-card .case-list + h3` didn't exist, so headings after a list sat flush. Check the actual adjacent-sibling combination, not just the element.
+
+**Check the mobile block.** `@media (max-width: 700px)` at the bottom of styles.css overrides several grids. A desktop change that "doesn't work" may be shadowed there — and the preview viewport is often ~660px wide, which is already inside the breakpoint. Verify width with `window.innerWidth` before diagnosing a layout bug.
+
+## 8. Rules
 
 1. **No inline `style=`** (exceptions: form honeypots).
 2. New styles = class in styles.css + entry here.

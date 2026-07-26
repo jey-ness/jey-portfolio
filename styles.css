@@ -127,7 +127,8 @@
   .case-insight summary::after { content: '+'; position: absolute; right: 18px; top: 16px; font-family: var(--mono); font-size: 18px; color: var(--muted); }
   .case-insight[open] summary::after { content: '–'; }
   .case-insight .case-list { margin: 0 18px 18px 36px; }
-  .case-insight p { margin: 0 18px 18px 18px; }
+  /* :last-child needed to beat .detail-section p:last-child specificity */
+  .case-insight p, .case-insight p:last-child { margin: 0 18px 18px; }
   .case-section-note { margin-top: 24px; }
   .case-subhead { margin: 24px 0 8px; font-family: var(--sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); opacity: 0.5; }
   .case-subhead:first-of-type { margin-top: 20px; }
@@ -140,6 +141,11 @@
   .case-icon svg { width: 22px; height: 22px; }
   .case-icon-card h4 { font-family: var(--serif); font-size: 20px; line-height: 1.2; font-style: italic; color: var(--ink); margin-bottom: 10px; }
   .case-icon-card p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.85; }
+  .case-icon-card h4:last-child { margin-bottom: 0; }
+  .case-icon-grid-compact { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .case-icon-grid-compact .case-icon-card { padding: 16px; }
+  .case-icon-grid-compact .case-icon { width: 34px; height: 34px; margin-bottom: 10px; }
+  .case-icon-grid-compact h4 { font-size: 16px; }
   .case-next-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .case-placeholder-grid, .case-roadmap-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 14px; }
   .case-placeholder-card, .case-roadmap-card { background: rgba(255,255,255,0.7); border: 1px dashed rgba(26,24,20,0.16); border-radius: 10px; padding: 18px; min-height: 150px; }

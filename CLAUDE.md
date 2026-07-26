@@ -17,6 +17,7 @@ Static SPA, no build step. 3 files: `index.html` (all content), `styles.css`, `s
 - **Edit case-study copy**: grep the detail id, edit in place using DESIGN-SYSTEM.md components. Image order should mirror jeyness.com's page for that project.
 - **New case study**: copy an existing `detail-*` div; register the slug in the 4 script.js structures; add a project card to its panel.
 - **Global style change**: one class in styles.css. Check it isn't overridden inside the `@media (max-width: 700px)` block at the bottom.
+- **A style change that "has no effect"**: read DESIGN-SYSTEM.md §7 before reaching for `!important` — a `:last-child` reset, modifier source-order, or the mobile block is usually the cause.
 - **Tab/nav behavior**: read DESIGN-SYSTEM.md §6 first — 4 synced nav UIs; test >1200px, 701–1200px, and ≤700px.
 
 ## Preview workflow (sandbox quirks — don't rediscover these)
