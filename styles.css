@@ -110,15 +110,17 @@
   .detail-img { width: 100%; border-radius: 10px; margin-bottom: 28px; display: block; border: 1px solid rgba(26,24,20,0.08); cursor: zoom-in; background: white; }
   .detail-section { margin-bottom: 28px; }
   .detail-section h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-  .detail-section p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.85; margin-bottom: 10px; }
+  .detail-section p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.85; margin-bottom: 14px; }
+  .detail-section p:last-child { margin-bottom: 0; }
   .case-summary { display: grid; grid-template-columns: 1.35fr 0.85fr; gap: 16px; margin-bottom: 28px; }
   .case-stack { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
   .case-intro { font-size: 15px; line-height: 1.8; color: var(--ink); opacity: 0.75; margin-bottom: 28px; }
   .case-card { background: rgba(255,255,255,0.68); border: 1px solid rgba(26,24,20,0.1); border-radius: 8px; padding: 20px; }
   .case-card h3, .case-meta-card h3, .case-callout h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
   .case-card h3 + * { margin-top: 0; }
-  .case-card p + h3 { margin-top: 20px; }
-  .case-card p, .case-callout p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.86; margin-bottom: 10px; }
+  .case-card p + h3, .case-card .case-list + h3 { margin-top: 22px; }
+  .case-card p, .case-callout p { font-size: 14px; line-height: 1.75; color: var(--ink); opacity: 0.86; margin-bottom: 14px; }
+  .case-card p:last-child, .case-callout p:last-child { margin-bottom: 0; }
   .case-meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0 30px; }
   .case-meta-card { background: rgba(26,24,20,0.035); border: 1px solid rgba(26,24,20,0.08); border-radius: 8px; padding: 16px; }
   .case-meta-card p { font-size: 13px; line-height: 1.65; color: var(--ink); opacity: 0.82; }
@@ -132,6 +134,7 @@
   .case-insight summary::after { content: '+'; position: absolute; right: 18px; top: 16px; font-family: var(--mono); font-size: 18px; color: var(--muted); }
   .case-insight[open] summary::after { content: '–'; }
   .case-insight .case-list { margin: 0 18px 18px 36px; }
+  .case-insight p { margin: 0 18px 18px 18px; }
   .case-section-note { margin-top: 24px; }
   .case-icon-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
   .case-img-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
