@@ -26,6 +26,8 @@ Static SPA, no build step. 3 files: `index.html` (all content), `styles.css`, `s
 - If the server errors about missing files: recreate `/tmp/portfolio-serve.py` (subclass `SimpleHTTPRequestHandler` with `directory=`, PORT from env) and `mkdir -p /tmp/portfolio-preview`.
 - **After every edit**: `cp index.html styles.css script.js /tmp/portfolio-preview/` — the preview does NOT track the repo.
 - Verify in browser: `openDetail('SLUG')` / `switchTab('TAB')` in the console, then screenshot. Window scrolls the page (detail views don't scroll internally). A reload resets to `#highlights` routing from the hash.
+- **After syncing files, `navigate` to the same URL can serve stale cached HTML** — a check may falsely show the old content. Use `location.reload(true)` before concluding an edit didn't apply.
+- A blank screenshot after `resize_window` is a capture glitch, not a broken page — reset with the desktop preset and re-shoot; trust DOM reads meanwhile.
 
 ## Conventions
 

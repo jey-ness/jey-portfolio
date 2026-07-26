@@ -369,6 +369,12 @@
     switchTab('highlights', false);
   }
 
+  document.addEventListener('input', function(event) {
+    if (event.target.classList && event.target.classList.contains('ba-range')) {
+      var slider = event.target.closest('.ba-slider');
+      if (slider) slider.style.setProperty('--pos', event.target.value + '%');
+    }
+  });
   window.addEventListener('hashchange', routeFromHash);
   document.addEventListener('click', function(event) {
     if (event.target.classList && event.target.classList.contains('detail-img')) {

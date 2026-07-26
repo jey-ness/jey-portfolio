@@ -126,6 +126,22 @@ Images live on the Cargo CDN: `https://freight.cargo.site/t/original/i/<hash>/<f
 ```
 Don't invent descriptions just to fill a card — a title-only card is better than fabricated prose. If one list item is a catch-all ("various improvements"), make it a closing sentence instead of a card.
 
+### Before/after slider (compare two same-size images)
+```html
+<figure class="case-figure">
+  <div class="ba-slider">
+    <img src="BEFORE.png" alt="…" loading="lazy">
+    <div class="ba-after"><img src="AFTER.png" alt="…" loading="lazy"></div>
+    <div class="ba-divider" aria-hidden="true"></div>
+    <span class="ba-label ba-label-before">UX</span>
+    <span class="ba-label ba-label-after">UI</span>
+    <input type="range" class="ba-range" min="0" max="100" value="50" aria-label="Drag to compare">
+  </div>
+  <figcaption class="case-caption">…— drag to compare.</figcaption>
+</figure>
+```
+Driven by an invisible `<input type=range>` over the whole area (mouse, touch, and keyboard for free); a delegated `input` listener in script.js sets `--pos` on the container. **Both images must share the exact same dimensions** — check `naturalWidth/Height` first. Don't add `detail-img` to slider images (it would trigger the lightbox). First use: Container Playground UX vs UI intro.
+
 ### Callout (highlighted note)
 `<div class="case-callout"><h3>…</h3><p>…</p></div>` — yellow tinted box.
 
