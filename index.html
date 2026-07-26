@@ -900,85 +900,167 @@
       </div>
     </div>
     <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/a6a08210be4c4935cc3528866e3065e323f3f014631957f611b576f00ab2340b/Cover222x.png" alt="Test creation flow hero">
-      <figcaption class="case-caption">Rethinking the most important flow in the product as Shoplift's testing capabilities expanded.</figcaption>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/a6a08210be4c4935cc3528866e3065e323f3f014631957f611b576f00ab2340b/Cover222x.png" alt="Test creation flow cover">
     </figure>
     <div class="case-summary">
-      <div class="case-card">
-        <h3>TL;DR</h3>
-        <p>Creating an A/B test is the core user journey in Shoplift, but the original wizard was built for a simpler product. As the platform expanded, the flow started to feel rigid, cognitively heavy, and difficult to scale.</p>
-        <p>I redesigned the creation experience to reduce friction for new users, support future testing modes, and make advanced experimentation feel approachable rather than overwhelming.</p>
+      <div class="case-col">
+        <div class="case-card">
+          <h3>Background</h3>
+          <p>The main user journey in Shoplift is creating A/B tests. At that point in time, our testing capabilities were limited, but we had a rough roadmap to expand the types of tests to support our users' needs. The existing flow was a wizard where the user needed to make one decision at a time.</p>
+        </div>
+        <div class="case-card">
+          <h3>Outcome</h3>
+          <p>Post-launch analysis showed the biggest gain in a place we hadn't targeted: <strong>time to launch a first test dropped for new users.</strong> That metric later tied directly into our activation research — users who launch a test and see positive results inside their trial window are measurably less likely to churn.</p>
+          <p>The rebuilt architecture also did its structural job: every testing capability added since has slotted into this flow rather than requiring another rewrite.</p>
+        </div>
       </div>
       <div class="case-card">
         <h3>My role included</h3>
         <ul class="case-list">
-          <li>Planning and PRD collaboration with the CPO</li>
-          <li>User research with CS and direct interviews</li>
-          <li>Hands-on design, prototyping, testing, QA, and post-launch analysis</li>
+          <li>Planning the design process and writing the PRD — steps, requirements, and timelines with the CPO</li>
+          <li>User research — talking to CS and conducting user interviews</li>
+          <li>Hands-on design and prototyping</li>
+          <li>Internal usability testing sessions</li>
+          <li>Delivering design to the development team</li>
+          <li>QA</li>
+          <li>Post-launch analysis</li>
         </ul>
       </div>
     </div>
     <div class="case-meta-grid">
-      <div class="case-meta-card"><h3>Release</h3><p>September 2023</p></div>
+      <div class="case-meta-card"><h3>Release date</h3><p>September 2023</p></div>
       <div class="case-meta-card"><h3>Users</h3><p>CMOs, e-commerce managers, and store founders</p></div>
-      <div class="case-meta-card"><h3>Constraint</h3><p>Designed during a React-to-Vue migration and rollout of a new design system</p></div>
-    </div>
-    <div class="detail-section">
-      <h3>Background</h3>
-      <p>The old test creation flow asked users to make one decision at a time in a narrow wizard pattern. That worked when Shoplift supported fewer experiment types, but it stopped scaling once the product introduced more testing options and more nuanced setup needs.</p>
-      <p>We needed a flow that could reduce cognitive load for beginners while creating a stronger foundation for future capabilities.</p>
+      <div class="case-meta-card"><h3>Constraint</h3><p>Designed during a React-to-Vue migration and the rollout of a new design system</p></div>
     </div>
     <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/9c960619986ad14267037c8d71058a3050949e1c3da05d2033e4831c9de6c18d/before-after2x.png" alt="Before and after for Shoplift test creation">
-      <figcaption class="case-caption">Before and after: simplifying decision-making while making room for a more capable system.</figcaption>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/9c960619986ad14267037c8d71058a3050949e1c3da05d2033e4831c9de6c18d/before-after2x.png" alt="Before and after — home page">
+      <figcaption class="case-caption">Before &amp; after — home page.</figcaption>
     </figure>
     <div class="detail-section">
-      <h3>Research</h3>
-      <p>I pulled from multiple inputs to understand where the flow was breaking down: Hotjar recordings, customer success conversations, user interviews, and UX and copy reviews. Across those sources, the same themes came up repeatedly.</p>
-      <ul class="case-list">
-        <li>Users did not always understand what kind of test to create.</li>
-        <li>The experience felt too linear for a more complex product.</li>
-        <li>New users needed guidance, while experienced users wanted to move faster.</li>
-      </ul>
-    </div>
-    <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/b64b781af0f7c314b31b3148231dfe91fd1e9a656120566d6f55d202c061f396/find2x.png" alt="Research findings for test creation flow">
-      <figcaption class="case-caption">Distilling friction points into clearer design priorities.</figcaption>
-    </figure>
-    <div class="detail-section">
-      <h3>Design goals</h3>
-      <div class="case-stack">
-        <div class="case-card">
-          <h3>Primary goals</h3>
+      <h3>Challenges</h3>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. The flow ignored what users actually needed to know</summary>
           <ul class="case-list">
-            <li>Reduce cognitive overload during setup</li>
-            <li>Shorten time to create a valid test</li>
-            <li>Help newer users get started through a test library</li>
-            <li>Make the architecture flexible enough for future experimentation modes</li>
+            <li>The wizard asked for one decision at a time without explaining why any of them mattered.</li>
+            <li>It assumed a level of testing fluency that most of our users did not have.</li>
           </ul>
-        </div>
+        </details>
+        <details class="case-insight">
+          <summary>2. There was no room to expand the feature</summary>
+          <ul class="case-list">
+            <li>We had a roadmap of new test types, and the linear wizard had nowhere to put them.</li>
+            <li>Every addition would have meant another step bolted onto an already long sequence.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>3. Technical — the codebase was mid-migration</summary>
+          <ul class="case-list">
+            <li>The app was moving from React to Vue, and test creation was the last piece left to convert.</li>
+            <li>The redesign had to be shippable in phases without destabilising the product's core journey.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>4. Visual — a new design system was landing at the same time</summary>
+          <ul class="case-list">
+            <li>We were rolling out a new design system and needed to solidify the design language as we went.</li>
+            <li>This flow became one of the first real tests of whether those components held up.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h3>Research &amp; key findings</h3>
+      <h4 class="case-subhead">How I researched the problem space</h4>
+      <ul class="case-list">
+        <li><strong>Unmoderated observations</strong> — Hotjar session recordings.</li>
+        <li><strong>Customer success</strong> — gathered initial sentiment about the flow.</li>
+        <li><strong>User interviews</strong> — in-depth conversations about user goals and needs.</li>
+        <li><strong>UX and copy review</strong> — breakdown of problem areas.</li>
+      </ul>
+      <h4 class="case-subhead">What I found</h4>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. The flow was not meeting our users' mental model</summary>
+          <ul class="case-list">
+            <li><strong>It was slow.</strong> Some steps were unnecessary, and others didn't arrive at the right moment.</li>
+            <li><strong>Most decisions were redundant — 90% of the time users picked the same options.</strong> We were asking people to choose things we could have defaulted.</li>
+            <li><strong>Users were overwhelmed.</strong> The first thing they saw was a template selection screen, which set the wrong tone immediately.</li>
+            <li><strong>There was friction.</strong> Users couldn't go back and revisit earlier decisions.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>2. A/B testing newbies didn't know where to start</summary>
+          <ul class="case-list">
+            <li>We already had a test library — Lift Assist™ — but it lived in a completely separate flow, so the people who needed it most never found it.</li>
+          </ul>
+        </details>
+        <details class="case-insight">
+          <summary>3. Users loved how visual the app was</summary>
+          <ul class="case-list">
+            <li>Previews of their own store and of the test variants were a genuine strength — something to lean into rather than redesign away.</li>
+          </ul>
+        </details>
       </div>
     </div>
     <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/b64b781af0f7c314b31b3148231dfe91fd1e9a656120566d6f55d202c061f396/find2x.png" alt="Key research findings for the test creation flow">
+      <figcaption class="case-caption">Key findings.</figcaption>
+    </figure>
+    <div class="detail-section">
+      <h3>Feature priorities</h3>
+      <ul class="case-list">
+        <li>Reduce cognitive overload when creating a test</li>
+        <li>Reduce test creation time</li>
+        <li>Help newbies get started by incorporating the test library into the flow</li>
+        <li>Allow the expansion of the flow to more testing capabilities</li>
+      </ul>
+    </div>
+    <figure class="case-figure">
       <img class="detail-img" src="https://freight.cargo.site/t/original/i/3173d7bf89ad9c35062b20283d84230391911240a9c7d14a4edc02c0dab12fc3/flow2x.png" alt="New Shoplift test creation flow architecture">
-      <figcaption class="case-caption">A more scalable flow with better structure, clearer decision points, and room to grow.</figcaption>
-    </figure>
-    <div class="detail-section">
-      <h3>Process</h3>
-      <p>I worked through wireframes, internal usability testing, and iterative refinement with engineering so we could improve the flow without destabilizing a critical part of the product. The redesign had to be clearer for users and also realistic to implement in phases.</p>
-    </div>
-    <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/126f16fb58446a8b377408279dd16d8fa23d4d22dcec2ca0404409b3860597ae/wireframes2x.png" alt="Wireframes for Shoplift test creation flow">
-      <figcaption class="case-caption">Early exploration focused on reducing friction without removing necessary control.</figcaption>
     </figure>
     <figure class="case-figure">
-      <img class="detail-img" src="https://freight.cargo.site/t/original/i/8f1cf4b2105a16749a46cc1377f50070355831d89d4fd02b86c1fc2116780442/final123.png" alt="Final designs for Shoplift test creation flow">
-      <figcaption class="case-caption">Final designs for handoff and rollout.</figcaption>
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/126f16fb58446a8b377408279dd16d8fa23d4d22dcec2ca0404409b3860597ae/wireframes2x.png" alt="Wireframes for the Shoplift test creation flow">
+    </figure>
+    <a class="case-prototype-link" href="https://www.figma.com/proto/ic0XAxlfActGc3A8U4jbTH/Shoplift-1.5?page-id=305%3A104085&amp;node-id=305-104236&amp;viewport=530%2C467%2C0.04&amp;t=7wjl4QRHwZmEZ47C-1&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;starting-point-node-id=305%3A104236" target="_blank" rel="noopener">View the prototype ↗</a>
+    <div class="detail-section">
+      <h3>What I learned</h3>
+      <div class="case-numbered">
+        <details class="case-insight" open>
+          <summary>1. Our original scope was way too broad</summary>
+          <p>We were too eager to serve nice-to-have ideas and lost time and resources trying to build them in.</p>
+        </details>
+        <details class="case-insight">
+          <summary>2. Talking to customer success early changed our core hypothesis</summary>
+          <p>Their input reshaped how we understood the friction points — and revealed a difference in expectations between novice and experienced users.</p>
+        </details>
+        <details class="case-insight">
+          <summary>3. The most useful metric was one we hadn't set out to move</summary>
+          <p>We went in optimising for cognitive load and creation time. The result that mattered most — faster first-test launches feeding directly into retention — only surfaced because post-launch analysis looked wider than the original goals. Worth measuring beyond what you set out to change.</p>
+        </details>
+      </div>
+    </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/8f1cf4b2105a16749a46cc1377f50070355831d89d4fd02b86c1fc2116780442/final123.png" alt="Test creation feature evolution">
+      <figcaption class="case-caption">Feature evolution.</figcaption>
     </figure>
     <div class="detail-section">
-      <h3>Outcome</h3>
-      <p>The new creation flow made the core product journey feel more intentional and future-ready. It gave new users a stronger starting point, gave the team more space to expand experimentation capabilities, and aligned the experience with the evolving product strategy.</p>
+      <h3>Since then</h3>
+      <p>As we grew our user base, test creation kept evolving with our users' needs:</p>
+      <ul class="case-list">
+        <li>Testing every type of page in the store</li>
+        <li>Adding engagement goals and metrics</li>
+        <li>Testing global elements and entire stores (theme-level testing)</li>
+        <li>URL split testing (in beta)</li>
+        <li>Improved variant previews</li>
+        <li>Advanced audience segmentation</li>
+        <li>Various UX improvements</li>
+      </ul>
+      <a class="case-prototype-link" href="https://www.loom.com/share/d9659ab6aba34cca8c988718eebd1f28?sid=cedb7a3f-46b5-41ba-a695-4fb820fff163" target="_blank" rel="noopener">Watch the product demo ↗</a>
     </div>
+    <figure class="case-figure">
+      <img class="detail-img" src="https://freight.cargo.site/t/original/i/2e28a079872bcf749db643d547cb825887f0b639dac58bbceb2dfd681601ca21/more123.png" alt="Test creation flow — later iterations">
+    </figure>
     <div class="case-thanks">Thank you!</div>
   </div>
 
