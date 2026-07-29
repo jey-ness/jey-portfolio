@@ -369,11 +369,31 @@
     switchTab('highlights', false);
   }
 
-  document.addEventListener('input', function(event) {
-    if (event.target.classList && event.target.classList.contains('ba-range')) {
-      var slider = event.target.closest('.ba-slider');
-      if (slider) slider.style.setProperty('--pos', event.target.value + '%');
+  /* Before/after sliders: pointer drag anywhere on the image (works on iOS,
+     where an invisible range thumb is untouchable); the range input remains
+     for keyboard/screen-reader control only (pointer-events: none in CSS). */
+  document.querySelectorAll('.ba-slider').forEach(function(slider) {
+    var range = slider.querySelector('.ba-range');
+    function setPos(clientX) {
+      var rect = slider.getBoundingClientRect();
+      var pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+      slider.style.setProperty('--pos', pct + '%');
+      if (range) range.value = pct;
     }
+    var dragging = false;
+    slider.addEventListener('pointerdown', function(e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      dragging = true;
+      if (slider.setPointerCapture) slider.setPointerCapture(e.pointerId);
+      setPos(e.clientX);
+      e.preventDefault();
+    });
+    slider.addEventListener('pointermove', function(e) { if (dragging) setPos(e.clientX); });
+    slider.addEventListener('pointerup', function() { dragging = false; });
+    slider.addEventListener('pointercancel', function() { dragging = false; });
+    if (range) range.addEventListener('input', function() {
+      slider.style.setProperty('--pos', range.value + '%');
+    });
   });
   window.addEventListener('hashchange', routeFromHash);
   document.addEventListener('click', function(event) {
